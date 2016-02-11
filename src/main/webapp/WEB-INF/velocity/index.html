@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/restangular/1.4.0/restangular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="resources/js/bootstrap.js"></script>
+    <script src="app/components/app.js"></script>
+    <script src="app/components/home/home_service.js"></script>
+    <meta http-equiv="Content-Type" content="charset=UTF-8">
+    <title app-title></title>
+</head>
+<body>
+
+    <!-- Application header -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" ng-href="#/">HOME</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a ng-href="#">Link</a></li>
+                    <li><a ng-href="#">Another Link</a></li>
+                </ul>
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+
+                <!-- Dropdown on right -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a ng-href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Dropdown right <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a ng-href="#">Action</a></li>
+                            <li><a ng-href="#">Another action</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a ng-href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <!-- Page content -->
+    <div class="container" ng-view></div>
+
+    <!-- Application footer -->
+    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-right">
+            <div class="navbar-brand">
+                Designed by <a href="mailto:pokora.tomek@gmail.com?Subject=Hello%20again" target="_top">Tomasz Pokora</a>
+            </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <script src="app/components/home/home_controller.js"></script>
+    <script src="app/components/properties/properties.js"></script>
+
+</body>
+</html>
