@@ -31,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/index.html", "/views/home.html", "/views/login.html").permitAll()
-                .antMatchers("/views/content.html").authenticated()
+                .antMatchers("/views/content.html", "/views/users/**").authenticated()
                 .and().logout()
                 .and().csrf().csrfTokenRepository(csrfTokenRepository())
                 .and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);

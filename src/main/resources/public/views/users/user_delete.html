@@ -1,0 +1,7 @@
+<form role="form">
+    <p>Are you sure want to delete this user: {{ user.name }}?</p>
+    <div class="form-group">
+        <input type="submit" class="btn btn-danger" ng-click="deleteUser()" value="Yes" />
+        <button ng-click="back()" type="button" class="btn btn-default">No</button>
+    </div>
+</form>

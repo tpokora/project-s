@@ -28,6 +28,31 @@ App.config(['$routeProvider', 'RestangularProvider', '$httpProvider', function($
             templateUrl: 'views/content.html'
         })
 
+        .when('/user/list', {
+            templateUrl: 'views/users/users.html',
+            controller: 'UsersController as usersCtrl',
+        })
+
+        .when('/user/:id', {
+            templateUrl: 'views/users/user.html',
+            controller: 'UsersController as usersCtrl',
+        })
+
+        .when('/new/user', {
+            templateUrl: 'views/users/user_new.html',
+            controller: 'UserNewController as userNewCtrl'
+        })
+
+        .when('/user/:id/update', {
+            templateUrl: 'views/users/user_update.html',
+            controller: 'UserUpdateController as userUpdCtrl',
+        })
+
+        .when('/user/:id/delete', {
+            templateUrl: 'views/users/user_delete.html',
+            controller: 'UserDeleteController as userDltCtrl',
+        })
+
         .otherwise({redirectTo:'/home'});
 
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';

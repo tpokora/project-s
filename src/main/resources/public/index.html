@@ -10,6 +10,7 @@
     <script src="resources/js/bootstrap.js"></script>
     <script src="app/components/app.js"></script>
     <script src="app/components/home/home_service.js"></script>
+    <script src="app/components/user/user_service.js"></script>
     <meta http-equiv="Content-Type" content="charset=UTF-8">
     <title app-title></title>
 </head>
@@ -45,8 +46,10 @@
 
                 <!-- Dropdown on right -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#/login">Login</a></li>
+                    <li ng-show="!authenticated"><a href="#/login">Login</a></li>
+                    <li ng-show="!authenticated"><a href="#/new/user">Sign in</a></li>
                     <li ng-show="authenticated"><a href="" ng-click="logout()">Logout</a></li>
+                    <li ng-show="authenticated" ><a href="#/user/list">Users</a></li>
                     <li class="dropdown">
                         <a ng-href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Dropdown right <span class="caret"></span></a>
@@ -78,5 +81,9 @@
 
     <script src="app/components/home/home_controller.js"></script>
     <script src="app/components/auth/auth_controller.js"></script>
+    <script src="app/components/user/user_controller.js"></script>
+    <script src="app/components/user/user_delete_controller.js"></script>
+    <script src="app/components/user/user_new_controller.js"></script>
+    <script src="app/components/user/user_update_controller.js"></script>
 </body>
 </html>

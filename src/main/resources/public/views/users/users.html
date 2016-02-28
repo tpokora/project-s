@@ -1,0 +1,9 @@
+<div class="well center-block">
+    <div class="lead">LIST OF USERS: </div>
+    <ul>
+        <li ng-repeat="user in users track by $index">
+            <a ng-href="#/user/{{ user.id }}">{{ user.name }}</a>
+        </li>
+    </ul>
+
+</div>

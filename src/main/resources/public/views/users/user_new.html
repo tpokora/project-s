@@ -1,0 +1,29 @@
+<div class="well center-block">
+    <form role="form">
+        <div class="form-group">
+            <label for="title" class="control-label">New user:</label>
+        </div>
+        <div class="form-group">
+            <input type="text" ng-model="user.name" class="form-control element-bg-color border-color text-font-color" id="name" placeholder="Login">
+        </div>
+        <div class="form-group">
+            <input type="password" ng-model="user.password" class="form-control element-bg-color border-color text-font-color" id="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input type="password" ng-model="user.password1" class="form-control element-bg-color border-color text-font-color" id="password1" placeholder="Repeat password">
+        </div>
+        <div class="form-group">
+            <input type="email" ng-model="user.email" class="form-control element-bg-color border-color text-font-color" id="email" placeholder="Email">
+        </div>
+        <!-- div class="form-group" ng-show="errors.error">
+            <span>{{ errors.error }}</span>
+        </div -->
+        <input type="submit" class="btn btn-style" ng-click="createUser()" value="Create" />
+        <button ng-click="back()" type="button" class="btn btn-default">Back</button>
+    </form>
+</div>
+
+
+
+
+

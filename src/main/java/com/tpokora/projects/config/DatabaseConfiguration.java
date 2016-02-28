@@ -6,6 +6,7 @@ package com.tpokora.projects.config;
 
 import javax.sql.DataSource;
 
+import com.tpokora.projects.user.model.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -53,7 +54,7 @@ public class DatabaseConfiguration {
         sessionBuilder.addProperties(getHibernateProperties());
         // Object.class change to real data Model class after comas
         // ex. ModelObject1.class, ModelObject2.class
-        //sessionBuilder.addAnnotatedClasses(User.class);
+        sessionBuilder.addAnnotatedClasses(User.class);
 
         return sessionBuilder.buildSessionFactory();
     }
