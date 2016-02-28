@@ -3,7 +3,7 @@
 App.factory('HomeService', ['$http', '$q', function($http, $q) {
     return {
         home: function() {
-            return $http.get('http://localhost:8080/project-s/rest/home')
+            return $http.get('http://localhost:8080/rest/home')
                 .then(
                     function(response) {
                         return response.data;

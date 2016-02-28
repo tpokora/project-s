@@ -13,7 +13,7 @@
     <meta http-equiv="Content-Type" content="charset=UTF-8">
     <title app-title></title>
 </head>
-<body>
+<body ng-controller="AuthController as auth">
 
     <!-- Application header -->
     <nav class="navbar navbar-default">
@@ -33,7 +33,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a ng-href="#">Link</a></li>
+                    <li><a ng-href="#/content">Content</a></li>
                     <li><a ng-href="#">Another Link</a></li>
                 </ul>
                 <form class="navbar-form navbar-left" role="search">
@@ -45,6 +45,8 @@
 
                 <!-- Dropdown on right -->
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/login">Login</a></li>
+                    <li ng-show="authenticated"><a href="" ng-click="logout()">Logout</a></li>
                     <li class="dropdown">
                         <a ng-href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Dropdown right <span class="caret"></span></a>
@@ -75,7 +77,6 @@
     </nav>
 
     <script src="app/components/home/home_controller.js"></script>
-    <script src="app/components/properties/properties.js"></script>
-
+    <script src="app/components/auth/auth_controller.js"></script>
 </body>
 </html>

@@ -1,19 +1,19 @@
 package com.tpokora.projects.common.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+//import javax.persistence.Column;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.Id;
+//import javax.persistence.MappedSuperclass;
 
 /**
  * Created by pokor on 11.02.2016.
  */
-@MappedSuperclass
+//@MappedSuperclass
 public class AbstractEntity {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "ID")
+    //@Id
+    //@GeneratedValue
+    //@Column(name = "ID")
     public Long id;
 
     public Long getId() {

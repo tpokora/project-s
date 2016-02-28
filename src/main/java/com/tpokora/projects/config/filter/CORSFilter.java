@@ -1,4 +1,4 @@
-package com.tpokora.projects.config;
+package com.tpokora.projects.config.filter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
