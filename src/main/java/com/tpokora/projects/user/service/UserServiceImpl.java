@@ -39,6 +39,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserByUsername(String username) {
+        try {
+            User user = userDAO.getUserByUsername(username);
+        } catch (IndexOutOfBoundsException e) {
+            return new NullUser();
+        } catch(UnexpectedRollbackException e) {
+            return new NullUser();
+        }
+
+        return userDAO.getUserByUsername(username);
+    }
+
+    @Override
     public void createOrUpdateUser(User user) {
         userDAO.createOrUpdateUser(user);
     }

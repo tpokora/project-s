@@ -8,7 +8,7 @@ import com.tpokora.projects.user.model.User;
 public class NullUser extends User {
 
     @Override
-    public String getName() {
+    public String getUsername() {
         return "User is NULL";
     }
 }

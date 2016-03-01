@@ -53,6 +53,14 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public User getUserByUsername(String username) {
+        String hql = "from User where username='" + username + "'";
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+
+        return (User) query.list().get(0);
+    }
+
+    @Override
     public void createOrUpdateUser(User user) {
         sessionFactory.getCurrentSession().saveOrUpdate(user);
     }
@@ -63,6 +71,4 @@ public class UserDAOImpl implements UserDAO {
         userToDelete.setId(id);
         sessionFactory.getCurrentSession().delete(userToDelete);
     }
-
-
 }

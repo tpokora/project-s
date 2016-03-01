@@ -21,6 +21,7 @@ import java.util.List;
 /**
  * Created by Tomek on 2016-01-19.
  */
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/rest/user")
 public class UserController extends AbstractRESTController {
@@ -68,11 +69,28 @@ public class UserController extends AbstractRESTController {
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/name/{username}", method = RequestMethod.GET, headers = "Accept=application/json")
+    public ResponseEntity<RESTResponseWrapper> getUserByUsername(@PathVariable("username") String username) {
+        restResponse.clearResponse();
+        logger.info("Looking for user with username: " + username + " ...");
+        User user = userService.getUserByUsername(username);
+        if (user instanceof NullUser) {
+            logger.error("No USERS with username: " + username + " returned to: " + this.getClass().getSimpleName());
+            userError.setError(ErrorTypes.USER_NOT_EXISTS);
+            restResponse.addError(userError);
+            return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
+        }
+
+        restResponse.addContent(USER_RESPONSE_STRING, user);
+        return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/new", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<RESTResponseWrapper> createNewUser(@RequestBody User user, UriComponentsBuilder ucb) throws Exception {
         restResponse.clearResponse();
         logger.info("Creating new user");
         User newUser = user;
+        newUser.setRole("USER");
 
         try {
             userService.createOrUpdateUser(newUser);
@@ -101,7 +119,7 @@ public class UserController extends AbstractRESTController {
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
         }
 
-        currentUser.setName(user.getName());
+        currentUser.setUsername(user.getUsername());
         currentUser.setPassword(user.getPassword());
         currentUser.setEmail(user.getEmail());
 
