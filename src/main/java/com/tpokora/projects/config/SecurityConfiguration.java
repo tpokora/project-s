@@ -38,15 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
-//        auth.jdbcAuthentication().dataSource(dataSource)
-//                .usersByUsernameQuery(
-//                        USERS_NAMES_QUERY
-//                )
-//                .authoritiesByUsernameQuery(
-//                        USERS_ROLES_QUERY
-//                );
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService);
     }
 
     @Override
@@ -57,8 +49,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/index.html", "/views/home.html", "/views/login.html", "/views/users/user_new.html").permitAll()
-                .antMatchers("/views/content.html", "/views/users/**").access("hasRole('USER') AND hasRole('ADMIN')")
-                .and().formLogin().loginPage("/views/login.html").failureUrl("/login")
+                .antMatchers("/content.html", "/views/users/").access("hasRole('ADMIN') OR hasRole('USER')")
+                .and().formLogin().loginPage("/views/login.html").failureUrl("/views/login.html")
                     .usernameParameter("username").passwordParameter("password")
                 .and().logout().logoutSuccessUrl("/")
                 .and().exceptionHandling().accessDeniedPage("/login")
