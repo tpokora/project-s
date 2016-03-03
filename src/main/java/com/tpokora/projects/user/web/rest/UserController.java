@@ -2,6 +2,7 @@ package com.tpokora.projects.user.web.rest;
 
 import com.tpokora.projects.common.errors.AbstractError;
 import com.tpokora.projects.common.errors.ErrorTypes;
+import com.tpokora.projects.common.utils.SecurityUtilites;
 import com.tpokora.projects.common.web.RESTResponseWrapper;
 import com.tpokora.projects.common.web.rest.AbstractRESTController;
 import com.tpokora.projects.user.model.User;
@@ -91,6 +92,7 @@ public class UserController extends AbstractRESTController {
         logger.info("Creating new user");
         User newUser = user;
         newUser.setRole("USER");
+        newUser.setPassword(SecurityUtilites.hashingPassword(newUser.getPassword()));
 
         try {
             userService.createOrUpdateUser(newUser);
