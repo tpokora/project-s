@@ -4,7 +4,7 @@ App.controller('UserNewController', ['$scope', '$location', 'UserService', funct
     var self = this;
     self.user = {
         id: '',
-        name: '',
+        username: '',
         password: '',
         password1: '',
         email: ''
