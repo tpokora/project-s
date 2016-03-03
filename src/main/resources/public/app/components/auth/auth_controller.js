@@ -1,6 +1,20 @@
 'use strict'
 
-App.controller('AuthController', function($rootScope, $scope, $http, $location) {
+App.controller('AuthController', function($rootScope, $scope, $http, $location, UserService) {
+    var self = this;
+
+    $rootScope.loggedUser = '';
+
+    self.fetchUserByUsername = function(username) {
+        UserService.fetchUserByUsername(username)
+            .then(
+                function(user) {
+                    $rootScope.loggedUser = user;
+                }, function(errResponse) {
+                    console.error('Error while fetching user');
+                }
+            );
+    };
 
     var authenticate = function(credentials, callback) {
         var headers = credentials ? { authorization : "Basic " +
@@ -9,6 +23,7 @@ App.controller('AuthController', function($rootScope, $scope, $http, $location) 
 
         $http.get('auth', { headers : headers }).success(function(data) {
             if (data.name) {
+                self.fetchUserByUsername(data.name);
                 $rootScope.authenticated = true;
             } else {
                 $rootScope.authenticated = false;

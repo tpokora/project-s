@@ -53,6 +53,11 @@ App.config(['$routeProvider', 'RestangularProvider', '$httpProvider', function($
             controller: 'UserDeleteController as userDltCtrl',
         })
 
+        .when('/admin', {
+            templateUrl: 'views/admin/panel.html',
+            controller: 'AdminPanelController as adminPanelCtrl'
+        })
+
         .otherwise({redirectTo:'/home'});
 
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';

@@ -28,6 +28,19 @@ App.factory('UserService', ['$http', '$q', function($http, $q) {
                 )
         },
 
+        fetchUserByUsername: function(username) {
+                    return $http.get('http://localhost:8080/rest/user/name/' + username)
+                        .then(
+                            function(response) {
+                                return response.data.content.users;
+                            },
+                            function(errResponse) {
+                                console.error('Error while fetching User');
+                                return $q.reject(errResponse);
+                            }
+                        )
+                },
+
         createUser: function(user) {
             return $http.post('http://localhost:8080/rest/user/new', user)
                 .then(
