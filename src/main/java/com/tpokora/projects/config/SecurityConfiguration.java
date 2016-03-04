@@ -44,18 +44,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     // TODO: login failure redirection
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
         http
                 .httpBasic()
+                .and().formLogin().loginPage("/views/login.html")//.failureUrl("/views/login.html")
+                .usernameParameter("username").passwordParameter("password")
+                .and().exceptionHandling().accessDeniedPage("/views/login.html")
+                .and().logout().logoutSuccessUrl("/")
                 .and()
                 .authorizeRequests()
                 .antMatchers("/index.html", "/views/home.html", "/views/login.html", "/views/users/user_new.html").permitAll()
-                .antMatchers("/content.html", "/views/users/").access("hasRole('ADMIN') OR hasRole('USER')")
-                .and().formLogin().loginPage("/views/login.html").failureUrl("/views/login.html")
-                    .usernameParameter("username").passwordParameter("password")
-                .and().logout().logoutSuccessUrl("/")
-                .and().exceptionHandling().accessDeniedPage("/login")
-                .and().csrf().csrfTokenRepository(csrfTokenRepository())
+                .antMatchers("/views/admin/**").hasRole("ADMIN")
+                .antMatchers("/views/content.html").hasRole("USER")
+                .antMatchers("/views/users/**").hasAnyRole("ADMIN, USER")
+                //.and().csrf().disable()
                 .and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
     }
 

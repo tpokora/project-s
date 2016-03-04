@@ -20,8 +20,7 @@ App.config(['$routeProvider', 'RestangularProvider', '$httpProvider', function($
         })
 
         .when('/login', {
-            templateUrl: 'views/login.html',
-
+            templateUrl: 'views/login.html'
         })
 
         .when('/content', {
@@ -54,8 +53,7 @@ App.config(['$routeProvider', 'RestangularProvider', '$httpProvider', function($
         })
 
         .when('/admin', {
-            templateUrl: 'views/admin/panel.html',
-            controller: 'AdminPanelController as adminPanelCtrl'
+            templateUrl: 'views/admin/panel.html'
         })
 
         .otherwise({redirectTo:'/home'});

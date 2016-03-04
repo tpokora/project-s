@@ -91,7 +91,7 @@ public class UserController extends AbstractRESTController {
         restResponse.clearResponse();
         logger.info("Creating new user");
         User newUser = user;
-        newUser.setRole("USER");
+        newUser.setRole("ROLE_USER");
         newUser.setPassword(SecurityUtilites.hashingPassword(newUser.getPassword()));
 
         try {
