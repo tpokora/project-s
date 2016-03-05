@@ -1,22 +1,26 @@
 package com.tpokora.projects.home.web.rest;
 
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.tpokora.projects.common.web.rest.AbstractControllerTest;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 /**
  * Created by pokor on 05.03.2016.
  */
-public class HomeControllerTest {
+public class HomeControllerTest extends AbstractControllerTest {
 
-    private final MockMvc mockMvc = standaloneSetup(new HomeController()).build();
+    @Before
+    public void setup() {
+        this.mockMvc = MockMvcBuilders.standaloneSetup(new HomeController()).build();
+    }
 
     @Test
-    public void validate_home() throws Exception {
+    public void getHome_ok() throws Exception {
         String str = "Template Spring Application";
 
         mockMvc.perform(get("/rest/home"))

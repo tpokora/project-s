@@ -37,7 +37,7 @@ public class UserController extends AbstractRESTController {
     @Autowired
     AbstractError userError;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<RESTResponseWrapper> getAllUsers() {
         restResponse.clearResponse();
         logger.info("Looking for users...");
@@ -49,7 +49,9 @@ public class UserController extends AbstractRESTController {
             return new ResponseEntity<RESTResponseWrapper>(HttpStatus.NOT_FOUND);
         }
 
+        logger.info("Add users list to response content...");
         restResponse.addContent(USER_RESPONSE_STRING, userList);
+        //logger.debug("Response: " + restResponse.getContent());
 
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }

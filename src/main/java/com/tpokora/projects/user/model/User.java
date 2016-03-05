@@ -17,6 +17,18 @@ public class User extends AbstractEntity {
     private String email;
     private String role;
 
+    public User() {
+        super();
+    }
+
+    public User(Long id, String username, String password, String email, String role) {
+        super(id);
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
+
     @Column(name = "USERNAME")
     public String getUsername() {
         return username;
