@@ -51,7 +51,6 @@ public class UserController extends AbstractRESTController {
 
         logger.info("Add users list to response content...");
         restResponse.addContent(USER_RESPONSE_STRING, userList);
-        //logger.debug("Response: " + restResponse.getContent());
 
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }
