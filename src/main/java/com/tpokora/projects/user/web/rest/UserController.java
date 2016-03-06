@@ -64,6 +64,7 @@ public class UserController {
             logger.error("No USERS with id: " + id + " returned to: " + this.getClass().getSimpleName());
             userError.setError(ErrorTypes.USER_NOT_EXISTS);
             restResponse.addError(userError);
+            logger.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
         }
 
