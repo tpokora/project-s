@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -25,7 +27,11 @@ import javax.sql.DataSource;
  */
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+@PropertySource("classpath:properties/app.properties")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private Environment env;
 
     private static final String USERS_NAMES_QUERY = "select username, password from users where username = ?";
     private static final String USERS_ROLES_QUERY = "select username, role from users where username = ?";
@@ -46,18 +52,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .httpBasic()
-                .and().formLogin().loginPage("/views/login.html")//.failureUrl("/views/login.html")
-                .usernameParameter("username").passwordParameter("password")
-                .and().exceptionHandling().accessDeniedPage("/views/login.html")
-                .and().logout().logoutSuccessUrl("/")
                 .and()
                 .authorizeRequests()
                 .antMatchers("/index.html", "/views/home.html", "/views/login.html", "/views/users/user_new.html").permitAll()
-                .antMatchers("/views/admin/**").hasRole("ADMIN")
-                .antMatchers("/views/content.html").hasRole("USER")
-                .antMatchers("/views/users/**").hasAnyRole("ADMIN, USER")
-                //.and().csrf().disable()
-                .and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
+                .antMatchers("/content.html", "/views/users/").access("hasRole('ADMIN') OR hasRole('USER')")
+                .and().formLogin().loginPage("/views/login.html").failureUrl("/views/login.html")
+                    .usernameParameter("username").passwordParameter("password")
+                .and().logout().logoutSuccessUrl("/")
+                .and().exceptionHandling().accessDeniedPage("/login")
+                .and().csrf().csrfTokenRepository(csrfTokenRepository());
+
+        if (env.getProperty("status").equals("dev")) {
+            http.csrf().disable();
+        } else {
+            http.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
+        }
     }
 
     private CsrfTokenRepository csrfTokenRepository() {

@@ -12,8 +12,7 @@ import java.util.HashMap;
 public class RESTResponseWrapper {
     private HashMap<String, Object> content = new HashMap<String, Object>();
 
-    @Autowired
-    private ErrorWrapper errors;
+    private ErrorWrapper errors = new ErrorWrapper();
 
     public RESTResponseWrapper() {
     }

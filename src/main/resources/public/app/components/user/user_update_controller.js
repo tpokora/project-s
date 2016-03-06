@@ -5,7 +5,7 @@ App.controller('UserUpdateController', ['$scope', '$location', '$routeParams', '
     var params = $routeParams;
     self.userToUpdate = {
         id: '',
-        name: '',
+        username: '',
         password: '',
         email: ''
     };

@@ -1,8 +1,6 @@
 package com.tpokora.projects.config;
 
 import com.tpokora.projects.common.errors.AbstractError;
-import com.tpokora.projects.common.errors.ErrorWrapper;
-import com.tpokora.projects.common.web.RESTResponseWrapper;
 import com.tpokora.projects.user.dao.UserDAO;
 import com.tpokora.projects.user.dao.UserDAOImpl;
 import com.tpokora.projects.user.service.CustomUserDetailsService;
@@ -13,7 +11,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
@@ -25,20 +22,6 @@ public class AppConfig {
     /*
 		Application beans
 	 */
-
-    // Response Bean
-    @Autowired
-    @Bean(name = "restResponse")
-    public RESTResponseWrapper getResponseWrapper() {
-        return new RESTResponseWrapper();
-    }
-
-    // Errors Bean
-    @Autowired
-    @Bean(name = "errors")
-    public ErrorWrapper getErrors() {
-        return new ErrorWrapper();
-    }
 
     @Autowired
     @Bean(name = "userError")

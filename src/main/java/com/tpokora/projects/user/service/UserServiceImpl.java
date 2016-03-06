@@ -1,5 +1,6 @@
 package com.tpokora.projects.user.service;
 
+import com.tpokora.projects.common.utils.SecurityUtilites;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.model.nullobjects.NullUser;
 import com.tpokora.projects.user.dao.UserDAO;
@@ -14,18 +15,19 @@ import java.util.List;
  * Created by Tomek on 2016-01-16.
  */
 @Service("userService")
-@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDAO userDAO;
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> getAllUsers() {
         return userDAO.getAllUsers();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User getUserById(int id) {
         try {
             User user = userDAO.getUserById(id);
@@ -39,6 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User getUserByUsername(String username) {
         try {
             User user = userDAO.getUserByUsername(username);
@@ -52,11 +55,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void createOrUpdateUser(User user) {
+        user.setPassword(SecurityUtilites.hashingPassword(user.getPassword()));
         userDAO.createOrUpdateUser(user);
     }
 
     @Override
+    @Transactional
     public void removeUserById(int id) {
         userDAO.removeUserById(id);
     }

@@ -14,7 +14,15 @@ public class AbstractEntity {
     @Id
     @GeneratedValue
     @Column(name = "ID")
-    public Long id;
+    protected Long id;
+
+    public AbstractEntity() {
+
+    }
+
+    public AbstractEntity(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;
