@@ -2,6 +2,7 @@
 <html ng-app="myApp">
 <head>
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/css/styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore.js"></script>
@@ -49,7 +50,6 @@
                     <li ng-show="authenticated"><a ng-href="#/user/{{ loggedUser.id }}"><b>Logged as:</b> {{ loggedUser.username }}</a></li>
                     <li ng-show="authenticated && loggedUser.role == 'ROLE_ADMIN'"><a ng-href="#/admin">Administration panel</a></li>
                     <li ng-show="!authenticated"><a href="#/login">Login</a></li>
-                    <li ng-show="!authenticated"><a href="#/new/user">Sign in</a></li>
                     <li ng-show="authenticated"><a href="" ng-click="logout()">Logout</a></li>
                     <li><a href="#/user/list">Users</a></li>
                     <li class="dropdown">
