@@ -25,20 +25,6 @@ public class AppConfig {
 		Application beans
 	 */
 
-    // Response Bean
-    @Autowired
-    @Bean(name = "restResponse")
-    public RESTResponseWrapper getResponseWrapper() {
-        return new RESTResponseWrapper();
-    }
-
-    // Errors Bean
-    @Autowired
-    @Bean(name = "errors")
-    public ErrorWrapper getErrors() {
-        return new ErrorWrapper();
-    }
-
     @Autowired
     @Bean(name = "userError")
     public AbstractError getUserError() {

@@ -4,7 +4,6 @@ import com.tpokora.projects.common.errors.AbstractError;
 import com.tpokora.projects.common.errors.ErrorTypes;
 import com.tpokora.projects.common.utils.SecurityUtilites;
 import com.tpokora.projects.common.web.RESTResponseWrapper;
-import com.tpokora.projects.common.web.rest.AbstractRESTController;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.model.nullobjects.NullUser;
 import com.tpokora.projects.user.service.UserService;
@@ -17,17 +16,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Created by Tomek on 2016-01-19.
  */
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/rest/user")
-public class UserController extends AbstractRESTController {
+public class UserController {
 
     private static final Logger logger = Logger.getLogger(UserController.class);
+
+    private static RESTResponseWrapper restResponse = new RESTResponseWrapper();
 
     private static final String USER_RESPONSE_STRING = "users";
 
@@ -41,8 +43,7 @@ public class UserController extends AbstractRESTController {
     public ResponseEntity<RESTResponseWrapper> getAllUsers() {
         restResponse.clearResponse();
         logger.info("Looking for users...");
-        List<User> userList = userService.getAllUsers();
-        if (userList.isEmpty()) {
+        if (userService.getAllUsers().isEmpty()) {
             logger.error("No USERS returned to: " + this.getClass().getSimpleName());
             userError.setError(ErrorTypes.USER_NOT_EXISTS);
             restResponse.addError(userError);
@@ -50,7 +51,7 @@ public class UserController extends AbstractRESTController {
         }
 
         logger.info("Add users list to response content...");
-        restResponse.addContent(USER_RESPONSE_STRING, userList);
+        restResponse.addContent(USER_RESPONSE_STRING, userService.getAllUsers());
 
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }
@@ -59,15 +60,14 @@ public class UserController extends AbstractRESTController {
     public ResponseEntity<RESTResponseWrapper> getUserById(@PathVariable("id") int id) {
         restResponse.clearResponse();
         logger.info("Looking for user with id: " + id + " ...");
-        User user = userService.getUserById(id);
-        if (user instanceof NullUser) {
+        if (userService.getUserById(id) instanceof NullUser) {
             logger.error("No USERS with id: " + id + " returned to: " + this.getClass().getSimpleName());
             userError.setError(ErrorTypes.USER_NOT_EXISTS);
             restResponse.addError(userError);
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
         }
 
-        restResponse.addContent(USER_RESPONSE_STRING, user);
+        restResponse.addContent(USER_RESPONSE_STRING, userToArray(userService.getUserById(id)));
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }
 
@@ -75,15 +75,14 @@ public class UserController extends AbstractRESTController {
     public ResponseEntity<RESTResponseWrapper> getUserByUsername(@PathVariable("username") String username) {
         restResponse.clearResponse();
         logger.info("Looking for user with username: " + username + " ...");
-        User user = userService.getUserByUsername(username);
-        if (user instanceof NullUser) {
+        if (userService.getUserByUsername(username) instanceof NullUser) {
             logger.error("No USERS with username: " + username + " returned to: " + this.getClass().getSimpleName());
             userError.setError(ErrorTypes.USER_NOT_EXISTS);
             restResponse.addError(userError);
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
         }
 
-        restResponse.addContent(USER_RESPONSE_STRING, user);
+        restResponse.addContent(USER_RESPONSE_STRING, userToArray(userService.getUserByUsername(username)));
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }
 
@@ -147,5 +146,11 @@ public class UserController extends AbstractRESTController {
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucb.path("/home").build().toUri());
         return new ResponseEntity<RESTResponseWrapper>(headers, HttpStatus.NO_CONTENT);
+    }
+
+    private List<User> userToArray(User user) {
+        List<User> userList = new ArrayList<User>();
+        userList.add(user);
+        return userList;
     }
 }
