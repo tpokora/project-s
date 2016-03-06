@@ -1,5 +1,6 @@
 package com.tpokora.projects.config;
 
+import com.tpokora.projects.config.filter.CORSFilter;
 import com.tpokora.projects.config.filter.CsrfHeaderFilter;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.service.UserService;
@@ -7,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -25,7 +28,11 @@ import javax.sql.DataSource;
  */
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+@PropertySource("classpath:properties/app.properties")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private Environment env;
 
     private static final String USERS_NAMES_QUERY = "select username, password from users where username = ?";
     private static final String USERS_ROLES_QUERY = "select username, role from users where username = ?";
@@ -44,7 +51,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     // TODO: login failure redirection
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
         http
                 .httpBasic()
                 .and()
@@ -55,8 +61,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .usernameParameter("username").passwordParameter("password")
                 .and().logout().logoutSuccessUrl("/")
                 .and().exceptionHandling().accessDeniedPage("/login")
-                .and().csrf().csrfTokenRepository(csrfTokenRepository())
-                .and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
+                .and().csrf().csrfTokenRepository(csrfTokenRepository());
+
+        if (env.getProperty("status").equals("dev")) {
+            http.csrf().disable();
+        } else {
+            http.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
+        }
     }
 
     private CsrfTokenRepository csrfTokenRepository() {

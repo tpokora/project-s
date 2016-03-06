@@ -2,7 +2,6 @@ package com.tpokora.projects.user.web.rest;
 
 import com.tpokora.projects.common.errors.AbstractError;
 import com.tpokora.projects.common.errors.ErrorTypes;
-import com.tpokora.projects.common.utils.SecurityUtilites;
 import com.tpokora.projects.common.web.RESTResponseWrapper;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.model.nullobjects.NullUser;
@@ -64,7 +63,6 @@ public class UserController {
             logger.error("No USERS with id: " + id + " returned to: " + this.getClass().getSimpleName());
             userError.setError(ErrorTypes.USER_NOT_EXISTS);
             restResponse.addError(userError);
-            logger.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
         }
 

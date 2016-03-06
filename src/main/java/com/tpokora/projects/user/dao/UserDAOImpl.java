@@ -28,7 +28,6 @@ public class UserDAOImpl implements UserDAO {
         this.sessionFactory = sessionFactory;
     }
 
-    // TODO: Have another look in handling not found elements in DAO, SERVICE and CONTROLLER
     @Override
     public List<User> getAllUsers() {
         @SuppressWarnings("unchecked")

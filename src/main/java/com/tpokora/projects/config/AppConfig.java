@@ -1,8 +1,6 @@
 package com.tpokora.projects.config;
 
 import com.tpokora.projects.common.errors.AbstractError;
-import com.tpokora.projects.common.errors.ErrorWrapper;
-import com.tpokora.projects.common.web.RESTResponseWrapper;
 import com.tpokora.projects.user.dao.UserDAO;
 import com.tpokora.projects.user.dao.UserDAOImpl;
 import com.tpokora.projects.user.service.CustomUserDetailsService;
