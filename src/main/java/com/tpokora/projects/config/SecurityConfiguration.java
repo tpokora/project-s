@@ -35,7 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String USERS_NAMES_QUERY = "select username, password from users where username = ?";
     private static final String USERS_ROLES_QUERY = "select username, role from users where username = ?";
-
+    //$2a$10$kEsz7BQn1kM8FRYJbYxEwOgF9r75yWxKiTrgfm.c.lfbZOptnLovG
     @Autowired
     private DataSource dataSource;
 
@@ -54,16 +54,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/index.html", "/views/home.html", "/views/login.html", "/views/users/user_new.html").permitAll()
-                .antMatchers("/content.html", "/views/users/").access("hasRole('ADMIN') OR hasRole('USER')")
+                .antMatchers("/views/admin/**").hasRole("ADMIN")
+                .antMatchers("/views/content.html").hasRole("USER")
+                .antMatchers("/views/users/**").hasAnyRole("ADMIN, USER")
                 .and().formLogin().loginPage("/views/login.html")
                     .usernameParameter("username").passwordParameter("password")
                 .and().logout().logoutSuccessUrl("/")
-                .and().exceptionHandling().accessDeniedPage("/login")
-                .and().csrf().csrfTokenRepository(csrfTokenRepository());
+                .and().exceptionHandling().accessDeniedPage("/?error");
 
         if (env.getProperty("status").equals("dev")) {
             http.csrf().disable();
         } else {
+            http.csrf().csrfTokenRepository(csrfTokenRepository());
             http.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
         }
     }

@@ -35,7 +35,6 @@ public class DatabaseConfiguration {
         dataSource.setUrl(env.getProperty("database.url"));
         dataSource.setUsername(env.getProperty("database.login"));
         dataSource.setPassword(env.getProperty("database.password"));
-
         return dataSource;
     }
 
@@ -52,8 +51,6 @@ public class DatabaseConfiguration {
 
         LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
         sessionBuilder.addProperties(getHibernateProperties());
-        // Object.class change to real data Model class after comas
-        // ex. ModelObject1.class, ModelObject2.class
         sessionBuilder.addAnnotatedClasses(User.class);
 
         return sessionBuilder.buildSessionFactory();

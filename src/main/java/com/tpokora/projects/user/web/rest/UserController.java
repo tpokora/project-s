@@ -89,7 +89,7 @@ public class UserController {
         restResponse.clearResponse();
         logger.info("Creating new user");
         User newUser = user;
-        newUser.setRole("USER");
+        newUser.setRole("ROLE_USER");
 
         try {
             userService.createOrUpdateUser(newUser);
