@@ -1,10 +1,10 @@
 package com.tpokora.projects.common.web;
 
 import com.tpokora.projects.common.errors.AbstractError;
-import com.tpokora.projects.common.errors.ErrorWrapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by pokor on 14.02.2016.
@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class RESTResponseWrapper {
     private HashMap<String, Object> content = new HashMap<String, Object>();
 
-    private ErrorWrapper errors = new ErrorWrapper();
+    private List<AbstractError> errors = new ArrayList<AbstractError>();
 
     public RESTResponseWrapper() {
     }
@@ -21,15 +21,15 @@ public class RESTResponseWrapper {
         this.content.put(name, obj);
     }
 
-    public RESTResponseWrapper(ErrorWrapper errors) {
+    public RESTResponseWrapper(List<AbstractError> errors) {
         this.errors = errors;
     }
 
     public RESTResponseWrapper(AbstractError abstractError) {
-        this.errors.addError(abstractError);
+        this.errors.add(abstractError);
     }
 
-    public RESTResponseWrapper(String name, Object obj, ErrorWrapper errors) {
+    public RESTResponseWrapper(String name, Object obj, List<AbstractError> errors) {
         this.content.put(name, obj);
         this.errors = errors;
     }
@@ -39,14 +39,14 @@ public class RESTResponseWrapper {
     }
 
     public void addError(AbstractError abstractError) {
-        this.errors.addError(abstractError);
+        this.errors.add(abstractError);
     }
 
-    public void addErrors(ErrorWrapper errors) {
+    public void addErrors(List<AbstractError> errors) {
         this.errors = errors;
     }
 
-    public ErrorWrapper getErrors() {
+    public List<AbstractError> getErrors() {
         return errors;
     }
 
@@ -56,6 +56,6 @@ public class RESTResponseWrapper {
 
     public void clearResponse() {
         content.clear();
-        errors.getErrors().clear();
+        errors.clear();
     }
 }

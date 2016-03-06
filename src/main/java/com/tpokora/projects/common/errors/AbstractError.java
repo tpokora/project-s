@@ -3,7 +3,6 @@ package com.tpokora.projects.common.errors;
 /**
  * Created by pokor on 14.02.2016.
  */
-// TODO: Better error propagation
 public abstract class AbstractError implements ErrorsInterface {
     protected int code;
     protected ErrorTypes type;

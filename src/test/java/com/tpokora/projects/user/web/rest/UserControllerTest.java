@@ -105,8 +105,7 @@ public class UserControllerTest extends AbstractControllerTest {
                 .andExpect(
                         MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON)
                 )
-                .andExpect(MockMvcResultMatchers.jsonPath("$.errors.errors").isArray());
-                //.andExpect(MockMvcResultMatchers.jsonPath("$.errors.errors.code").value(404));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.errors").isArray());
     }
 
     @Test

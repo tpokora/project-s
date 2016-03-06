@@ -1,10 +1,10 @@
 package com.tpokora.projects.common.web.rest;
 
 import com.tpokora.projects.common.errors.AbstractError;
-import com.tpokora.projects.common.errors.ErrorWrapper;
 import com.tpokora.projects.common.web.RESTResponseWrapper;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * Created by pokor on 14.02.2016.
@@ -20,7 +20,7 @@ public abstract class AbstractRESTController {
         restResponse.addError(abstractError);
     }
 
-    public void addErrors(ErrorWrapper errors) {
+    public void addErrors(List<AbstractError> errors) {
         restResponse.addErrors(errors);
     }
 }
