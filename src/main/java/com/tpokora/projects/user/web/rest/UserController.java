@@ -92,7 +92,6 @@ public class UserController {
         logger.info("Creating new user");
         User newUser = user;
         newUser.setRole("USER");
-        newUser.setPassword(SecurityUtilites.hashingPassword(newUser.getPassword()));
 
         try {
             userService.createOrUpdateUser(newUser);

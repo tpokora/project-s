@@ -1,5 +1,6 @@
 package com.tpokora.projects.user.service;
 
+import com.tpokora.projects.common.utils.SecurityUtilites;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.model.nullobjects.NullUser;
 import com.tpokora.projects.user.dao.UserDAO;
@@ -56,6 +57,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void createOrUpdateUser(User user) {
+        user.setPassword(SecurityUtilites.hashingPassword(user.getPassword()));
         userDAO.createOrUpdateUser(user);
     }
 

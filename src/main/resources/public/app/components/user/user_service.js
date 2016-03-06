@@ -19,7 +19,8 @@ App.factory('UserService', ['$http', '$q', function($http, $q) {
             return $http.get('http://localhost:8080/rest/user/' + id)
                 .then(
                     function(response) {
-                        return response.data.content.users;
+                        response.data.content.users[0].password = '';
+                        return response.data.content.users[0];
                     },
                     function(errResponse) {
                         console.error('Error while fetching User');
@@ -32,7 +33,7 @@ App.factory('UserService', ['$http', '$q', function($http, $q) {
                     return $http.get('http://localhost:8080/rest/user/name/' + username)
                         .then(
                             function(response) {
-                                return response.data.content.users;
+                                return response.data.content.users[0];
                             },
                             function(errResponse) {
                                 console.error('Error while fetching User');
