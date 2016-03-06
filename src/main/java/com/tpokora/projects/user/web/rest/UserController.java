@@ -100,7 +100,7 @@ public class UserController {
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
-        restResponse.addContent("user", newUser);
+        restResponse.addContent(USER_RESPONSE_STRING, userToArray(newUser));
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucb.path("/home").build().toUri());
         return new ResponseEntity<RESTResponseWrapper>(restResponse, headers, HttpStatus.CREATED);
@@ -124,7 +124,7 @@ public class UserController {
         currentUser.setEmail(user.getEmail());
 
         userService.createOrUpdateUser(currentUser);
-        restResponse.addContent(USER_RESPONSE_STRING, currentUser);
+        restResponse.addContent(USER_RESPONSE_STRING, userToArray(currentUser));
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }
 
