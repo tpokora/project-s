@@ -47,7 +47,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
-    // TODO: login failure redirection
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -56,7 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/index.html", "/views/home.html", "/views/login.html", "/views/users/user_new.html").permitAll()
                 .antMatchers("/content.html", "/views/users/").access("hasRole('ADMIN') OR hasRole('USER')")
-                .and().formLogin().loginPage("/views/login.html").failureUrl("/views/login.html")
+                .and().formLogin().loginPage("/views/login.html")
                     .usernameParameter("username").passwordParameter("password")
                 .and().logout().logoutSuccessUrl("/")
                 .and().exceptionHandling().accessDeniedPage("/login")

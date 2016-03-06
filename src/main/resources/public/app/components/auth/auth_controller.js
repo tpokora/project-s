@@ -43,7 +43,7 @@ App.controller('AuthController', function($rootScope, $scope, $http, $location, 
                 $location.path("/");
                 $scope.error = false;
             } else {
-                $location.path("/");
+                $location.path("/login");
                 $scope.error = true;
             }
         });
