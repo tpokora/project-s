@@ -3,33 +3,29 @@
         <form class="register-form" role="form">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div class="form-group">
-                <label for="title" class="control-label">New user:</label>
+                <label for="title" class="form-title control-label">New user</label>
             </div>
             <div class="form-group">
-                <input type="text" ng-model="user.username"
-                       class="form-control element-bg-color border-color text-font-color" id="username"
+                <input type="text" ng-model="user.username" id="username"
                        placeholder="username">
             </div>
             <div class="form-group">
-                <input type="password" ng-model="user.password"
-                       class="form-control element-bg-color border-color text-font-color" id="password"
+                <input type="password" ng-model="user.password" id="password"
                        placeholder="password">
             </div>
             <div class="form-group">
-                <input type="password" ng-model="user.password1"
-                       class="form-control element-bg-color border-color text-font-color" id="password1"
+                <input type="password" ng-model="user.password1" id="password1"
                        placeholder="repeat password">
             </div>
             <div class="form-group">
-                <input type="email" ng-model="user.email"
-                       class="form-control element-bg-color border-color text-font-color" id="email"
+                <input type="email" ng-model="user.email" id="email"
                        placeholder="email">
             </div>
             <!-- div class="form-group" ng-show="errors.error">
                 <span>{{ errors.error }}</span>
             </div -->
-            <input type="submit" class="btn btn-style" ng-click="createUser()" value="Create"/>
-            <button ng-click="back()" type="button" class="btn btn-default">Back</button>
+            <input type="submit" ng-click="createUser()" value="CREATE"/>
+            <button ng-click="back()" type="button">Back</button>
         </form>
     </div>
 </div>

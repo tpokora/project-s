@@ -1,3 +1,7 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+
 .login-page {
   width: 360px;
   padding: 8% 0 0;
@@ -13,6 +17,15 @@
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form .form-title {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  color: #828282;
+  font-size: 18px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
 }
 
 .form input {
