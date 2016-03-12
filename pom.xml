@@ -18,7 +18,12 @@
         <com.jayway.jsonpath.version>1.2.0</com.jayway.jsonpath.version>
         <org.mockito.version>1.9.5</org.mockito.version>
         <org.hamcrest.version>1.3</org.hamcrest.version>
+        <wro4j.maven.plugin.version>1.7.6</wro4j.maven.plugin.version>
         <org.webjars.angularjs.version>1.5.0</org.webjars.angularjs.version>
+        <org.webjars.underscorejs.version>1.8.3</org.webjars.underscorejs.version>
+        <org.webjars.restangular.version>1.5.1</org.webjars.restangular.version>
+        <org.webjars.bootstrap.version>4.0.0-alpha.2</org.webjars.bootstrap.version>
+        <org.webjars.bootstrap.version>2.1.1</org.webjars.bootstrap.version>
     </properties>
 
     <parent>
@@ -89,11 +94,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>angularjs</artifactId>
-            <version>${org.webjars.angularjs.version}</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -127,7 +127,7 @@
             <plugin>
                 <groupId>ro.isdc.wro4j</groupId>
                 <artifactId>wro4j-maven-plugin</artifactId>
-                <version>1.7.6</version>
+                <version>${wro4j.maven.plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>generate-resources</phase>
@@ -138,8 +138,8 @@
                 </executions>
                 <configuration>
                     <wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
-                    <cssDestinationFolder>${project.build.directory}/generated-resources/static/css</cssDestinationFolder>
-                    <jsDestinationFolder>${project.build.directory}/generated-resources/static/js</jsDestinationFolder>
+                    <cssDestinationFolder>${project.build.directory}/classes/public/resources/css</cssDestinationFolder>
+                    <jsDestinationFolder>${project.build.directory}/classes/public/resources/js</jsDestinationFolder>
                     <wroFile>${project.build.directory}/wro/wro.xml</wroFile>
                     <extraConfigFile>${basedir}/src/main/wro/wro.properties</extraConfigFile>
                     <contextFolder>${basedir}/src/main/wro</contextFolder>
@@ -148,51 +148,30 @@
                     <dependency>
                         <groupId>org.webjars</groupId>
                         <artifactId>jquery</artifactId>
-                        <version>2.1.1</version>
+                        <version>${org.webjars.bootstrap.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>org.webjars</groupId>
                         <artifactId>angularjs</artifactId>
-                        <version>1.5.0</version>
+                        <version>${org.webjars.angularjs.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.webjars</groupId>
+                        <artifactId>restangular</artifactId>
+                        <version>${org.webjars.restangular.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.webjars</groupId>
+                        <artifactId>underscorejs</artifactId>
+                        <version>${org.webjars.underscorejs.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>org.webjars</groupId>
                         <artifactId>bootstrap</artifactId>
-                        <version>3.2.0</version>
+                        <version>${org.webjars.bootstrap.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
-            <!--plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>${maven.dependency.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>unpack</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.webjars</groupId>
-                                    <artifactId>angularjs</artifactId>
-                                    <version>${org.webjars.angularjs.version}</version>
-                                    <type>jar</type>
-                                    <overWrite>false</overWrite>
-                                    <outputDirectory>${project.build.directory}/esourcesXXX</outputDirectory>
-                                    <destFileName>optional-new-name.jar</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                            <includes>**/angular*.min.js</includes>
-                            <outputDirectory>${project.build.directory}/wars</outputDirectory>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>true</overWriteSnapshots>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin-->
         </plugins>
     </build>
 </project>
