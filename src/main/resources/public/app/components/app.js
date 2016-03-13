@@ -17,6 +17,8 @@ App.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', '$htt
     $urlRouterProvider.otherwise('/home')
 
     $stateProvider
+
+        // Main page ui-views
         .state('home', {
             url: '/home',
             templateUrl: 'views/home.html',
@@ -54,9 +56,19 @@ App.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', '$htt
             templateUrl: 'views/users/user_delete.html',
             controller: 'UserDeleteController as userDltCtrl'
         })
+
+        // Admin ui-views
         .state('admin', {
             url: '/admin',
             templateUrl: 'views/admin/panel.html'
+        })
+        .state('admin.home', {
+            url: '/admin/home',
+            templateUrl: 'views/admin/admin_home.html'
+        })
+        .state('admin.database', {
+            url: '/admin/database',
+            templateUrl: 'views/admin/admin_database.html'
         })
 
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';

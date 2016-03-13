@@ -43,7 +43,7 @@
                 <!-- Dropdown on right -->
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-show="authenticated"><a ui-sref="user({ id:loggedUser.id })"><b>Logged as:</b> {{ loggedUser.username }}</a></li>
-                    <li ng-show="authenticated && loggedUser.role == 'ROLE_ADMIN'"><a ui-sref="admin">Administration panel</a></li>
+                    <li ng-show="authenticated && loggedUser.role == 'ROLE_ADMIN'"><a ui-sref="admin.home">Administration panel</a></li>
                     <li ng-show="!authenticated"><a ui-sref="login">Login</a></li>
                     <li ng-show="!authenticated"><a ui-sref="user_new">Sign in</a></li>
                     <li ng-show="authenticated"><a href="" ng-click="logout()">Logout</a></li>
