@@ -66,6 +66,10 @@ App.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', '$htt
             url: '/admin/home',
             templateUrl: 'views/admin/admin_home.html'
         })
+        .state('admin.users', {
+            url: '/admin/users',
+            templateUrl: 'views/admin/admin_users.html'
+        })
         .state('admin.database', {
             url: '/admin/database',
             templateUrl: 'views/admin/admin_database.html'

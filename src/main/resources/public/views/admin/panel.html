@@ -1,9 +1,14 @@
-<div>
-    <strong>Admin panel</strong>
-    <ul>
-        <li><a ui-sref=".home">Panel</a></li>
-        <li><a ui-sref=".database">Database</a></li>
+<div class="panel panel-default">
+    <nav class="navbar navbar-default">
+        <!-- Dropdown on right -->
+        <ul class="nav navbar-nav navbar-left">
+            <li ng-show="authenticated && loggedUser.role == 'ROLE_ADMIN'"><a ui-sref="admin.home">Panel</a></li>
+            <li ng-show="authenticated && loggedUser.role == 'ROLE_ADMIN'"><a ui-sref="admin.users">Users</a></li>
+            <li ng-show="authenticated && loggedUser.role == 'ROLE_ADMIN'"><a ui-sref="admin.database">Database</a></li>
     </ul>
+    </nav>
 
-    <div class="panel panel-default" ui-view></div>
+    <hr/>
+
+    <div class="container" ui-view></div>
 </div>
