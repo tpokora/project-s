@@ -1,62 +1,63 @@
 'use strict'
 
 var App = angular.module('myApp', [
-    'ngRoute',
-    'restangular' ])
+    'restangular',
+    'ui.router'
+     ])
     .directive('appTitle', function() {
         return {
             template: 'Spring Template Application'
         };
     });
 
-App.config(['$routeProvider', 'RestangularProvider', '$httpProvider', function($routeProvider, RestangularProvider, $httpProvider) {
+App.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, RestangularProvider, $httpProvider) {
 
     RestangularProvider.setBaseUrl('http://localhost:8080/');
 
-    $routeProvider
-        .when('/home', {
-            templateUrl: 'views/home.html',
-            controller: 'HomeController as homeCtrl',
-        })
+    $urlRouterProvider.otherwise('/home')
 
-        .when('/login', {
+    $stateProvider
+        .state('home', {
+            url: '/home',
+            templateUrl: 'views/home.html',
+            controller: 'HomeController as homeCtrl'
+        })
+        .state('login', {
+            url: '/login',
             templateUrl: 'views/login.html'
         })
-
-        .when('/content', {
+        .state('content', {
+            url: '/content',
             templateUrl: 'views/content.html'
         })
-
-        .when('/user/list', {
+        .state('users', {
+            url: '/user/list',
             templateUrl: 'views/users/users.html',
-            controller: 'UsersController as usersCtrl',
+            controller: 'UsersController as usersCtrl'
         })
-
-        .when('/user/:id', {
+        .state('user', {
+            url: '/user/{id:int}',
             templateUrl: 'views/users/user.html',
-            controller: 'UsersController as usersCtrl',
+            controller: 'UsersController as usersCtrl'
         })
-
-        .when('/new/user', {
+        .state('user_new', {
             templateUrl: 'views/users/user_new.html',
             controller: 'UserNewController as userNewCtrl'
         })
-
-        .when('/user/:id/update', {
+        .state('user_update', {
+            url: '/user/{id:int}/update',
             templateUrl: 'views/users/user_update.html',
-            controller: 'UserUpdateController as userUpdCtrl',
+            controller: 'UserUpdateController as userUpdCtrl'
         })
-
-        .when('/user/:id/delete', {
+        .state('user_delete', {
+            url: '/user/{id:int}/delete',
             templateUrl: 'views/users/user_delete.html',
-            controller: 'UserDeleteController as userDltCtrl',
+            controller: 'UserDeleteController as userDltCtrl'
         })
-
-        .when('/admin', {
+        .state('admin', {
+            url: '/admin',
             templateUrl: 'views/admin/panel.html'
         })
-
-        .otherwise({redirectTo:'/home'});
 
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 }]);

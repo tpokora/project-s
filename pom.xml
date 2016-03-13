@@ -21,6 +21,7 @@
         <!-- Web resources -->
         <wro4j.maven.plugin.version>1.7.6</wro4j.maven.plugin.version>
         <org.webjars.angularjs.version>1.5.0</org.webjars.angularjs.version>
+        <org.webjars.angular-ui-router.version>0.2.17</org.webjars.angular-ui-router.version>
         <org.webjars.underscorejs.version>1.8.3</org.webjars.underscorejs.version>
         <org.webjars.restangular.version>1.5.1</org.webjars.restangular.version>
         <org.webjars.bootstrap.version>3.3.6</org.webjars.bootstrap.version>
@@ -155,6 +156,11 @@
                         <groupId>org.webjars</groupId>
                         <artifactId>angularjs</artifactId>
                         <version>${org.webjars.angularjs.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.webjars</groupId>
+                        <artifactId>angular-ui-router</artifactId>
+                        <version>${org.webjars.angular-ui-router.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>org.webjars</groupId>

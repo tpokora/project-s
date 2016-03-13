@@ -1,8 +1,8 @@
 'use strict'
 
-App.controller('UsersController', ['$scope', '$routeParams', '$location', 'UserService', function($scope, $routeParams, $location, UserService) {
+App.controller('UsersController', ['$scope', '$stateParams', '$location', 'UserService', function($scope, $stateParams, $location, UserService) {
     var self = this;
-    var params = $routeParams;
+    var params = $stateParams;
 
     this.fetchAllUsers = function() {
             UserService.fetchAllUsers()

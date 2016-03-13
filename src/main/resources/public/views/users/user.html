@@ -22,10 +22,10 @@
             </tr>
             <tr>
                 <td>
-                    <a class="btn btn-style" ng-href="#/user/{{ user.id }}/delete">Delete</a>
+                    <a class="btn btn-style" ui-sref="user_delete({ id:user.id })">Delete</a>
                 </td>
                 <td>
-                    <a class="btn btn-style" ng-href="#/user/{{ user.id }}/update">Update</a>
+                    <a class="btn btn-style" ui-sref="user_update({ id:user.id })">Update</a>
                 </td>
             </tr>
         </tbody>

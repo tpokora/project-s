@@ -1,8 +1,8 @@
 'use strict'
 
-App.controller('UserUpdateController', ['$scope', '$location', '$routeParams', 'UserService', function($scope, $location, $routeParams, UserService) {
+App.controller('UserUpdateController', ['$scope', '$location', '$stateParams', 'UserService', function($scope, $location, $stateParams, UserService) {
     var self = this;
-    var params = $routeParams;
+    var params = $stateParams;
     self.userToUpdate = {
         id: '',
         username: '',

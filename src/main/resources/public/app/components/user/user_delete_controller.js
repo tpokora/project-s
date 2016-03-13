@@ -1,10 +1,8 @@
 'use strict'
 
-App.controller('UserDeleteController', ['$scope', '$location', '$routeParams', 'UserService', function($scope, $location, $routeParams, UserService) {
+App.controller('UserDeleteController', ['$scope', '$location', '$stateParams', 'UserService', function($scope, $location, $stateParams, UserService) {
     var self = this;
-    var params = $routeParams;
-    self.user = [];
-
+    var params = $stateParams;
 
     this.fetchUserById = function(id) {
         UserService.fetchUserById(id)
