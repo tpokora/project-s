@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by pokor on 16.03.2016.
  */
-public class TableDetails implements TableDescriber {
+public class TableDetails {
     private String tableName;
     private Map<String, String> tableColumnsDescription = new HashMap<String, String>();
 
@@ -32,10 +32,5 @@ public class TableDetails implements TableDescriber {
 
     public Map<String, String> getTableColumnsDescription() {
         return tableColumnsDescription;
-    }
-
-    @Override
-    public void setTableDescription(Class clazz) {
-        // TODO: set table details
     }
 }
