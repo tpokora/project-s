@@ -9,12 +9,12 @@ import javax.persistence.MappedSuperclass;
  * Created by pokor on 11.02.2016.
  */
 @MappedSuperclass
-public class AbstractEntity {
+public abstract class AbstractEntity {
 
     @Id
     @GeneratedValue
     @Column(name = "ID")
-    protected Long id;
+    private Long id;
 
     public AbstractEntity() {
 

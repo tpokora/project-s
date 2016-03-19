@@ -1,6 +1,7 @@
 package com.tpokora.projects.config;
 
 import com.tpokora.projects.common.errors.AbstractError;
+import com.tpokora.projects.common.model.TableDetailsProvider;
 import com.tpokora.projects.user.dao.UserDAO;
 import com.tpokora.projects.user.dao.UserDAOImpl;
 import com.tpokora.projects.user.service.CustomUserDetailsService;
@@ -51,5 +52,10 @@ public class AppConfig {
     @Bean(name = "userDetailsService")
     public UserDetailsService getUserDetailsService() {
         return new CustomUserDetailsService();
+    }
+
+    @Bean(name = "tableDetails")
+    public TableDetailsProvider getTableDetailsProvider(SessionFactory sessionFactory) {
+        return new TableDetailsProvider(sessionFactory);
     }
 }
