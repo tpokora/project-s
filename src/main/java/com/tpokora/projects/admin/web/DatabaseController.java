@@ -1,9 +1,10 @@
 package com.tpokora.projects.admin.web;
 
 import com.tpokora.projects.common.model.TableDetails;
-import com.tpokora.projects.common.model.TableDetailsProvider;
 import com.tpokora.projects.common.web.RESTResponseWrapper;
+import com.tpokora.projects.user.dao.UserDAO;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,15 +25,17 @@ public class DatabaseController {
 
     private static RESTResponseWrapper restResponse = new RESTResponseWrapper();
 
-    private List<TableDetails> tableDetailsList = new ArrayList<TableDetails>();
+    private List<TableDetails> tableDetailsList;
 
+    @Autowired
+    UserDAO userDAO;
 
     @RequestMapping(value = "/table/list", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<RESTResponseWrapper> getTables() {
         restResponse.clearResponse();
         logger.info("Looking for tables...");
-
-        tableDetailsList = TableDetailsProvider.getAllTablesDetails();
+        tableDetailsList = new ArrayList<TableDetails>();
+        tableDetailsList.add(userDAO.getTableDetails());
         restResponse.addContent("tables", tableDetailsList);
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }

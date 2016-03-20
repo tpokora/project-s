@@ -1,5 +1,6 @@
 package com.tpokora.projects.user.dao;
 
+import com.tpokora.projects.common.dao.DescribableDAO;
 import com.tpokora.projects.user.model.User;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  * Created by Tomek on 2016-01-16.
  */
-public interface UserDAO {
+public interface UserDAO extends DescribableDAO{
     public List<User> getAllUsers();
     public User getUserById(int id);
     public User getUserByUsername(String username);

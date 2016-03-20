@@ -1,5 +1,7 @@
 package com.tpokora.projects.user.dao;
 
+import com.tpokora.projects.common.model.TableDetails;
+import com.tpokora.projects.common.model.TableDetailsProvider;
 import com.tpokora.projects.user.model.User;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
@@ -69,5 +71,10 @@ public class UserDAOImpl implements UserDAO {
         User userToDelete = new User();
         userToDelete.setId(id);
         sessionFactory.getCurrentSession().delete(userToDelete);
+    }
+
+    @Override
+    public TableDetails getTableDetails() {
+        return TableDetailsProvider.getTableDetails(User.class, sessionFactory);
     }
 }
