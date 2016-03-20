@@ -1,6 +1,6 @@
 package com.tpokora.projects.user.dao;
 
-import com.tpokora.projects.common.dao.DescribableDAO;
+import com.tpokora.projects.admin.dao.DescribableDAO;
 import com.tpokora.projects.user.model.User;
 
 import java.util.List;

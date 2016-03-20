@@ -1,8 +1,8 @@
 package com.tpokora.projects.admin.web;
 
+import com.tpokora.projects.admin.service.TablesDetailsService;
 import com.tpokora.projects.common.model.TableDetails;
 import com.tpokora.projects.common.web.RESTResponseWrapper;
-import com.tpokora.projects.user.dao.UserDAO;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,14 +28,13 @@ public class DatabaseController {
     private List<TableDetails> tableDetailsList;
 
     @Autowired
-    UserDAO userDAO;
+    TablesDetailsService tableDetailsService;
 
     @RequestMapping(value = "/table/list", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<RESTResponseWrapper> getTables() {
         restResponse.clearResponse();
         logger.info("Looking for tables...");
-        tableDetailsList = new ArrayList<TableDetails>();
-        tableDetailsList.add(userDAO.getTableDetails());
+        tableDetailsList = tableDetailsService.getAllTablesIDetails();
         restResponse.addContent("tables", tableDetailsList);
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }

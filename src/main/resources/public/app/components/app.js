@@ -16,6 +16,8 @@ App.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', '$htt
 
     $urlRouterProvider.otherwise('/home')
 
+    // TODO: Url patterns, example: admin.database should look like admin/database not admin/admin/database
+
     $stateProvider
 
         // Main page ui-views
@@ -63,16 +65,17 @@ App.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', '$htt
             templateUrl: 'views/admin/panel.html'
         })
         .state('admin.home', {
-            url: '/admin/home',
+            url: '/home',
             templateUrl: 'views/admin/admin_home.html'
         })
         .state('admin.users', {
-            url: '/admin/users',
+            url: '/users',
             templateUrl: 'views/admin/admin_users.html'
         })
         .state('admin.database', {
-            url: '/admin/database',
-            templateUrl: 'views/admin/admin_database.html'
+            url: '/database',
+            templateUrl: 'views/admin/admin_database.html',
+            controller: 'DatabaseController as databaseCtrl'
         })
 
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';

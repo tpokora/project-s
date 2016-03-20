@@ -1,6 +1,7 @@
-package com.tpokora.projects.common.web;
+package com.tpokora.projects.admin.web;
 
-import com.tpokora.projects.admin.web.DatabaseController;
+import com.tpokora.projects.admin.service.TablesDetailsService;
+import com.tpokora.projects.common.model.TableDetails;
 import com.tpokora.projects.common.web.rest.AbstractControllerTest;
 import com.tpokora.projects.user.dao.UserDAO;
 import com.tpokora.projects.user.utils.UserTestUtils;
@@ -15,6 +16,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.List;
+
 import static org.mockito.Mockito.when;
 
 /**
@@ -25,7 +28,7 @@ public class DatabaseControllerTest extends AbstractControllerTest {
     private static final Logger logger = Logger.getLogger(DatabaseControllerTest.class);
 
     @Mock
-    UserDAO userDAO;
+    TablesDetailsService tablesDetailsService;
 
     @InjectMocks
     DatabaseController databaseController;
@@ -38,7 +41,7 @@ public class DatabaseControllerTest extends AbstractControllerTest {
 
     @Test
     public void getAllTables_tablesExists() throws Exception {
-        when(userDAO.getTableDetails()).thenReturn(UserTestUtils.generateTableDetails(3));
+        when(tablesDetailsService.getAllTablesIDetails()).thenReturn(UserTestUtils.generateTableDetailsList(3));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/rest/admin/database/table/list"))
                 .andExpect(MockMvcResultMatchers.status().isOk())

@@ -1,4 +1,4 @@
-package com.tpokora.projects.common.dao;
+package com.tpokora.projects.admin.dao;
 
 import com.tpokora.projects.common.model.TableDetails;
 
