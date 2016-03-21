@@ -4,6 +4,8 @@ App.controller('UserDeleteController', ['$scope', '$location', '$stateParams', '
     var self = this;
     var params = $stateParams;
 
+    var backUrl = "/users";
+
     this.fetchUserById = function(id) {
         UserService.fetchUserById(id)
             .then(
@@ -15,7 +17,14 @@ App.controller('UserDeleteController', ['$scope', '$location', '$stateParams', '
             );
     };
 
+    self.setBackUrl = function() {
+        if ($location.path().indexOf("admin") > -1) {
+            backUrl = "/admin/users";
+        }
+    }
+
     self.user = this.fetchUserById(params.id);
+    self.setBackUrl();
 
     $scope.deleteUser = function() {
         UserService.deleteUserById($scope.user.id)
@@ -27,7 +36,7 @@ App.controller('UserDeleteController', ['$scope', '$location', '$stateParams', '
     };
 
     $scope.back = function() {
-        $location.path('/user/' + $scope.user.id);
+        $location.path(backUrl);
     };
 
 }]);

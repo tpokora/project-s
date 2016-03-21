@@ -16,7 +16,6 @@ App.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', '$htt
 
     $urlRouterProvider.otherwise('/home')
 
-    // TODO: Url patterns, example: admin.database should look like admin/database not admin/admin/database
 
     $stateProvider
 
@@ -70,7 +69,18 @@ App.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', '$htt
         })
         .state('admin.users', {
             url: '/users',
-            templateUrl: 'views/admin/admin_users.html'
+            templateUrl: 'views/admin/admin_users.html',
+            controller: 'UsersController as usersCtrl'
+        })
+        .state('admin.user_update', {
+            url: '/user/{id:int}/update',
+            templateUrl: 'views/users/user_update.html',
+            controller: 'UserUpdateController as userUpdCtrl'
+        })
+        .state('admin.user_delete', {
+            url: '/user/{id:int}/delete',
+            templateUrl: 'views/users/user_delete.html',
+            controller: 'UserDeleteController as userDltCtrl'
         })
         .state('admin.database', {
             url: '/database',
