@@ -1,6 +1,7 @@
 package com.tpokora.projects.admin.web;
 
 import com.tpokora.projects.admin.service.TablesDetailsService;
+import com.tpokora.projects.admin.utils.DatabaseTestUtils;
 import com.tpokora.projects.common.model.TableDetails;
 import com.tpokora.projects.common.web.rest.AbstractControllerTest;
 import com.tpokora.projects.user.dao.UserDAO;
@@ -41,7 +42,7 @@ public class DatabaseControllerTest extends AbstractControllerTest {
 
     @Test
     public void getAllTables_tablesExists() throws Exception {
-        when(tablesDetailsService.getAllTablesIDetails()).thenReturn(UserTestUtils.generateTableDetailsList(3));
+        when(tablesDetailsService.getAllTablesIDetails()).thenReturn(DatabaseTestUtils.generateTableDetailsList(3));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/rest/admin/database/table/list"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -49,5 +50,23 @@ public class DatabaseControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.tables").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.tables").isArray());
+    }
+
+    @Test
+    public void checkTableColumns_columnFields() throws Exception {
+        when(tablesDetailsService.getAllTablesIDetails()).thenReturn(DatabaseTestUtils.generateTableDetailsList(1));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/rest/admin/database/table/list"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.tables").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.tables").isArray())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.tables[0]").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.tables[0].columns").isArray())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.tables[0].columns[0].name").value("username"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.tables[0].columns[0].type").value("string"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.tables[0].columns[1].name").value("password"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.tables[0].columns[1].type").value("string"));
     }
 }

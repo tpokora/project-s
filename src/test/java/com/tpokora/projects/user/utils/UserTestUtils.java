@@ -23,25 +23,4 @@ public class UserTestUtils extends TestUtils {
 
         return usersList;
     }
-
-    public static List<TableDetails> generateTableDetailsList(int amount) {
-        ArrayList<TableDetails> list = new ArrayList<TableDetails>();
-
-        for(int i = 0; i < amount; i++) {
-            list.add(generateTableDetails(i));
-        }
-
-        return list;
-    }
-
-    public static TableDetails generateTableDetails(int index) {
-        TableDetails tableDetails = new TableDetails();
-        tableDetails.setName("users");
-        HashMap<String, String> tableColumnDetails = new HashMap<String, String>();
-        tableColumnDetails.put("username" + index, "string");
-        tableColumnDetails.put("password" + index, "string");
-        tableColumnDetails.put("email" + index, "string");
-        tableColumnDetails.put("role" + index, "string");
-        return tableDetails;
-    }
 }
