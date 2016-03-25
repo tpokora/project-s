@@ -7,6 +7,8 @@ package com.tpokora.projects.config;
 import javax.sql.DataSource;
 
 import com.tpokora.projects.user.dao.UserRepository;
+import com.tpokora.projects.user.model.User;
+import org.hibernate.SessionFactory;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +17,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -62,6 +65,17 @@ public class DatabaseConfiguration {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
+    }
+
+    @Autowired
+    @Bean(name = "sessionFactory")
+    public SessionFactory getSessionFactory(DataSource dataSource) {
+
+        LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
+        sessionBuilder.addProperties(getHibernateProperties());
+        sessionBuilder.addAnnotatedClasses(User.class);
+
+        return sessionBuilder.buildSessionFactory();
     }
 
 }

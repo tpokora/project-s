@@ -4,13 +4,11 @@ import com.tpokora.projects.common.model.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 /**
  * Created by Tomek on 2016-01-10.
  */
 @Entity
-@Table(name = "USERS")
 public class User extends AbstractEntity {
     private String username;
     private String password;

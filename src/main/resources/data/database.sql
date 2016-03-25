@@ -2,7 +2,7 @@ CREATE DATABASE users_database;
 
 USE users_database;
 
-CREATE TABLE `users` (
+CREATE TABLE `user` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `USERNAME` varchar(45) COLLATE utf8_polish_ci NOT NULL,
   `PASSWORD` varchar(64) COLLATE utf8_polish_ci NOT NULL,
@@ -14,6 +14,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 
-INSERT INTO USERS(USERNAME, PASSWORD, EMAIL, ROLE)
+INSERT INTO USER(USERNAME, PASSWORD, EMAIL, ROLE)
     VALUES ('admin', '$2a$10$RiDTA930W5o8lpeNbQc1/.1jDubtN7gLDmzUR4OrhMob8BDuW54J6', 'email@email.com', 'ROLE_ADMIN');
 

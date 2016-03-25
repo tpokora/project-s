@@ -4,7 +4,7 @@ App.controller('UserDeleteController', ['$scope', '$location', '$stateParams', '
     var self = this;
     var params = $stateParams;
 
-    var backUrl = "/users";
+    var backUrl = "/home";
 
     this.fetchUserById = function(id) {
         UserService.fetchUserById(id)
@@ -30,7 +30,7 @@ App.controller('UserDeleteController', ['$scope', '$location', '$stateParams', '
         UserService.deleteUserById($scope.user.id)
             .then(
                 function() {
-                    $location.path('/home');
+                    $location.path(backUrl);
                 }
             );
     };

@@ -1,24 +1,40 @@
 package com.tpokora.projects.admin.service;
 
 import com.tpokora.projects.common.model.TableDetails;
-import com.tpokora.projects.user.dao.UserRepository;
+import org.hibernate.SessionFactory;
+import org.hibernate.metadata.ClassMetadata;
+import org.hibernate.persister.entity.AbstractEntityPersister;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by pokor on 20.03.2016.
  */
 public class TablesDetailsServiceImpl implements TablesDetailsService {
 
-    @Resource
-    UserRepository userRepo;
+    @Autowired
+    SessionFactory sessionFactory;
+
+    public TablesDetailsServiceImpl() {
+    }
 
     @Override
     public List<TableDetails> getAllTablesIDetails() {
         ArrayList<TableDetails> tableDetailsList = new ArrayList<TableDetails>();
-        //tableDetailsList.add(userDAO.getTableDetails());
+
+        Map<String, ClassMetadata> classMetaDataMap = sessionFactory.getAllClassMetadata();
+        for (Map.Entry<String, ClassMetadata> metaDataMap : classMetaDataMap.entrySet()) {
+            ClassMetadata classMetadata = metaDataMap.getValue();
+            AbstractEntityPersister abstractEntityPersister = (AbstractEntityPersister) classMetadata;
+            TableDetails tableDetails = new TableDetails();
+            tableDetails.setName(abstractEntityPersister.getTableName());
+            tableDetails.setColumns(abstractEntityPersister.getPropertyNames(), abstractEntityPersister.getPropertyTypes());
+            tableDetailsList.add(tableDetails);
+        }
+
         return tableDetailsList;
     }
 }
