@@ -11,6 +11,6 @@ public interface UserService {
     public List<User> getAllUsers();
     public User getUserById(int id);
     public User getUserByUsername(String username);
-    public void createOrUpdateUser(User user);
+    public User createOrUpdateUser(User user);
     public void removeUserById(int id);
 }

@@ -37,14 +37,15 @@ public class UserController {
     @Autowired
     AbstractError userError;
 
+    // TODO: Handle adding error when not found
+
     @RequestMapping(value = "/list", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<RESTResponseWrapper> getAllUsers() {
         restResponse.clearResponse();
         logger.info("Looking for users...");
         if (userService.getAllUsers().isEmpty()) {
             logger.error("No USERS returned to: " + this.getClass().getSimpleName());
-            userError.setError(ErrorTypes.USER_NOT_EXISTS);
-            restResponse.addError(userError);
+            addUserErrorToResponse(ErrorTypes.USER_NOT_EXISTS);
             return new ResponseEntity<RESTResponseWrapper>(HttpStatus.NOT_FOUND);
         }
 
@@ -60,8 +61,7 @@ public class UserController {
         logger.info("Looking for user with id: " + id + " ...");
         if (userService.getUserById(id) instanceof NullUser) {
             logger.error("No USERS with id: " + id + " returned to: " + this.getClass().getSimpleName());
-            userError.setError(ErrorTypes.USER_NOT_EXISTS);
-            restResponse.addError(userError);
+            addUserErrorToResponse(ErrorTypes.USER_NOT_EXISTS);
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
         }
 
@@ -75,8 +75,7 @@ public class UserController {
         logger.info("Looking for user with username: " + username + " ...");
         if (userService.getUserByUsername(username) instanceof NullUser) {
             logger.error("No USERS with username: " + username + " returned to: " + this.getClass().getSimpleName());
-            userError.setError(ErrorTypes.USER_NOT_EXISTS);
-            restResponse.addError(userError);
+            addUserErrorToResponse(ErrorTypes.USER_NOT_EXISTS);
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
         }
 
@@ -94,8 +93,7 @@ public class UserController {
         try {
             userService.createOrUpdateUser(newUser);
         } catch(ConstraintViolationException e) {
-            userError.setError(ErrorTypes.USER_ALREADY_EXISTS);
-            restResponse.addError(userError);
+            addUserErrorToResponse(ErrorTypes.USER_ALREADY_EXISTS);
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
@@ -110,20 +108,12 @@ public class UserController {
         restResponse.clearResponse();
         System.out.println("Updating user: " + id);
 
-        User currentUser = userService.getUserById(id);
-
-        if (currentUser instanceof NullUser) {
-            userError.setError(ErrorTypes.USER_NOT_EXISTS);
-            restResponse.addError(userError);
+        if (userService.getUserById(id) instanceof NullUser) {
+            addUserErrorToResponse(ErrorTypes.USER_NOT_EXISTS);
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
         }
 
-        currentUser.setUsername(user.getUsername());
-        currentUser.setPassword(user.getPassword());
-        currentUser.setEmail(user.getEmail());
-
-        userService.createOrUpdateUser(currentUser);
-        restResponse.addContent(USER_RESPONSE_STRING, userToArray(currentUser));
+        restResponse.addContent(USER_RESPONSE_STRING, userToArray(userService.createOrUpdateUser(user)));
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }
 
@@ -134,8 +124,7 @@ public class UserController {
         User deleteUser = userService.getUserById(id);
         if (deleteUser instanceof NullUser) {
             logger.error("Unable to delete user. User not exists");
-            userError.setError(ErrorTypes.USER_NOT_EXISTS);
-            restResponse.addError(userError);
+            addUserErrorToResponse(ErrorTypes.USER_NOT_EXISTS);
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
         }
 
@@ -143,6 +132,11 @@ public class UserController {
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucb.path("/home").build().toUri());
         return new ResponseEntity<RESTResponseWrapper>(headers, HttpStatus.NO_CONTENT);
+    }
+
+    private void addUserErrorToResponse(ErrorTypes error) {
+        userError.setError(error);
+        restResponse.addError(userError);
     }
 
     private List<User> userToArray(User user) {

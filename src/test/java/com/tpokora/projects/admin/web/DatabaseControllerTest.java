@@ -2,10 +2,7 @@ package com.tpokora.projects.admin.web;
 
 import com.tpokora.projects.admin.service.TablesDetailsService;
 import com.tpokora.projects.admin.utils.DatabaseTestUtils;
-import com.tpokora.projects.common.model.TableDetails;
 import com.tpokora.projects.common.web.rest.AbstractControllerTest;
-import com.tpokora.projects.user.dao.UserDAO;
-import com.tpokora.projects.user.utils.UserTestUtils;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;

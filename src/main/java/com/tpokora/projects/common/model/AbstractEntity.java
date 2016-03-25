@@ -14,21 +14,21 @@ public abstract class AbstractEntity {
     @Id
     @GeneratedValue
     @Column(name = "ID")
-    private Long id;
+    private Integer id;
 
     public AbstractEntity() {
 
     }
 
-    public AbstractEntity(Long id) {
+    public AbstractEntity(Integer id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

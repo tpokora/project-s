@@ -1,8 +1,6 @@
 package com.tpokora.projects.admin.utils;
 
 import com.tpokora.projects.common.model.TableDetails;
-import com.tpokora.projects.user.dao.UserDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;

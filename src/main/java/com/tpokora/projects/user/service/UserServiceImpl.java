@@ -1,14 +1,14 @@
 package com.tpokora.projects.user.service;
 
 import com.tpokora.projects.common.utils.SecurityUtilites;
+import com.tpokora.projects.user.dao.UserRepository;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.model.nullobjects.NullUser;
-import com.tpokora.projects.user.dao.UserDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,53 +17,62 @@ import java.util.List;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    UserDAO userDAO;
+    @Resource
+    private UserRepository userRepo;
 
     @Override
     @Transactional(readOnly = true)
     public List<User> getAllUsers() {
-        return userDAO.getAllUsers();
+        return (List<User>) userRepo.findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
     public User getUserById(int id) {
         try {
-            User user = userDAO.getUserById(id);
+            User user = userRepo.findOne(id);
         } catch(IndexOutOfBoundsException e) {
             return new NullUser();
         } catch(UnexpectedRollbackException e) {
             return new NullUser();
         }
 
-        return userDAO.getUserById(id);
+        return userRepo.findOne(id);
     }
 
     @Override
     @Transactional(readOnly = true)
     public User getUserByUsername(String username) {
         try {
-            User user = userDAO.getUserByUsername(username);
+            User user = userRepo.findByUsername(username);
         } catch (IndexOutOfBoundsException e) {
             return new NullUser();
         } catch(UnexpectedRollbackException e) {
             return new NullUser();
         }
 
-        return userDAO.getUserByUsername(username);
+        return userRepo.findByUsername(username);
     }
 
     @Override
     @Transactional
-    public void createOrUpdateUser(User user) {
-        user.setPassword(SecurityUtilites.hashingPassword(user.getPassword()));
-        userDAO.createOrUpdateUser(user);
+    public User createOrUpdateUser(User user) {
+        User userToSave = user;
+        if (user.getId() != null) {
+            userToSave = userRepo.findOne(user.getId());
+            userToSave.setUsername(user.getUsername());
+            userToSave.setPassword(user.getPassword());
+            userToSave.setEmail(user.getEmail());
+        }
+
+        userToSave.setPassword(SecurityUtilites.hashingPassword(userToSave.getPassword()));
+        userRepo.saveAndFlush(userToSave);
+        return userRepo.findByUsername(userToSave.getUsername());
     }
 
     @Override
     @Transactional
     public void removeUserById(int id) {
-        userDAO.removeUserById(id);
+        userRepo.delete(id);
     }
 }

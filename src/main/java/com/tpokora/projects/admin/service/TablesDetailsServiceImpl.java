@@ -1,9 +1,9 @@
 package com.tpokora.projects.admin.service;
 
 import com.tpokora.projects.common.model.TableDetails;
-import com.tpokora.projects.user.dao.UserDAO;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.tpokora.projects.user.dao.UserRepository;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,13 +12,13 @@ import java.util.List;
  */
 public class TablesDetailsServiceImpl implements TablesDetailsService {
 
-    @Autowired
-    UserDAO userDAO;
+    @Resource
+    UserRepository userRepo;
 
     @Override
     public List<TableDetails> getAllTablesIDetails() {
         ArrayList<TableDetails> tableDetailsList = new ArrayList<TableDetails>();
-        tableDetailsList.add(userDAO.getTableDetails());
+        //tableDetailsList.add(userDAO.getTableDetails());
         return tableDetailsList;
     }
 }
