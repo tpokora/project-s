@@ -38,7 +38,7 @@ App.controller('UserUpdateController', ['$scope', '$location', '$stateParams', '
         UserService.updateUser(params.id, self.userToUpdate)
             .then(
                 function() {
-                    $location.path('/user/' + params.id);
+                    $location.path(backUrl);
                 }
             );
     };
