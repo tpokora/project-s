@@ -3,8 +3,8 @@ package com.tpokora.projects.config;
 import com.tpokora.projects.admin.service.TablesDetailsService;
 import com.tpokora.projects.admin.service.TablesDetailsServiceImpl;
 import com.tpokora.projects.common.errors.AbstractError;
-import com.tpokora.projects.user.dao.UserDAO;
-import com.tpokora.projects.user.dao.UserDAOImpl;
+//import com.tpokora.projects.user.dao.UserDAO;
+//import com.tpokora.projects.user.dao.UserDAOImpl;
 import com.tpokora.projects.user.service.CustomUserDetailsService;
 import com.tpokora.projects.user.service.UserService;
 import com.tpokora.projects.user.service.UserServiceImpl;
@@ -35,11 +35,11 @@ public class AppConfig {
 		DAO Objects bean configuration
 	*/
 
-    @Autowired
-    @Bean(name = "userDao")
-    public UserDAO getUserDao(SessionFactory sessionFactory) {
-        return new UserDAOImpl(sessionFactory);
-    }
+//    @Autowired
+//    @Bean(name = "userDao")
+//    public UserDAO getUserDao(SessionFactory sessionFactory) {
+//        return new UserDAOImpl(sessionFactory);
+//    }
 
 	/*
 		Service classes

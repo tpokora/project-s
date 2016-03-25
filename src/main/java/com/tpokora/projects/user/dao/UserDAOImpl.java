@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * Created by Tomek on 2016-01-16.
  */
+/*
 @Repository("userDao")
 public class UserDAOImpl implements UserDAO {
 
@@ -78,3 +79,4 @@ public class UserDAOImpl implements UserDAO {
         return TableDetailsProvider.getTableDetails(User.class, sessionFactory);
     }
 }
+*/
