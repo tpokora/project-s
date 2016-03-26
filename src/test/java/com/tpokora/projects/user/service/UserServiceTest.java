@@ -1,6 +1,6 @@
 package com.tpokora.projects.user.service;
 
-import com.tpokora.projects.common.AbstractServiceTest;
+import com.tpokora.projects.common.service.AbstractServiceTest;
 import com.tpokora.projects.user.model.User;
 import org.apache.log4j.Logger;
 import org.junit.Assert;

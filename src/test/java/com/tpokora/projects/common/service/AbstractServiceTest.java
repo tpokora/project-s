@@ -1,4 +1,4 @@
-package com.tpokora.projects.common;
+package com.tpokora.projects.common.service;
 
 import com.tpokora.projects.config.AppConfig;
 import com.tpokora.projects.config.DatabaseConfiguration;
@@ -14,5 +14,5 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
         DatabaseConfiguration.class
 })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class AbstractServiceTest {
+public abstract class AbstractServiceTest {
 }

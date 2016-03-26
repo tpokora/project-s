@@ -15,7 +15,7 @@ public class UserTestUtils extends TestUtils {
         List<User> usersList = new ArrayList<User>();
         if (amount > 0) {
             for (int i = 1; i <= amount; i++) {
-                usersList.add(new User(Integer.valueOf(i), "user" + i, "pass", "email@email.com", "ROLE_USER"));
+                usersList.add(new User(Integer.valueOf(i), "user" + i, "pass", "email@email.com", "ROLE_USER", null));
             }
         }
 
