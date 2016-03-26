@@ -35,7 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String USERS_NAMES_QUERY = "select username, password from users where username = ?";
     private static final String USERS_ROLES_QUERY = "select username, role from users where username = ?";
-    //$2a$10$kEsz7BQn1kM8FRYJbYxEwOgF9r75yWxKiTrgfm.c.lfbZOptnLovG
+
     @Autowired
     private DataSource dataSource;
 

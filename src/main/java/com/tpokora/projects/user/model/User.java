@@ -1,10 +1,11 @@
 package com.tpokora.projects.user.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.tpokora.projects.articles.model.Article;
 import com.tpokora.projects.common.model.AbstractEntity;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by Tomek on 2016-01-10.
@@ -26,7 +27,8 @@ public class User extends AbstractEntity {
     private String role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Article> articles;
+    @JsonManagedReference
+    private List<Article> articles;
 
     public User() {
         super();
@@ -40,7 +42,7 @@ public class User extends AbstractEntity {
         this.role = role;
     }
 
-    public User(Integer id, String username, String password, String email, String role, Set<Article> articles) {
+    public User(Integer id, String username, String password, String email, String role, List<Article> articles) {
         super(id);
         this.username = username;
         this.password = password;
@@ -81,11 +83,11 @@ public class User extends AbstractEntity {
         this.role = role;
     }
 
-    public Set<Article> getArticles() {
+    public List<Article> getArticles() {
         return articles;
     }
 
-    public void setArticles(Set<Article> articles) {
+    public void setArticles(List<Article> articles) {
         this.articles = articles;
     }
 }

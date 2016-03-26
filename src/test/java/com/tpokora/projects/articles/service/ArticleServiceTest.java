@@ -74,11 +74,13 @@ public class ArticleServiceTest extends AbstractServiceTest {
      */
     @Test
     @Transactional
-    public void getArticleByTitle_testArticle_success() {
+    public void getArticlesByTitle_testArticle_success() {
         String title = "testArticle";
-        Article article = articleService.getArticleByTitle(title);
+        List<Article> articles = articleService.getArticlesByTitle(title);
 
-        Assert.assertEquals(true, article.getTitle().equals(title));
+        articles.forEach(article -> {
+            Assert.assertEquals(true, article.getTitle().equals(title));
+        });
     }
 
     /**
@@ -92,26 +94,21 @@ public class ArticleServiceTest extends AbstractServiceTest {
         String title = "Test Article";
         String updatedTitle = "Test Article - updated";
         String content = "Article content for testing purposes";
-        SerialBlob blob = new SerialBlob(content.getBytes());
         Date date = new Date();
 
         Article newArticle = new Article();
         newArticle.setTitle(title);
-        newArticle.setContent(blob);
+        newArticle.setContent(content);
         newArticle.setCreateTime(date);
         newArticle.setUser(user);
 
-        articleService.createOrUpdateArticle(newArticle);
-
-        Article addedArticle = articleService.getArticleByTitle(title);
+        Article addedArticle = articleService.createOrUpdateArticle(newArticle);
 
         Assert.assertEquals(title, addedArticle.getTitle());
 
         newArticle.setTitle(updatedTitle);
 
-        articleService.createOrUpdateArticle(newArticle);
-
-        Article updatedArticle = articleService.getArticleByTitle(updatedTitle);
+        Article updatedArticle = articleService.createOrUpdateArticle(newArticle);
 
         Assert.assertEquals(updatedTitle, updatedArticle.getTitle());
     }

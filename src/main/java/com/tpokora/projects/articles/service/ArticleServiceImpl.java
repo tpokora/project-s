@@ -27,14 +27,14 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Article getArticleByTitle(String title) {
+    public List<Article> getArticlesByTitle(String title) {
         return articleRepo.findByTitle(title);
     }
 
     @Override
     public Article createOrUpdateArticle(Article article) {
         articleRepo.saveAndFlush(article);
-        return articleRepo.findByTitle(article.getTitle());
+        return articleRepo.findOne(article.getId());
     }
 
     @Override

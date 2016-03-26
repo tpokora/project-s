@@ -10,7 +10,7 @@ import java.util.List;
 public interface ArticleService {
     public List<Article> getAllArticles();
     public Article getArticleById(Integer id);
-    public Article getArticleByTitle(String title);
+    public List<Article> getArticlesByTitle(String title);
     public Article createOrUpdateArticle(Article article);
     public void deleteArticleById(Integer id);
 }

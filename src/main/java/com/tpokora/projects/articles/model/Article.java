@@ -1,11 +1,14 @@
 package com.tpokora.projects.articles.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.tpokora.projects.common.model.AbstractEntity;
 import com.tpokora.projects.user.model.User;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.sql.Blob;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -13,14 +16,14 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "ARTICLE")
-public class Article extends AbstractEntity {
+public class Article extends AbstractEntity implements Serializable {
 
     @Column(name = "TITLE")
     private String title;
 
     @Column(name = "CONTENT")
     @Lob
-    private Blob content;
+    private String content;
 
     @Column(name = "CREATE_TIME")
     @DateTimeFormat
@@ -28,21 +31,22 @@ public class Article extends AbstractEntity {
 
 
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference // TODO: will be needed in the future when article will have to have authors name
     private User user;
 
     public Article() {
 
     }
 
-    public Article(Integer id, String title, Blob content, Date createTime) {
+    public Article(Integer id, String title, String content, Date createTime) {
         super(id);
         this.title = title;
         this.content = content;
         this.createTime = createTime;
     }
 
-    public Article(Integer id, String title, Blob content, Date createTime, User user) {
+    public Article(Integer id, String title, String content, Date createTime, User user) {
         super(id);
         this.title = title;
         this.content = content;
@@ -58,11 +62,11 @@ public class Article extends AbstractEntity {
         this.title = title;
     }
 
-    public Blob getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(Blob content) {
+    public void setContent(String content) {
         this.content = content;
     }
 

@@ -87,4 +87,18 @@ public class UserServiceTest extends AbstractServiceTest {
         Assert.assertNull(userService.getUserById(id));
     }
 
+    /**
+     * Test to get user with articles
+     */
+    @Test
+    @Transactional
+    public void getUserById_16_userWithOneArticle() {
+        User user = userService.getUserById(16);
+
+        Assert.assertEquals(true, user.getId() == 16);
+        Assert.assertEquals(true, !user.getArticles().isEmpty());
+        Assert.assertEquals(true, user.getArticles().get(0).getTitle().equals("testArticle"));
+        Assert.assertEquals(true, user.getArticles().size() == 1);
+    }
+
 }

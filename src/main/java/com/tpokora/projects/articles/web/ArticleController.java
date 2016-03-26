@@ -1,4 +1,4 @@
-package com.tpokora.projects.articles;
+package com.tpokora.projects.articles.web;
 
 import com.tpokora.projects.articles.service.ArticleService;
 import com.tpokora.projects.common.web.RESTResponseWrapper;
@@ -25,6 +25,8 @@ public class ArticleController {
 
     @Autowired
     ArticleService articleService;
+
+    // TODO: Finish article controller
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<RESTResponseWrapper> getAllArticles() {
