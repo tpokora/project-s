@@ -1,6 +1,7 @@
 package com.tpokora.projects.articles.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.tpokora.projects.common.model.AbstractEntity;
@@ -26,7 +27,7 @@ public class Article extends AbstractEntity implements Serializable {
     private String content;
 
     @Column(name = "CREATE_TIME")
-    @DateTimeFormat
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm a z")
     private Date createTime;
 
 

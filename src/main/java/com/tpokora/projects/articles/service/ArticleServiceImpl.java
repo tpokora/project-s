@@ -33,7 +33,16 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article createOrUpdateArticle(Article article) {
-        articleRepo.saveAndFlush(article);
+        if (article.getId() == null) {
+            articleRepo.saveAndFlush(article);
+            return articleRepo.findOne(article.getId());
+        }
+
+        Article updateArticle = articleRepo.findOne(article.getId());
+        updateArticle.setTitle(article.getTitle());
+        updateArticle.setContent(article.getContent());
+        articleRepo.saveAndFlush(updateArticle);
+
         return articleRepo.findOne(article.getId());
     }
 

@@ -4,6 +4,7 @@ import com.tpokora.projects.admin.service.TablesDetailsService;
 import com.tpokora.projects.admin.service.TablesDetailsServiceImpl;
 import com.tpokora.projects.articles.service.ArticleService;
 import com.tpokora.projects.articles.service.ArticleServiceImpl;
+import com.tpokora.projects.articles.web.rest.ArticleError;
 import com.tpokora.projects.common.errors.AbstractError;
 import com.tpokora.projects.user.service.CustomUserDetailsService;
 import com.tpokora.projects.user.service.UserService;
@@ -24,10 +25,14 @@ public class AppConfig {
 		Application beans
 	 */
 
-    @Autowired
     @Bean(name = "userError")
     public AbstractError getUserError() {
         return new UserError();
+    }
+
+    @Bean(name = "articleError")
+    public AbstractError getArticleError() {
+        return new ArticleError();
     }
 
 
