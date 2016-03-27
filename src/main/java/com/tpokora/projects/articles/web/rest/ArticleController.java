@@ -37,8 +37,6 @@ public class ArticleController implements RESTControllerError {
     @Autowired
     ArticleService articleService;
 
-    // TODO: Finish article controller
-
     @RequestMapping(value = "/list", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<RESTResponseWrapper> getAllArticles() {
         restResponse.clearResponse();
@@ -96,7 +94,7 @@ public class ArticleController implements RESTControllerError {
         Article newArticle = article;
 
         try {
-            articleService.createOrUpdateArticle(newArticle);
+            newArticle = articleService.createOrUpdateArticle(newArticle);
         } catch (ConstraintViolationException e) {
             addErrorToRESTResponse(articleError, ErrorTypes.ARTICLE_ALREADY_EXISTS);
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.UNPROCESSABLE_ENTITY);
@@ -104,7 +102,7 @@ public class ArticleController implements RESTControllerError {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucb.path("/home").build().toUri());
-
+        restResponse.addContent(ARTICLE_RESPONSE_STRING, newArticle);
         return new ResponseEntity<RESTResponseWrapper>(restResponse, headers, HttpStatus.CREATED);
     }
 

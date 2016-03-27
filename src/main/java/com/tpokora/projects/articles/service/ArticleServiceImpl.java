@@ -5,6 +5,7 @@ import com.tpokora.projects.articles.model.Article;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,8 +35,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Article createOrUpdateArticle(Article article) {
         if (article.getId() == null) {
-            articleRepo.saveAndFlush(article);
-            return articleRepo.findOne(article.getId());
+            article.setCreateTime(new Date());
+            Integer newArticleId = articleRepo.saveAndFlush(article).getId();
+            return articleRepo.findOne(newArticleId);
         }
 
         Article updateArticle = articleRepo.findOne(article.getId());
