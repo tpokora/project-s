@@ -13,5 +13,4 @@ import java.util.List;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Integer> {
     public List<Article> findByTitle(String title);
-    public Integer findUser_IdById(@Param("id") Integer id);
 }

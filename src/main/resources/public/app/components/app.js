@@ -29,10 +29,6 @@ App.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', '$htt
             url: '/login',
             templateUrl: 'views/login.html'
         })
-        .state('content', {
-            url: '/content',
-            templateUrl: 'views/content.html'
-        })
         .state('users', {
             url: '/user/list',
             templateUrl: 'views/users/users.html',
@@ -86,6 +82,12 @@ App.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', '$htt
             url: '/database',
             templateUrl: 'views/admin/admin_database.html',
             controller: 'DatabaseController as databaseCtrl'
+        })
+
+        // Article ui-views
+        .state('article', {
+            url: '/article',
+            templateUrl: 'views/article/article.html'
         })
 
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
