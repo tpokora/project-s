@@ -1,9 +1,15 @@
 'use strict'
 
-App.factory('HomeService', ['$http', '$q', function($http, $q) {
+App.factory('HomeService', ['$http', '$q', 'ConfigService', function($http, $q, ConfigService) {
+
+    var baseUrl = '';
+    ConfigService.baseUrl().then(function(data) {
+        baseUrl = data;
+    })
+
     return {
         home: function() {
-            return $http.get('http://localhost:8080/rest/home')
+            return $http.get(baseUrl + '/rest/home')
                 .then(
                     function(response) {
                         return response.data;

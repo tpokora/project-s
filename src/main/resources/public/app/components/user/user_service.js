@@ -1,9 +1,15 @@
 'use strict'
 
-App.factory('UserService', ['$http', '$q', function($http, $q) {
+App.factory('UserService', ['$http', '$q', 'ConfigService', function($http, $q, ConfigService) {
+    
+    var baseUrl = '';
+    ConfigService.baseUrl().then(function(data) {
+        baseUrl = data;
+    })
+
     return {
         fetchAllUsers: function() {
-            return $http.get('http://localhost:8080/rest/user/list')
+            return $http.get(baseUrl + '/rest/user/list')
                 .then(
                     function(response) {
                         return response.data.content.users;
@@ -16,7 +22,7 @@ App.factory('UserService', ['$http', '$q', function($http, $q) {
         },
 
         fetchUserById: function(id) {
-            return $http.get('http://localhost:8080/rest/user/' + id)
+            return $http.get(baseUrl + '/rest/user/' + id)
                 .then(
                     function(response) {
                         response.data.content.users[0].password = '';
@@ -30,7 +36,7 @@ App.factory('UserService', ['$http', '$q', function($http, $q) {
         },
 
         fetchUserByUsername: function(username) {
-                    return $http.get('http://localhost:8080/rest/user/name/' + username)
+                    return $http.get(baseUrl + '/rest/user/name/' + username)
                         .then(
                             function(response) {
                                 return response.data.content.users[0];
@@ -43,7 +49,7 @@ App.factory('UserService', ['$http', '$q', function($http, $q) {
                 },
 
         createUser: function(user) {
-            return $http.post('http://localhost:8080/rest/user/new', user)
+            return $http.post(baseUrl + '/rest/user/new', user)
                 .then(
                     function(response) {
                         return response.data;
@@ -55,7 +61,7 @@ App.factory('UserService', ['$http', '$q', function($http, $q) {
         },
 
         updateUser: function(id, user) {
-            return $http.put('http://localhost:8080/rest/user/' + id + '/update', user)
+            return $http.put(baseUrl + '/rest/user/' + id + '/update', user)
                 .then(
                     function(response) {
                         return response.data.content.users;
@@ -68,7 +74,7 @@ App.factory('UserService', ['$http', '$q', function($http, $q) {
         },
 
         deleteUserById: function(id) {
-            return $http.delete('http://localhost:8080/rest/user/' + id + '/delete')
+            return $http.delete(baseUrl + '/rest/user/' + id + '/delete')
                 .then(
                     function(response) {
                         return response.data;
