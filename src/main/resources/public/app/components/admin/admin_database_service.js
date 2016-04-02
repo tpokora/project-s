@@ -1,9 +1,15 @@
 'use strict'
 
-App.factory('DatabaseService', ['$http', '$q', function($http, $q) {
+App.factory('DatabaseService', ['$http', '$q', 'ConfigService', function($http, $q, ConfigService) {
+
+    var baseUrl = '';
+    ConfigService.baseUrl().then(function(data) {
+        baseUrl = data;
+    })
+
     return {
         fetchAllTablesDetails: function() {
-            return $http.get('http://localhost:8080/rest/admin/database/table/list')
+            return $http.get(baseUrl + '/rest/admin/database/table/list')
                 .then(
                     function(response) {
                         return response.data.content.tables;
