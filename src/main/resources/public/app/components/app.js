@@ -91,5 +91,11 @@ App.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', '$htt
             controller: 'ArticleController as articleCtrl'
         })
 
+        .state('article', {
+            url: '/article/{id:int}',
+            templateUrl: 'views/article/article.html',
+            controller: 'ArticleController as articleCtrl'
+        })
+
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 }]);

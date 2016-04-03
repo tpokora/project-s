@@ -1,7 +1,7 @@
-<div class="well center-block">
-    <div class="lead">LIST OF ARTICLES: </div>
-    <div id="articles-list" ng-repeat="article in articles | orderBy: createTime: true">
-        <div class="article">
+<div id="articles-list" class="well center-block">
+    <header>List of articles:</header>
+    <div ng-repeat="article in articles | orderBy: createTime: true">
+        <div class="article-list-element">
             <div class="title">
                 <a ui-sref="article({ id:article.id })">{{ article.title }}</a></div>
         <div>

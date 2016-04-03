@@ -1,7 +1,15 @@
 body {
-    font-family: "Roboto", sans-serif;
+    font-family: "PT Sans", "Helvetica Neue", Helvetica,Arial, sans-serif, sans-serif
 }
 
+/* Utilities */
+.top-bottom-line {
+    padding: 6px 10px;
+    border-top: 1px solid #B1A9A9;
+    border-bottom: 1px solid #B1A9A9;
+}
+
+/* Form */
     .login-page {
     width: 360px;
     padding: 8% 0 0;
@@ -68,20 +76,41 @@ body {
     margin: 0 auto;
 }
 
-/* Articles */
-#articles-list {
-
+/* Users list */
+#users-list header {
+   margin: 20px 0px 30px 0px;
+   font-size: 34px;
+   font-weight: bold;
 }
 
-.article {
+/* Articles list */
+#articles-list header{
+   margin: 20px 0px 30px 0px;
+   font-size: 34px;
+   font-weight: bold;
+}
+
+.article-list-element {
     padding: 10px;
     border-bottom: 1px solid #B1A9A9;
 }
 
-.article .title {
+.article-list-element .title {
     font-size: 24px;
 }
 
 .date {
     font-weight: bold;
+}
+
+/* Article */
+article header {
+    margin: 20px 0px 30px 0px;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+article .article-content {
+    padding: 6px 10px;
+    font-size: 18px;
 }

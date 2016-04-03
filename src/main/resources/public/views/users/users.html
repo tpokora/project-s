@@ -1,5 +1,5 @@
-<div class="well center-block">
-    <div class="lead">LIST OF USERS: </div>
+<div id="users-list" class="well center-block">
+    <header>List of users: </header>
     <ul>
         <li ng-repeat="user in users track by $index">
             <a ui-sref="user({ id:user.id })">{{ user.username }}</a>

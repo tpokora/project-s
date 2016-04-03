@@ -1,1 +1,7 @@
-<h1>Article - In progress</h1>
+<article class="well center-block">
+    <header>{{ article.title }}</header>
+    <p class="top-bottom-line">
+        <span>By: {{ article.user.username }} | {{ article.createTime }}</span>
+    </p>
+    <div class="article-content">{{ article.content }}</div>
+</article>
