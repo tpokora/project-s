@@ -12,10 +12,7 @@ var App = angular.module('myApp', [
 
 App.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, RestangularProvider, $httpProvider) {
 
-    RestangularProvider.setBaseUrl('http://localhost:8080/');
-
     $urlRouterProvider.otherwise('/home')
-
 
     $stateProvider
 
