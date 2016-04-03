@@ -1,6 +1,15 @@
 <div class="well center-block">
     <div class="lead">LIST OF ARTICLES: </div>
-    <div ng-repeat="article in articles">
-        <div>{{ article.title }}</div>
+    <div id="articles-list" ng-repeat="article in articles">
+        <div class="article">
+            <div class="title">
+                <a ui-sref="article({ id:article.id })">{{ article.title }}</a></div>
+        <div>
+                <span class="">Author: {{ article.user.username }}</span>
+            </div>
+            <div>
+                <span class="date">Created:</span> {{ article.createTime }}
+            </div>
+        </div>
     </div>
 </div>
