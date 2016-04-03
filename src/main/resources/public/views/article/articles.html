@@ -1,6 +1,6 @@
 <div class="well center-block">
     <div class="lead">LIST OF ARTICLES: </div>
-    <div id="articles-list" ng-repeat="article in articles">
+    <div id="articles-list" ng-repeat="article in articles | orderBy: createTime: true">
         <div class="article">
             <div class="title">
                 <a ui-sref="article({ id:article.id })">{{ article.title }}</a></div>
