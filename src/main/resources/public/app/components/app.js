@@ -85,9 +85,10 @@ App.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', '$htt
         })
 
         // Article ui-views
-        .state('article', {
-            url: '/article',
-            templateUrl: 'views/article/article.html'
+        .state('articles', {
+            url: '/articles',
+            templateUrl: 'views/article/articles.html',
+            controller: 'ArticleController as articleCtrl'
         })
 
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
