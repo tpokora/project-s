@@ -33,7 +33,6 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a ui-sref="content">Content</a></li>
                 </ul>
                 <form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
@@ -66,7 +65,12 @@
     </nav>
 
     <!-- Page content -->
-    <div class="container" ui-view></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 main-container" ui-view="main-view"></div>
+            <div class="col-sm-2 widget" ui-view="widget"></div>
+        </div>
+    </div>
 
     <!-- Application footer -->
     <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">

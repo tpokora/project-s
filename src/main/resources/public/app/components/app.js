@@ -1,7 +1,6 @@
 'use strict'
 
 var App = angular.module('myApp', [
-    'restangular',
     'ui.router'
      ])
     .directive('appTitle', function() {
@@ -10,9 +9,7 @@ var App = angular.module('myApp', [
         };
     });
 
-App.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, RestangularProvider, $httpProvider) {
-
-    RestangularProvider.setBaseUrl('http://localhost:8080/');
+App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
 
     $urlRouterProvider.otherwise('/home')
 
@@ -22,71 +19,129 @@ App.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', '$htt
         // Main page ui-views
         .state('home', {
             url: '/home',
-            templateUrl: 'views/home.html',
-            controller: 'HomeController as homeCtrl'
+            views: {
+                'main-view': {
+                    templateUrl: 'views/home.html',
+                    controller: 'HomeController as homeCtrl'
+                },
+                'widget': {
+                    templateUrl: 'views/widget/widget_home.html'
+                }
+            }
+
         })
         .state('login', {
             url: '/login',
-            templateUrl: 'views/login.html'
+            views: {
+                'main-view': {
+                    templateUrl: 'views/login.html'
+                },
+            }
         })
-        .state('content', {
-            url: '/content',
-            templateUrl: 'views/content.html'
-        })
+
+        // User ui-views
         .state('users', {
             url: '/user/list',
-            templateUrl: 'views/users/users.html',
-            controller: 'UsersController as usersCtrl'
+            views: {
+                'main-view': {
+                    templateUrl: 'views/users/users.html',
+                    controller: 'UsersController as usersCtrl'
+                }
+            }
+
         })
         .state('user', {
             url: '/user/{id:int}',
-            templateUrl: 'views/users/user.html',
-            controller: 'UsersController as usersCtrl'
+            views: {
+                'main-view': {
+                    templateUrl: 'views/users/user.html',
+                    controller: 'UsersController as usersCtrl'
+                }
+            }
         })
         .state('user_new', {
-            templateUrl: 'views/users/user_new.html',
-            controller: 'UserNewController as userNewCtrl'
+            views: {
+                'main-view': {
+                    templateUrl: 'views/users/user_new.html',
+                    controller: 'UserNewController as userNewCtrl'
+                }
+            }
+
         })
         .state('user_update', {
             url: '/user/{id:int}/update',
-            templateUrl: 'views/users/user_update.html',
-            controller: 'UserUpdateController as userUpdCtrl'
+            views: {
+                'main-view': {
+                    templateUrl: 'views/users/user_update.html',
+                    controller: 'UserUpdateController as userUpdCtrl'
+                }
+            }
         })
         .state('user_delete', {
             url: '/user/{id:int}/delete',
-            templateUrl: 'views/users/user_delete.html',
-            controller: 'UserDeleteController as userDltCtrl'
+            views: {
+                'main-view': {
+                    templateUrl: 'views/users/user_delete.html',
+                    controller: 'UserDeleteController as userDltCtrl'
+                }
+            }
+
         })
 
         // Admin ui-views
         .state('admin', {
             url: '/admin',
-            templateUrl: 'views/admin/panel.html'
+            views: {
+                'main-view': {
+                    templateUrl: 'views/admin/panel.html'
+                }
+            }
+
         })
         .state('admin.home', {
             url: '/home',
-            templateUrl: 'views/admin/admin_home.html'
+            views: {
+                'admin-view': {
+                    templateUrl: 'views/admin/admin_home.html'
+                }
+            }
         })
         .state('admin.users', {
             url: '/users',
-            templateUrl: 'views/admin/admin_users.html',
-            controller: 'UsersController as usersCtrl'
+            views: {
+                'admin-view': {
+                    templateUrl: 'views/admin/admin_users.html',
+                    controller: 'UsersController as usersCtrl'
+                }
+            }
         })
         .state('admin.user_update', {
             url: '/user/{id:int}/update',
-            templateUrl: 'views/users/user_update.html',
-            controller: 'UserUpdateController as userUpdCtrl'
+            views: {
+                'admin-view': {
+                    templateUrl: 'views/users/user_update.html',
+                    controller: 'UserUpdateController as userUpdCtrl'
+                }
+            }
         })
         .state('admin.user_delete', {
             url: '/user/{id:int}/delete',
-            templateUrl: 'views/users/user_delete.html',
-            controller: 'UserDeleteController as userDltCtrl'
+            views: {
+                'admin-view': {
+                    templateUrl: 'views/users/user_delete.html',
+                    controller: 'UserDeleteController as userDltCtrl'
+                }
+            }
         })
         .state('admin.database', {
             url: '/database',
-            templateUrl: 'views/admin/admin_database.html',
-            controller: 'DatabaseController as databaseCtrl'
+            views: {
+                'admin-view': {
+                    templateUrl: 'views/admin/admin_database.html',
+                    controller: 'DatabaseController as databaseCtrl'
+                }
+            }
         })
 
-        $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 }]);
