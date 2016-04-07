@@ -1,0 +1,41 @@
+package com.tpokora.projects.widget.model.news;
+
+import com.tpokora.projects.widget.model.WidgetAbstractModel;
+
+import java.util.ArrayList;
+
+/**
+ * Created by pokor on 07.04.2016.
+ */
+public class NewsWrapper extends WidgetAbstractModel {
+
+    private ArrayList<News> newsList;
+
+    public NewsWrapper() {
+        super();
+        newsList = new ArrayList<News>();
+    }
+
+    public NewsWrapper(String title) {
+        super(title);
+        newsList = new ArrayList<News>();
+    }
+
+    public void addNews(News news) {
+        newsList.add(news);
+    }
+
+    public void setNewsList(ArrayList<News> newsList) {
+        this.newsList = newsList;
+    }
+
+    public ArrayList<News> getNewsList() {
+        return newsList;
+    }
+
+    public void clearNewsList() {
+        newsList.clear();
+    }
+
+
+}
