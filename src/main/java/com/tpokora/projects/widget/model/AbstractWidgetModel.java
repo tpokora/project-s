@@ -3,13 +3,13 @@ package com.tpokora.projects.widget.model;
 /**
  * Created by pokor on 07.04.2016.
  */
-public abstract class WidgetAbstractModel {
+public abstract class AbstractWidgetModel {
 
     protected String name;
 
-    public WidgetAbstractModel() {}
+    public AbstractWidgetModel() {}
 
-    public WidgetAbstractModel(String name) {
+    public AbstractWidgetModel(String name) {
         this.name = name;
     }
 

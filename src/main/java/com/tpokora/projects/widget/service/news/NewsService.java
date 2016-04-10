@@ -1,7 +1,7 @@
 package com.tpokora.projects.widget.service.news;
 
 import com.tpokora.projects.widget.dao.NewsDAO;
-import com.tpokora.projects.widget.model.WidgetAbstractModel;
+import com.tpokora.projects.widget.model.AbstractWidgetModel;
 import com.tpokora.projects.widget.model.news.NewsWrapper;
 import com.tpokora.projects.widget.service.ContentService;
 
@@ -19,7 +19,7 @@ public class NewsService implements ContentService {
     }
 
 
-    public WidgetAbstractModel getContent() {
+    public AbstractWidgetModel getContent() {
 
         return newsWrapper;
     }

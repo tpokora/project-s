@@ -1,13 +1,13 @@
 package com.tpokora.projects.widget.model.news;
 
-import com.tpokora.projects.widget.model.WidgetAbstractModel;
+import com.tpokora.projects.widget.model.AbstractWidgetModel;
 
 import java.util.ArrayList;
 
 /**
  * Created by pokor on 07.04.2016.
  */
-public class NewsWrapper extends WidgetAbstractModel {
+public class NewsWrapper extends AbstractWidgetModel {
 
     private ArrayList<News> newsList;
 
