@@ -2,7 +2,7 @@ package com.tpokora.projects.widget.service;
 
 import com.tpokora.projects.config.AppConfig;
 import com.tpokora.projects.config.DatabaseConfiguration;
-import com.tpokora.projects.widget.dao.NewsDAO;
+import com.tpokora.projects.widget.dao.news.NewsDAO;
 import com.tpokora.projects.widget.model.news.NewsWrapper;
 import com.tpokora.projects.widget.utils.NewsTestUtils;
 import junit.framework.Assert;

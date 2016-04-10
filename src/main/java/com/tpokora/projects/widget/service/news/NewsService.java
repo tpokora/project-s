@@ -1,6 +1,6 @@
 package com.tpokora.projects.widget.service.news;
 
-import com.tpokora.projects.widget.dao.NewsDAO;
+import com.tpokora.projects.widget.dao.news.NewsDAO;
 import com.tpokora.projects.widget.model.news.NewsWrapper;
 import com.tpokora.projects.widget.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;

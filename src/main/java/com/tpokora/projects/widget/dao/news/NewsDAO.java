@@ -1,4 +1,4 @@
-package com.tpokora.projects.widget.dao;
+package com.tpokora.projects.widget.dao.news;
 
 import com.tpokora.projects.widget.model.news.NewsWrapper;
 
