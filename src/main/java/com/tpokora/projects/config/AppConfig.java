@@ -7,6 +7,10 @@ import com.tpokora.projects.user.service.CustomUserDetailsService;
 import com.tpokora.projects.user.service.UserService;
 import com.tpokora.projects.user.service.UserServiceImpl;
 import com.tpokora.projects.user.web.rest.UserError;
+import com.tpokora.projects.widget.service.ContentService;
+import com.tpokora.projects.widget.service.WidgetService;
+import com.tpokora.projects.widget.service.WidgetServiceImpl;
+import com.tpokora.projects.widget.service.news.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,5 +50,19 @@ public class AppConfig {
     @Bean(name = "tablesDetailsService")
     public TablesDetailsService getTablesDetailsService() {
         return new TablesDetailsServiceImpl();
+    }
+
+    /*
+        Widget Services
+     */
+
+    @Bean(name = "widgetService")
+    public WidgetService widgetService() {
+        return new WidgetServiceImpl();
+    }
+
+    @Bean(name = "newsService")
+    public ContentService getNewsService() {
+        return new NewsService();
     }
 }

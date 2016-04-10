@@ -30,4 +30,8 @@ public class News {
     public void setLink(String link) {
         this.link = link;
     }
+
+    public String toString() {
+        return "Title: " + this.title + " - " + this.link;
+    }
 }
