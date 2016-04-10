@@ -1,7 +1,7 @@
 package com.tpokora.projects.widget.service;
 
 import com.tpokora.projects.widget.model.NullWidgetObject;
-import com.tpokora.projects.widget.model.WidgetAbstractModel;
+import com.tpokora.projects.widget.model.AbstractWidgetModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -13,9 +13,9 @@ public class WidgetServiceImpl implements WidgetService {
     ContentService newsService;
 
     @Override
-    public WidgetAbstractModel getContent(String source) {
+    public AbstractWidgetModel getContent(String source) {
 
-        WidgetAbstractModel content = new NullWidgetObject();
+        AbstractWidgetModel content = new NullWidgetObject();
 
         if (source == null) {
             return content;

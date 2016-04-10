@@ -7,6 +7,8 @@ import com.tpokora.projects.user.service.CustomUserDetailsService;
 import com.tpokora.projects.user.service.UserService;
 import com.tpokora.projects.user.service.UserServiceImpl;
 import com.tpokora.projects.user.web.rest.UserError;
+import com.tpokora.projects.widget.dao.NewsDAO;
+import com.tpokora.projects.widget.dao.NewsDAOImpl;
 import com.tpokora.projects.widget.service.ContentService;
 import com.tpokora.projects.widget.service.WidgetService;
 import com.tpokora.projects.widget.service.WidgetServiceImpl;
@@ -64,5 +66,10 @@ public class AppConfig {
     @Bean(name = "newsService")
     public ContentService getNewsService() {
         return new NewsService();
+    }
+
+    @Bean(name = "newsDao")
+    public NewsDAO getNewsDao() {
+        return new NewsDAOImpl();
     }
 }
