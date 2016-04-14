@@ -1,16 +1,15 @@
-package com.tpokora.projects.widget.model.news;
+package com.tpokora.projects.widget.rss;
 
 /**
- * Created by pokor on 07.04.2016.
+ * Created by pokor on 14.04.2016.
  */
-public class News {
-
+public class FeedMessage {
     private String title;
     private String link;
 
-    public News() {}
+    public FeedMessage() {}
 
-    public News(String title, String link) {
+    public FeedMessage(String title, String link) {
         this.title = title;
         this.link = link;
     }
@@ -29,9 +28,5 @@ public class News {
 
     public void setLink(String link) {
         this.link = link;
-    }
-
-    public String toString() {
-        return "Title: " + this.title + " - " + this.link;
     }
 }

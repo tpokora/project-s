@@ -1,7 +1,6 @@
 package com.tpokora.projects.widget.web;
 
 import com.tpokora.projects.common.web.RESTResponseWrapper;
-import com.tpokora.projects.widget.model.news.NewsWrapper;
 import com.tpokora.projects.widget.service.WidgetService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +27,6 @@ public class WidgetController {
     @RequestMapping("/home")
     public ResponseEntity<RESTResponseWrapper> get() {
         widgetResponse = new RESTResponseWrapper();
-        logger.info("Get widget data...");
-
-        widgetResponse.addContent("news", new NewsWrapper());
 
         return new ResponseEntity<RESTResponseWrapper>(widgetResponse, HttpStatus.OK);
     }
