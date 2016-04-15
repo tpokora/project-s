@@ -36,7 +36,7 @@ public class RSSParserImplTest {
      * Test checks if function returns returns normalized RSS from TEST source
      */
     @Test
-    public void parseRSS_test_parserRss() throws IOException, ParserConfigurationException, TransformerException, SAXException, XPathExpressionException {
+    public void parseRSS_test_parserRss() throws ParserConfigurationException, TransformerException, SAXException, IOException, XPathExpressionException {
         Document rss = rssParser.parseRSS("test");
 
         String sourceText = xp.evaluate("//rss/source/text()", rss.getDocumentElement());

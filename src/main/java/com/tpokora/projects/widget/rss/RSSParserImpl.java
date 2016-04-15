@@ -16,6 +16,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -33,7 +34,7 @@ public class RSSParserImpl implements RSSParser {
     public RSSParserImpl() {}
 
     @Override
-    public Document parseRSS(String source) throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public Document parseRSS(String source) throws ParserConfigurationException, SAXException, IOException, TransformerException {
         loadXSL(source);
 
         Document rss = getRSSFromUrl("http://www.vogella.com/article.rss");
@@ -61,7 +62,7 @@ public class RSSParserImpl implements RSSParser {
         }
     }
 
-    private Document getRSSFromUrl(String urlString) throws ParserConfigurationException, IOException, SAXException {
+    private Document getRSSFromUrl(String urlString) throws IOException, ParserConfigurationException, SAXException {
         url = new URL(urlString);
         conn = url.openConnection();
         BufferedReader bf = new BufferedReader(new InputStreamReader(conn.getInputStream()));
