@@ -1,7 +1,11 @@
-package com.tpokora.projects.widget.web;
+package com.tpokora.projects.widget.web.rest;
 
+import com.tpokora.projects.common.errors.AbstractError;
+import com.tpokora.projects.common.errors.ErrorTypes;
 import com.tpokora.projects.common.web.RESTResponseWrapper;
-import com.tpokora.projects.widget.service.WidgetService;
+import com.tpokora.projects.widget.model.AbstractWidgetModel;
+import com.tpokora.projects.widget.model.rss.Feed;
+import com.tpokora.projects.widget.service.ContentService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +26,10 @@ public class WidgetController {
     private RESTResponseWrapper widgetResponse;
 
     @Autowired
-    private WidgetService widgetService;
+    private AbstractError rssError;
+
+    @Autowired
+    private ContentService rssService;
 
     @RequestMapping("/home")
     public ResponseEntity<RESTResponseWrapper> get() {
@@ -31,13 +38,24 @@ public class WidgetController {
         return new ResponseEntity<RESTResponseWrapper>(widgetResponse, HttpStatus.OK);
     }
 
-    @RequestMapping("/{source}")
+    @RequestMapping("/rss/{source}")
     public ResponseEntity<RESTResponseWrapper> getContentBySource(@PathVariable("source") String source) {
         widgetResponse = new RESTResponseWrapper();
-        logger.info("Getting source content: " + source);
+        logger.info("Getting RSS source content: " + source);
 
-        widgetResponse.addContent("widgetContent", widgetService.getContent(source));
+        if (rssService.getContent(source) == null) {
+            logger.error("No RSS source content: " + source);
+            addErrorToResponse(ErrorTypes.RSS_NOT_EXISTS);
+            return new ResponseEntity<RESTResponseWrapper>(widgetResponse, HttpStatus.NOT_FOUND);
+        }
+
+        widgetResponse.addContent("RSS", rssService.getContent(source));
 
         return new ResponseEntity<RESTResponseWrapper>(widgetResponse, HttpStatus.OK);
+    }
+
+    private void addErrorToResponse(ErrorTypes error) {
+        rssError.setError(error);
+        widgetResponse.addError(rssError);
     }
 }

@@ -30,8 +30,6 @@ public class RSSParserImpl implements RSSParser {
 
     private Properties sources;
 
-    private URL url;
-    private URLConnection conn;
     private Transformer xsl;
 
     public RSSParserImpl() {
@@ -45,6 +43,12 @@ public class RSSParserImpl implements RSSParser {
     @Override
     public Document parseRSS(String source) throws ParserConfigurationException, SAXException, IOException, TransformerException {
         loadXSL(source);
+
+        String url = sources.getProperty(source);
+
+        if (url == null) {
+            return null;
+        }
 
         Document rss = getRSSFromUrl(sources.getProperty(source));
         DOMSource domSource = new DOMSource(rss);
@@ -72,8 +76,8 @@ public class RSSParserImpl implements RSSParser {
     }
 
     private Document getRSSFromUrl(String urlString) throws IOException, ParserConfigurationException, SAXException {
-        url = new URL(urlString);
-        conn = url.openConnection();
+        URL url = new URL(urlString);;
+        URLConnection conn = url.openConnection();
         BufferedReader bf = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
         String line = "";

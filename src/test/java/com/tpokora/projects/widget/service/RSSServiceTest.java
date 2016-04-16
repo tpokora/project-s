@@ -31,6 +31,7 @@ public class RSSServiceTest extends AbstractServiceTest {
         Feed model = (Feed) rssService.getContent("test");
 
         Assert.assertNotNull(model);
+        Assert.assertTrue("Expected 'RSS', got: " + model.getSource(), model.getName().equals("RSS"));
         Assert.assertTrue("Expected 'http://www.vogella.com', got: " + model.getSource(), model.getSource().equals("http://www.vogella.com"));
 
         for (FeedMessage feedMsg : model.getFeeds()) {

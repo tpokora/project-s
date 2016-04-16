@@ -10,13 +10,11 @@ import com.tpokora.projects.user.service.CustomUserDetailsService;
 import com.tpokora.projects.user.service.UserService;
 import com.tpokora.projects.user.service.UserServiceImpl;
 import com.tpokora.projects.user.web.rest.UserError;
+import com.tpokora.projects.widget.rss.RSSError;
 import com.tpokora.projects.widget.rss.RSSParser;
 import com.tpokora.projects.widget.rss.RSSParserImpl;
 import com.tpokora.projects.widget.service.ContentService;
 import com.tpokora.projects.widget.service.RSSService;
-import com.tpokora.projects.widget.service.WidgetService;
-import com.tpokora.projects.widget.service.WidgetServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -41,6 +39,10 @@ public class AppConfig {
         return new ArticleError();
     }
 
+    @Bean(name = "rssError")
+    public AbstractError getRssError() {
+        return new RSSError();
+    }
 
 	/*
 		Service classes
@@ -69,11 +71,6 @@ public class AppConfig {
     /*
         Widget Services
      */
-
-    @Bean(name = "widgetService")
-    public WidgetService widgetService() {
-        return new WidgetServiceImpl();
-    }
 
     @Bean(name = "rssParser")
     public RSSParser getRssParser() {

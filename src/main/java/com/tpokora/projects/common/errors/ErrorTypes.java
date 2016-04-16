@@ -8,5 +8,8 @@ public enum ErrorTypes {
     USER_NOT_EXISTS, USER_ALREADY_EXISTS,
 
     // Article error Codes
-    ARTICLE_NOT_EXISTS, ARTICLE_ALREADY_EXISTS
+    ARTICLE_NOT_EXISTS, ARTICLE_ALREADY_EXISTS,
+
+    // RSS error Codes
+    RSS_NOT_EXISTS
 }
