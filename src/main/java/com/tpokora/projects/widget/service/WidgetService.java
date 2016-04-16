@@ -8,3 +8,4 @@ import com.tpokora.projects.widget.model.AbstractWidgetModel;
 public interface WidgetService {
     public AbstractWidgetModel getContent(String source);
 }
+

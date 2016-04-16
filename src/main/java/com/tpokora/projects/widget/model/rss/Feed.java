@@ -1,4 +1,6 @@
-package com.tpokora.projects.widget.rss;
+package com.tpokora.projects.widget.model.rss;
+
+import com.tpokora.projects.widget.model.AbstractWidgetModel;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,7 +8,7 @@ import java.util.Date;
 /**
  * Created by pokor on 14.04.2016.
  */
-public class Feed {
+public class Feed extends AbstractWidgetModel {
 
     private String source;
     private Date lastUpdated;

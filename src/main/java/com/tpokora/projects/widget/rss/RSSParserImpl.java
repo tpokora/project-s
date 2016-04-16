@@ -2,8 +2,6 @@ package com.tpokora.projects.widget.rss;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
@@ -36,8 +34,12 @@ public class RSSParserImpl implements RSSParser {
     private URLConnection conn;
     private Transformer xsl;
 
-    public RSSParserImpl() throws IOException {
-        loadProperties();
+    public RSSParserImpl() {
+        try {
+            loadProperties();
+        } catch (IOException e) {
+            logger.error("Can't load matcher file for parsing");
+        }
     }
 
     @Override

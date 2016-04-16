@@ -1,4 +1,4 @@
-package com.tpokora.projects.widget.rss;
+package com.tpokora.projects.widget.model.rss;
 
 /**
  * Created by pokor on 14.04.2016.

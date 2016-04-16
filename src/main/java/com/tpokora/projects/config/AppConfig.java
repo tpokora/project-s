@@ -7,6 +7,8 @@ import com.tpokora.projects.user.service.CustomUserDetailsService;
 import com.tpokora.projects.user.service.UserService;
 import com.tpokora.projects.user.service.UserServiceImpl;
 import com.tpokora.projects.user.web.rest.UserError;
+import com.tpokora.projects.widget.rss.RSSParser;
+import com.tpokora.projects.widget.rss.RSSParserImpl;
 import com.tpokora.projects.widget.service.ContentService;
 import com.tpokora.projects.widget.service.RSSService;
 import com.tpokora.projects.widget.service.WidgetService;
@@ -59,6 +61,11 @@ public class AppConfig {
     @Bean(name = "widgetService")
     public WidgetService widgetService() {
         return new WidgetServiceImpl();
+    }
+
+    @Bean(name = "rssParser")
+    public RSSParser getRssParser() {
+        return new RSSParserImpl();
     }
 
     @Bean(name = "rssService")
