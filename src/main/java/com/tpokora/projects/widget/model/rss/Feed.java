@@ -14,7 +14,9 @@ public class Feed extends AbstractWidgetModel {
     private Date lastUpdated;
     private ArrayList<FeedMessage> feeds;
 
-    public Feed() {}
+    public Feed() {
+        feeds = new ArrayList<FeedMessage>();
+    }
 
     public String getSource() {
         return source;
@@ -38,5 +40,9 @@ public class Feed extends AbstractWidgetModel {
 
     public void setFeeds(ArrayList<FeedMessage> feeds) {
         this.feeds = feeds;
+    }
+
+    public void addFeedMsg(FeedMessage feedMsg) {
+        feeds.add(feedMsg);
     }
 }

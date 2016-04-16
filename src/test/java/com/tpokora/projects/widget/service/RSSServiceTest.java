@@ -1,15 +1,21 @@
 package com.tpokora.projects.widget.service;
 
-import com.tpokora.projects.widget.model.AbstractWidgetModel;
+import com.tpokora.projects.common.service.AbstractServiceTest;
+import com.tpokora.projects.widget.model.rss.Feed;
+import com.tpokora.projects.widget.model.rss.FeedMessage;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by pokor on 16.04.2016.
  */
-public class RSSServiceTest {
+public class RSSServiceTest extends AbstractServiceTest {
+
+    private final static Logger logger = LoggerFactory.getLogger(RSSServiceTest.class);
 
     @Autowired
     private ContentService rssService;
@@ -17,10 +23,19 @@ public class RSSServiceTest {
     @Before
     public void setup() {}
 
+    /**
+     * This test test if XML Feed msg into Feed object
+     */
     @Test
     public void getContent_test_elementExists() {
-        AbstractWidgetModel model = rssService.getContent("test");
+        Feed model = (Feed) rssService.getContent("test");
 
         Assert.assertNotNull(model);
+        Assert.assertTrue("Expected 'http://www.vogella.com', got: " + model.getSource(), model.getSource().equals("http://www.vogella.com"));
+
+        for (FeedMessage feedMsg : model.getFeeds()) {
+            Assert.assertTrue(!feedMsg.getTitle().equals("") && feedMsg.getTitle() != null);
+            Assert.assertTrue(feedMsg.getLink().contains("http://") && feedMsg.getLink() != null);
+        }
     }
 }

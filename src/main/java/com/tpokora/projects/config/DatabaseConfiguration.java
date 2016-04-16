@@ -6,6 +6,8 @@ package com.tpokora.projects.config;
 
 import javax.sql.DataSource;
 
+import com.tpokora.projects.articles.dao.ArticleRepository;
+import com.tpokora.projects.articles.model.Article;
 import com.tpokora.projects.user.dao.UserRepository;
 import com.tpokora.projects.user.model.User;
 import org.hibernate.SessionFactory;
@@ -26,7 +28,9 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackageClasses = UserRepository.class)
+@EnableJpaRepositories(basePackageClasses = {
+        UserRepository.class, ArticleRepository.class
+})
 @PropertySource("classpath:properties/developer.properties")
 public class DatabaseConfiguration {
 
@@ -73,7 +77,7 @@ public class DatabaseConfiguration {
 
         LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
         sessionBuilder.addProperties(getHibernateProperties());
-        sessionBuilder.addAnnotatedClasses(User.class);
+        sessionBuilder.addAnnotatedClasses(User.class, Article.class);
 
         return sessionBuilder.buildSessionFactory();
     }

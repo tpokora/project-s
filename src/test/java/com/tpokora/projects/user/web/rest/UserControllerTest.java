@@ -1,5 +1,7 @@
 package com.tpokora.projects.user.web.rest;
 
+import com.tpokora.projects.articles.model.Article;
+import com.tpokora.projects.articles.utils.ArticleTestUtils;
 import com.tpokora.projects.common.errors.AbstractError;
 import com.tpokora.projects.common.utils.TestUtils;
 import com.tpokora.projects.common.web.rest.AbstractControllerTest;
@@ -17,6 +19,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.mockito.Mockito.when;
 
@@ -148,5 +155,27 @@ public class UserControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 
+    /**
+     * Test to get user with article
+     * @throws Exception
+     *
+     * TODO unignore when articles presentation fix
+     */
+    @Ignore
+    @Test
+    public void getUserById_1_userWithArticle() throws Exception {
+        User user = UserTestUtils.generateUsers(1).get(0);
+        user.setArticles((List<Article>) ArticleTestUtils.generateArticles(1, user.getId()));
+        when(userService.getUserById(user.getId())).thenReturn(user);
+        mockMvc.perform(MockMvcRequestBuilders.get("/rest/user/" + user.getId()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].id").value(user.getId()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].articles").isArray())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].articles[0].id").value(user.getArticles().get(0).getId()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].articles[0].title").value(user.getArticles().get(0).getTitle()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].articles[0].content").value(user.getArticles().get(0).getContent()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].articles[0].createTime").value(user.getArticles().get(0).getCreateTime().getTime()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].articles[0].user.id").value(user.getId()));
+    }
 
 }

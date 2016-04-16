@@ -1,0 +1,15 @@
+<div id="articles-list" class="center-block">
+    <header>List of articles:</header>
+    <div ng-repeat="article in articles | orderBy: createTime: true">
+        <div class="article-list-element">
+            <div class="title">
+                <a ui-sref="article({ id:article.id })">{{ article.title }}</a></div>
+        <div>
+                <span class="">Author: {{ article.user.username }}</span>
+            </div>
+            <div>
+                <span class="date">Created:</span> {{ article.createTime }}
+            </div>
+        </div>
+    </div>
+</div>

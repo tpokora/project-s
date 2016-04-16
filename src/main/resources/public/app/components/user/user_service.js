@@ -5,7 +5,7 @@ App.factory('UserService', ['$http', '$q', 'ConfigService', function($http, $q, 
     var baseUrl = '';
     ConfigService.baseUrl().then(function(data) {
         baseUrl = data;
-    })
+    });
 
     return {
         fetchAllUsers: function() {

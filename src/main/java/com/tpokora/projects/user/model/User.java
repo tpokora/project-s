@@ -1,19 +1,34 @@
 package com.tpokora.projects.user.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.tpokora.projects.articles.model.Article;
 import com.tpokora.projects.common.model.AbstractEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Tomek on 2016-01-10.
  */
 @Entity
+@Table(name = "USER")
 public class User extends AbstractEntity {
+
+    @Column(name = "USERNAME")
     private String username;
+
+    @Column(name = "PASSWORD")
     private String password;
+
+    @Column(name = "EMAIL")
     private String email;
+
+    @Column(name = "ROLE")
     private String role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Article> articles;
 
     public User() {
         super();
@@ -27,7 +42,15 @@ public class User extends AbstractEntity {
         this.role = role;
     }
 
-    @Column(name = "USERNAME")
+    public User(Integer id, String username, String password, String email, String role, List<Article> articles) {
+        super(id);
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.articles = articles;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -36,7 +59,6 @@ public class User extends AbstractEntity {
         this.username = username;
     }
 
-    @Column(name = "PASSWORD")
     public String getPassword() {
         return password;
     }
@@ -45,7 +67,6 @@ public class User extends AbstractEntity {
         this.password = password;
     }
 
-    @Column(name = "EMAIL")
     public String getEmail() {
         return email;
     }
@@ -54,12 +75,19 @@ public class User extends AbstractEntity {
         this.email = email;
     }
 
-    @Column(name = "ROLE")
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
     }
 }
