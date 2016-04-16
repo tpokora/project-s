@@ -10,27 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class WidgetServiceImpl implements WidgetService {
 
     @Autowired
-    ContentService newsService;
+    ContentService rssService;
 
     @Override
     public AbstractWidgetModel getContent(String source) {
 
         AbstractWidgetModel content = new NullWidgetObject();
-
-        if (source == null) {
-            return content;
-        }
-
-        switch(source.toUpperCase()) {
-            case "NEWS": {
-                content = newsService.getContent();
-                content.setName(source);
-                break;
-            }
-
-            default:
-                content = new NullWidgetObject();
-        }
 
         return content;
     }

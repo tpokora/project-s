@@ -8,6 +8,7 @@ import com.tpokora.projects.user.service.UserService;
 import com.tpokora.projects.user.service.UserServiceImpl;
 import com.tpokora.projects.user.web.rest.UserError;
 import com.tpokora.projects.widget.service.ContentService;
+import com.tpokora.projects.widget.service.RSSService;
 import com.tpokora.projects.widget.service.WidgetService;
 import com.tpokora.projects.widget.service.WidgetServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,11 @@ public class AppConfig {
     @Bean(name = "widgetService")
     public WidgetService widgetService() {
         return new WidgetServiceImpl();
+    }
+
+    @Bean(name = "rssService")
+    public ContentService getRssService() {
+        return new RSSService();
     }
 
 }

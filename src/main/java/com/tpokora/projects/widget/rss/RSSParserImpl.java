@@ -2,8 +2,11 @@ package com.tpokora.projects.widget.rss;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -16,9 +19,9 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Properties;
 
 /**
  * Created by pokor on 14.04.2016.
@@ -27,17 +30,21 @@ public class RSSParserImpl implements RSSParser {
 
     private final Logger logger = LoggerFactory.getLogger(RSSParserImpl.class);
 
+    private Properties sources;
+
     private URL url;
     private URLConnection conn;
     private Transformer xsl;
 
-    public RSSParserImpl() {}
+    public RSSParserImpl() throws IOException {
+        loadProperties();
+    }
 
     @Override
     public Document parseRSS(String source) throws ParserConfigurationException, SAXException, IOException, TransformerException {
         loadXSL(source);
 
-        Document rss = getRSSFromUrl("http://www.vogella.com/article.rss");
+        Document rss = getRSSFromUrl(sources.getProperty(source));
         DOMSource domSource = new DOMSource(rss);
 
         StringWriter stringWriter = new StringWriter();
@@ -53,7 +60,7 @@ public class RSSParserImpl implements RSSParser {
 
     private void loadXSL(String name) {
         try {
-            Resource resource = new ClassPathResource("/rss.parsers/" + name + ".xsl");
+            Resource resource = new ClassPathResource("/rss/parsers/" + name + ".xsl");
             File xslFile = resource.getFile();
             Templates template = TransformerFactory.newInstance().newTemplates(new StreamSource(new FileInputStream(xslFile)));
             xsl = template.newTransformer();
@@ -78,5 +85,10 @@ public class RSSParserImpl implements RSSParser {
         DocumentBuilder builder = factory.newDocumentBuilder();
 
         return builder.parse(new InputSource(new ByteArrayInputStream(xmlSource.toString().getBytes("utf-8"))));
+    }
+
+    private void loadProperties() throws IOException {
+        Resource resource = new ClassPathResource("/rss/matcher.properties");
+        sources = PropertiesLoaderUtils.loadProperties(resource);
     }
 }
