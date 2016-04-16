@@ -1,0 +1,7 @@
+<div class="center-block">
+    RSS
+    <div>Source: {{ rss.source }}</div>
+    <ul ng-repeat="feed in rss.feeds">
+        <li><a href="{{ feed.link }}">{{ feed.title | limitTo: 20}}</a></li>
+    </ul>
+</div>

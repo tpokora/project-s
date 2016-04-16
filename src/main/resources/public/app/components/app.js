@@ -165,5 +165,20 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             }
         })
 
+        // Widget ui-views
+        .state('rss', {
+            url: '/rss/{source:string}',
+            views: {
+                'main-view': {
+                    templateUrl: 'views/home.html',
+                    controller: 'HomeController as homeCtrl'
+                },
+                'widget': {
+                    templateUrl: 'views/widget/rss.html',
+                    controller: 'WidgetController as widgetCtrl'
+                }
+            }
+        })
+
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 }]);
