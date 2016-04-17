@@ -16,7 +16,5 @@ App.controller('WidgetController', ['$scope', '$q', '$stateParams', '$location',
             );
     };
 
-    if (params.source != null) {
-        this.fetchRSSBySource(params.source);
-    }
+    this.fetchRSSBySource('niebezpiecznik');
 }]);

@@ -23,9 +23,6 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
                 'main-view': {
                     templateUrl: 'views/home.html',
                     controller: 'HomeController as homeCtrl'
-                },
-                'widget': {
-                    templateUrl: 'views/widget/widget_home.html'
                 }
             }
 
@@ -161,21 +158,6 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
                 'main-view' : {
                     templateUrl: 'views/article/article.html',
                     controller: 'ArticleController as articleCtrl'
-                }
-            }
-        })
-
-        // Widget ui-views
-        .state('rss', {
-            url: '/rss/{source:string}',
-            views: {
-                'main-view': {
-                    templateUrl: 'views/home.html',
-                    controller: 'HomeController as homeCtrl'
-                },
-                'widget': {
-                    templateUrl: 'views/widget/rss.html',
-                    controller: 'WidgetController as widgetCtrl'
                 }
             }
         })

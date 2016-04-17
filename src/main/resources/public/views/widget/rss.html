@@ -1,7 +1,6 @@
-<div class="center-block">
-    RSS
+<div class="center-block" ng-controller="WidgetController as widgetCtrl">
     <div>Source: {{ rss.source }}</div>
     <ul ng-repeat="feed in rss.feeds">
-        <li><a href="{{ feed.link }}">{{ feed.title | limitTo: 20}}</a></li>
+        <li><a href="{{ feed.link }}" target="_blank">{{ feed.title | limitTo: 20}}...</a></li>
     </ul>
 </div>

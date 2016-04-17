@@ -53,14 +53,10 @@
                     <li ng-show="authenticated"><a href="" ng-click="logout()">Logout</a></li>
                     <li ng-show="authenticated"><a ui-sref="users">Users</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">RSS<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a ng-href="#">Action</a></li>
-                            <li><a ng-href="#">Another action</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a ng-href="#">Separated link</a></li>
-                        </ul>
+                        <div class="dropdown-menu" ng-include="'views/widget/rss.html'">
+                        </div>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -71,7 +67,6 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8 main-container" ui-view="main-view"></div>
-            <div class="col-sm-2 widget" ui-view="widget"></div>
         </div>
     </div>
 
