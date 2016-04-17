@@ -4,13 +4,10 @@ App.controller('WidgetController', ['$scope', '$q', '$stateParams', '$location',
     var self = this;
     var params = $stateParams;
 
-    console.log("ASDASDAsd");
-
     this.fetchRSSBySource = function(source) {
         RSSService.fetchRSSBySource(source)
             .then(
                 function(rss) {
-                    console.log("Source: " + source);
                     $scope.rss = rss;
                 },
                 function(errResponse) {
@@ -20,7 +17,6 @@ App.controller('WidgetController', ['$scope', '$q', '$stateParams', '$location',
     };
 
     if (params.source != null) {
-        console.log("RSSSource: " + params.source);
         this.fetchRSSBySource(params.source);
     }
 }]);
