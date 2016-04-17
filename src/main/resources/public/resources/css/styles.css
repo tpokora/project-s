@@ -114,3 +114,19 @@ article .article-content {
     padding: 6px 10px;
     font-size: 18px;
 }
+
+/* RSS View */
+#rss-view {
+    width: 260px;
+}
+
+#rss-view #rss-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#rss-view #rss-list li {
+    padding: 6px;
+    border-bottom: 1px solid #B1A9A9;
+}
