@@ -16,6 +16,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by pokor on 16.04.2016.
@@ -26,6 +27,11 @@ public class RSSService implements ContentService {
 
     @Autowired
     private RSSParser rssParser;
+
+    @Override
+    public List<String> getRSSSources() {
+        return rssParser.getRSSSources();
+    }
 
     @Override
     public AbstractWidgetModel getContent(String source) {

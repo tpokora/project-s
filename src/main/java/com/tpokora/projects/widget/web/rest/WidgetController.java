@@ -31,9 +31,18 @@ public class WidgetController {
     @Autowired
     private ContentService rssService;
 
-    @RequestMapping("/home")
+    @RequestMapping("/rss/list")
     public ResponseEntity<RESTResponseWrapper> get() {
         widgetResponse = new RESTResponseWrapper();
+        logger.info("Getting RSS Sources names...");
+
+        if (rssService.getRSSSources() == null) {
+            logger.error("No RSS sources");
+            addErrorToResponse(ErrorTypes.RSS_NOT_EXISTS);
+            return new ResponseEntity<RESTResponseWrapper>(widgetResponse, HttpStatus.NO_CONTENT);
+        }
+
+        widgetResponse.addContent("RSSSources", rssService.getRSSSources());
 
         return new ResponseEntity<RESTResponseWrapper>(widgetResponse, HttpStatus.OK);
     }
@@ -46,7 +55,7 @@ public class WidgetController {
         if (rssService.getContent(source) == null) {
             logger.error("No RSS source content: " + source);
             addErrorToResponse(ErrorTypes.RSS_NOT_EXISTS);
-            return new ResponseEntity<RESTResponseWrapper>(widgetResponse, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<RESTResponseWrapper>(widgetResponse, HttpStatus.NO_CONTENT);
         }
 
         widgetResponse.addContent("RSS", rssService.getContent(source));

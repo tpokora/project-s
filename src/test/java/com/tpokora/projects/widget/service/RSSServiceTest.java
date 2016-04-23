@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+
 /**
  * Created by pokor on 16.04.2016.
  */
@@ -38,5 +40,17 @@ public class RSSServiceTest extends AbstractServiceTest {
             Assert.assertTrue(!feedMsg.getTitle().equals("") && feedMsg.getTitle() != null);
             Assert.assertTrue(feedMsg.getLink().contains("http://") && feedMsg.getLink() != null);
         }
+    }
+
+
+    /**
+     * Test if getRSSSources retrieves list of elements
+     */
+    @Test
+    public void getRSSSources_elementsList() {
+        ArrayList<String> elementsList = (ArrayList<String>) rssService.getRSSSources();
+
+        Assert.assertNotNull(elementsList);
+        Assert.assertTrue(!elementsList.isEmpty());
     }
 }

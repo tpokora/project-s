@@ -19,7 +19,8 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Properties;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by pokor on 14.04.2016.
@@ -38,6 +39,16 @@ public class RSSParserImpl implements RSSParser {
         } catch (IOException e) {
             logger.error("Can't load matcher file for parsing");
         }
+    }
+
+    @Override
+    public List<String> getRSSSources() {
+        ArrayList<String> sourcesNames = new ArrayList<>();
+        Set<Object> keys = sources.keySet();
+
+        sourcesNames.addAll(keys.stream().map(Object::toString).collect(Collectors.toList()));
+
+        return sourcesNames;
     }
 
     @Override
@@ -76,7 +87,7 @@ public class RSSParserImpl implements RSSParser {
     }
 
     private Document getRSSFromUrl(String urlString) throws IOException, ParserConfigurationException, SAXException {
-        URL url = new URL(urlString);;
+        URL url = new URL(urlString);
         URLConnection conn = url.openConnection();
         BufferedReader bf = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
