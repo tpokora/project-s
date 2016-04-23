@@ -3,12 +3,12 @@
         <select id="rss-list-select" class="form-control" ng-options="source as source for source in rssSources"
                 ng-model="selectedSource"
                 ng-change="fetchRSSBySource(selectedSource)">
-    </select>
+        </select>
         <span id="rss-list-header" class="dropdown-header top-bottom-line"
-              ng-show="rss.source">Source: {{ rss.source }}</span>
-    <ul id="rss-list" ng-repeat="feed in rss.feeds | limitTo: 10">
+              ng-show="rss.source">{{ rss.source }}</span>
+        <ul id="rss-list" ng-repeat="feed in rss.feeds | limitTo: 10">
             <li class="rss-list-element"><a href="{{ feed.link }}" target="_blank">{{ feed.title | limitTo: 40}}...</a>
             </li>
-    </ul>
+        </ul>
     </form>
 </div>
