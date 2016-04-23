@@ -1,4 +1,6 @@
 <div id="rss-view" class="center-block" ng-controller="WidgetController as widgetCtrl">
+    <select ng-options="source as source for source in rssSources" ng-model="selectedSource" ng-change="fetchRSSBySource(selectedSource)">
+    </select>
     <div>Source: {{ rss.source }}</div>
     <ul id="rss-list" ng-repeat="feed in rss.feeds | limitTo: 10">
         <li><a href="{{ feed.link }}" target="_blank">{{ feed.title | limitTo: 20}}...</a></li>

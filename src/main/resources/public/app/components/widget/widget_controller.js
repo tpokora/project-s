@@ -4,7 +4,21 @@ App.controller('WidgetController', ['$scope', '$q', '$stateParams', '$location',
     var self = this;
     var params = $stateParams;
 
-    this.fetchRSSBySource = function(source) {
+    $scope.fetchRSSSources = function() {
+        RSSService.fetchRSSSources()
+            .then(
+                function(rssSources) {
+                    $scope.rssSources = rssSources;
+                }, function(errResponse) {
+                    console.error('Error while fetching RSS Sources');
+                }
+            );
+    }
+
+    $scope.fetchRSSSources();
+
+    $scope.fetchRSSBySource = function(source) {
+        if (source != "" && source != null) {
         RSSService.fetchRSSBySource(source)
             .then(
                 function(rss) {
@@ -14,7 +28,6 @@ App.controller('WidgetController', ['$scope', '$q', '$stateParams', '$location',
                     console.error('Error while fetching RSS');
                 }
             );
+        }
     };
-
-    this.fetchRSSBySource('niebezpiecznik');
 }]);
