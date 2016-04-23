@@ -122,7 +122,7 @@ article .article-content {
 
 /* RSS View */
 #rss-view {
-    width: 260px;
+    width: 280px;
 }
 
 #rss-view #rss-list {
@@ -131,7 +131,12 @@ article .article-content {
     margin: 0;
 }
 
-#rss-view #rss-list li {
-    padding: 6px;
+#rss-view #rss-list-header {
+    text-align: center;
+    font-size: 20px;
+}
+
+#rss-view #rss-list .rss-list-element {
+    padding: 8px;
     border-bottom: 1px solid #B1A9A9;
 }
