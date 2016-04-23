@@ -1,8 +1,14 @@
 <div id="rss-view" class="center-block" ng-controller="WidgetController as widgetCtrl">
-    <select ng-options="source as source for source in rssSources" ng-model="selectedSource" ng-change="fetchRSSBySource(selectedSource)">
+    <form class="clear-style">
+        <select id="rss-list-select" class="form-control" ng-options="source as source for source in rssSources"
+                ng-model="selectedSource"
+                ng-change="fetchRSSBySource(selectedSource)">
     </select>
-    <div>Source: {{ rss.source }}</div>
+        <span id="rss-list-header" class="dropdown-header top-bottom-line"
+              ng-show="rss.source">Source: {{ rss.source }}</span>
     <ul id="rss-list" ng-repeat="feed in rss.feeds | limitTo: 10">
-        <li><a href="{{ feed.link }}" target="_blank">{{ feed.title | limitTo: 20}}...</a></li>
+            <li class="rss-list-element"><a href="{{ feed.link }}" target="_blank">{{ feed.title | limitTo: 40}}...</a>
+            </li>
     </ul>
+    </form>
 </div>
