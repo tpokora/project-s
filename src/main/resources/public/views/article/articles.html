@@ -1,4 +1,7 @@
 <div id="articles-list" class="center-block">
+    <div>
+        <a ui-sref="article_new" ng-show="authenticated">New Article</a>
+    </div>
     <header>List of articles:</header>
     <div ng-repeat="article in articles | orderBy: createTime: true">
         <div class="article-list-element">

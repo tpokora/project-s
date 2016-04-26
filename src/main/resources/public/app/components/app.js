@@ -57,6 +57,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             }
         })
         .state('user_new', {
+            url: '/user/new',
             views: {
                 'main-view': {
                     templateUrl: 'views/users/user_new.html',
@@ -158,6 +159,16 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
                 'main-view' : {
                     templateUrl: 'views/article/article.html',
                     controller: 'ArticleController as articleCtrl'
+                }
+            }
+        })
+
+        .state('article_new', {
+            url: '/article/new',
+            views: {
+                'main-view' : {
+                        templateUrl: 'views/article/article_new.html',
+                        controller: 'ArticleController as articleCtrl'
                 }
             }
         })
