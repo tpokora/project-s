@@ -4,6 +4,14 @@ App.controller('ArticleController', ['$scope', '$stateParams', '$location', 'Art
     var self = this;
     var params = $stateParams;
 
+    $scope.newArticle = {
+        id: '',
+        title: '',
+        content: '',
+        date: '',
+        userId: ''
+    };
+
     this.fetchAllArticles = function() {
         ArticleService.fetchAllArticles()
             .then(
@@ -28,5 +36,13 @@ App.controller('ArticleController', ['$scope', '$stateParams', '$location', 'Art
     if(params.id != null) {
         this.fetchArticleById(params.id);
     }
+
+    $scope.createArticle = function(userId) {
+        $scope.newArticle.userId;
+        ArticleService.createArticle($scope.newArticle)
+            .then(function() {
+                $location.path('/articles');
+            });
+    };
 
 }]);

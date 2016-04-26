@@ -26,6 +26,18 @@ App.factory('ArticleService', ['$http', '$q', 'ConfigService', function($http, $
                     console.error('Error while fetching article');
                     return $q.reject(errResponse);
                 });
+        },
+
+        createArticle: function(article) {
+            return $http.post(baseUrl + '/rest/article/new', article)
+                .then(
+                    function(response) {
+                        return response.data;
+                    }, function(errResponse) {
+                        console.error('Error while creating new Article');
+                        return $q.reject(errResponse);
+                    }
+                )
         }
     }
 }]);
