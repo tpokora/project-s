@@ -3,6 +3,22 @@
         <p>Login to see content</p>
     </div>
     <div ng-show="authenticated">
-        NEW ARTICLE TEMPLATE
+        <div>New Article</div>
+        <form role="form">
+            <div class="form-group">
+                <label for="title">Author: </label>
+                <input type="text" class="form-control" id="author" value="{{ loggedUser.username }}" disabled/>
+            </div>
+            <div class="form-group">
+                <label for="title">Title: </label>
+                <input type="text" class="form-control" id="title"/>
+            </div>
+            <div class="form-group">
+                <label for="content">Content: </label>
+                <textarea class="form-control" rows="5" id="content" name="content"></textarea>
+            </div>
+            <input type="submit" value="Submit"/>
+            <button type="button">Back</button>
+        </form>
     </div>
 </div>
