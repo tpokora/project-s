@@ -9,7 +9,9 @@ App.controller('ArticleController', ['$scope', '$stateParams', '$location', 'Art
         title: '',
         content: '',
         date: '',
-        userId: ''
+        user: {
+            id: ''
+        }
     };
 
     this.fetchAllArticles = function() {
@@ -38,7 +40,8 @@ App.controller('ArticleController', ['$scope', '$stateParams', '$location', 'Art
     }
 
     $scope.createArticle = function(userId) {
-        $scope.newArticle.userId;
+        $scope.newArticle.user.id = userId;
+        console.log('newArticle: ' + $scope.newArticle);
         ArticleService.createArticle($scope.newArticle)
             .then(function() {
                 $location.path('/articles');
