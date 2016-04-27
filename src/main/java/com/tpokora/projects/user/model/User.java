@@ -1,7 +1,6 @@
 package com.tpokora.projects.user.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.tpokora.projects.articles.model.Article;
 import com.tpokora.projects.common.model.AbstractEntity;
 
