@@ -82,7 +82,6 @@ public class UserControllerTest extends AbstractControllerTest {
                 )
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].username").value("user1"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].password").value("pass"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].email").value("email@email.com"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].role").value("ROLE_USER"));
     }
@@ -121,7 +120,6 @@ public class UserControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.users").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].username").value(newUser.getUsername()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].password").value(newUser.getPassword()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].email").value(newUser.getEmail()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].role").value("ROLE_USER"));
     }

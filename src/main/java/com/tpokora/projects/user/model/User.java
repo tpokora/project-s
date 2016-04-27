@@ -1,7 +1,6 @@
 package com.tpokora.projects.user.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import com.tpokora.projects.articles.model.Article;
 import com.tpokora.projects.common.model.AbstractEntity;
 
@@ -19,7 +18,7 @@ public class User extends AbstractEntity {
     private String username;
 
     @Column(name = "PASSWORD")
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Column(name = "EMAIL")

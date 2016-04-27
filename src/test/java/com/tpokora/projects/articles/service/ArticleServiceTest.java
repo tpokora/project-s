@@ -63,10 +63,11 @@ public class ArticleServiceTest extends AbstractServiceTest {
      */
     @Test
     @Transactional
-    public void getArticleById_1_success() {
-        Article article = articleService.getArticleById(1);
+    public void getArticleById_Id_success() {
+        int id = 1022;
+        Article article = articleService.getArticleById(id);
 
-        Assert.assertEquals(true, article.getId() == 1);
+        Assert.assertEquals(true, article.getId() == id);
     }
 
     /**
@@ -119,10 +120,10 @@ public class ArticleServiceTest extends AbstractServiceTest {
     @Test
     @Transactional
     @Rollback(true)
-    public void deleteArticleById_1_success() {
-        Assert.assertNotNull(articleService.getArticleById(1));
+    public void deleteArticleById_Id_success() {
+        int id = 1022;
+        Assert.assertNotNull(articleService.getArticleById(id));
 
-        int id = 1;
         articleService.deleteArticleById(id);
 
         Assert.assertNull(articleService.getArticleById(id));

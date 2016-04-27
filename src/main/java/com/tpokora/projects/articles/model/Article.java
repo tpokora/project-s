@@ -1,7 +1,9 @@
 package com.tpokora.projects.articles.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.tpokora.projects.common.model.AbstractEntity;
 import com.tpokora.projects.user.model.User;
 
@@ -30,7 +32,9 @@ public class Article extends AbstractEntity implements Serializable {
 
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     @ManyToOne
-    @JsonManagedReference
+    /**
+     * @JsonManagedReference commented out due to error in handling reference when POSTed
+     */
     private User user;
 
     public Article() {
