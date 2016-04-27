@@ -27,13 +27,13 @@ public class Article extends AbstractEntity implements Serializable {
     private String content;
 
     @Column(name = "CREATE_TIME")
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm a z")
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
     private Date createTime;
 
 
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference // TODO: will be needed in the future when article will have to have authors name
+    @ManyToOne
+    @JsonManagedReference
     private User user;
 
     public Article() {

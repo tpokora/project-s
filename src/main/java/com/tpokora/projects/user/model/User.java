@@ -1,5 +1,6 @@
 package com.tpokora.projects.user.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.tpokora.projects.articles.model.Article;
 import com.tpokora.projects.common.model.AbstractEntity;
@@ -26,8 +27,8 @@ public class User extends AbstractEntity {
     @Column(name = "ROLE")
     private String role;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Article> articles;
 
     public User() {
