@@ -1,8 +1,6 @@
 package com.tpokora.projects.config;
 
 import com.tpokora.projects.config.filter.CsrfHeaderFilter;
-import com.tpokora.projects.user.model.User;
-import com.tpokora.projects.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
@@ -53,12 +51,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/index.html", "/views/home.html", "/views/login.html", "/views/users/user_new.html").permitAll()
+                /**
+                 * TODO: Create functionality to generate urls from properties files
+                 */
+                .antMatchers("/index.html", "/views/home.html", "/views/login.html", "/views/users/user_new.html", "/views/article/**", "/views/widget/**").permitAll()
                 .antMatchers("/views/admin/**").hasRole("ADMIN")
-                .antMatchers("/views/content.html").hasRole("USER")
-                .antMatchers("/views/users/**").hasAnyRole("ADMIN, USER")
+                .antMatchers("/views/users/**", "/views/article/article_new.html").hasAnyRole("ADMIN, USER")
                 .and().formLogin().loginPage("/views/login.html")
-                    .usernameParameter("username").passwordParameter("password")
+                .usernameParameter("username").passwordParameter("password")
                 .and().logout().logoutSuccessUrl("/")
                 .and().exceptionHandling().accessDeniedPage("/?error");
 
@@ -78,7 +78,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder;
     }
