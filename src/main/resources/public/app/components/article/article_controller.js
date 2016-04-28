@@ -30,6 +30,7 @@ App.controller('ArticleController', ['$scope', '$stateParams', '$location', 'Art
         ArticleService.fetchArticleById(id)
             .then(function(article) {
                 $scope.article = article;
+                    $scope.parsedContent = $scope.article.content.replace(/\r\n/g, '<br />');
             }, function(errResponse) {
                 console.error('Error while fetching Article');
             });
