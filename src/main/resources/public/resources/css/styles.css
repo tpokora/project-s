@@ -1,5 +1,7 @@
 body {
-    font-family: "PT Sans", "Helvetica Neue", Helvetica,Arial, sans-serif, sans-serif
+    font-family: "PT Sans", "Helvetica Neue", Helvetica,Arial, sans-serif, sans-serif;
+    background: #3E3D3D;
+    color: #B1B1B1;
 }
 
 /* Utilities */
