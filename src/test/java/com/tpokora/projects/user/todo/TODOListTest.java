@@ -20,6 +20,13 @@ public class TODOListTest {
         todoList = new TODOList();
     }
 
+    public void createTodoElements(int amount) {
+        for (int i = 0; i < amount; i++) {
+            todoList.createElement("TEST" + i);
+            todoList.getElementByIndex(i).setId(i);
+        }
+    }
+
     /**
      * Tests if createElement creates new element in todolist
      */
@@ -36,12 +43,21 @@ public class TODOListTest {
      */
     @Test
     public void test_removeElementById_1_elementNotFound() {
-        for (int i = 0; i < 3; i++) {
-            todoList.createElement("TEST" + i);
-            todoList.getElementByIndex(i).setId(i);
-        }
+        createTodoElements(5);
 
         todoList.removeElementById(1);
         Assert.assertNull("Element should not exist", todoList.getElementById(1));
+    }
+
+    /**
+     * Set element to checked by id
+     */
+    @Test
+    public void test_setElementToCheckedById_2_elementChecked() {
+        createTodoElements(5);
+
+        todoList.setElementToChecked(2);
+        Assert.assertTrue("Element is not checked", todoList.getElementById(2).isChecked());
+
     }
 }

@@ -43,4 +43,13 @@ public class TODOList {
             }
         }
     }
+
+    public void setElementToChecked(int id) {
+        for (TODOElement element : todoElements) {
+            if (element.getId() == id) {
+                element.setChecked(true);
+                break;
+            }
+        }
+    }
 }
