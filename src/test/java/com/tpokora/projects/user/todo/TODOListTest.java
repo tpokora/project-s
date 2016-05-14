@@ -28,4 +28,20 @@ public class TODOListTest {
         todoList.createElement("TEST");
         Assert.assertTrue("Element not found.", todoList.getElementByIndex(0) != null);
     }
+
+
+
+    /**
+     * Test if removeElementById remove element
+     */
+    @Test
+    public void test_removeElementById_1_elementNotFound() {
+        for (int i = 0; i < 3; i++) {
+            todoList.createElement("TEST" + i);
+            todoList.getElementByIndex(i).setId(i);
+        }
+
+        todoList.removeElementById(1);
+        Assert.assertNull("Element should not exist", todoList.getElementById(1));
+    }
 }

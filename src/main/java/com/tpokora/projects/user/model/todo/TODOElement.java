@@ -1,11 +1,13 @@
 package com.tpokora.projects.user.model.todo;
 
+import com.tpokora.projects.common.model.AbstractEntity;
+
 import java.util.Date;
 
 /**
  * Created by pokor on 14.05.2016.
  */
-public class TODOElement {
+public class TODOElement extends AbstractEntity {
 
     private String content;
     private boolean checked;
@@ -15,11 +17,13 @@ public class TODOElement {
 
     /**
      * Constructor with all parameters for creating very specific TODOElement
+     * @param id
      * @param content
      * @param checked
      * @param date
      */
-    public TODOElement(String content, boolean checked, Date date) {
+    public TODOElement(Integer id, String content, boolean checked, Date date) {
+        super(id);
         this.content = content;
         this.checked = checked;
         this.date = date;

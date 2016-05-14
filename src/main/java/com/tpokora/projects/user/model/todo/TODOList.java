@@ -21,7 +21,26 @@ public class TODOList {
         return todoElements.get(index);
     }
 
+    public TODOElement getElementById(int id) {
+        for (TODOElement element : todoElements) {
+            if (element.getId() == id) {
+                return element;
+            }
+        }
+
+        return null;
+    }
+
     public void removeElementByIndex(int index) {
         todoElements.remove(index);
+    }
+
+    public void removeElementById(int id) {
+        for (TODOElement element : todoElements) {
+            if (element.getId() == id) {
+                todoElements.remove(id);
+                break;
+            }
+        }
     }
 }
