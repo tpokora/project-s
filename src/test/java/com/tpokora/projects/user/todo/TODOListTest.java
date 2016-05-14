@@ -1,5 +1,6 @@
 package com.tpokora.projects.user.todo;
 
+import com.tpokora.projects.user.model.todo.TODOElement;
 import com.tpokora.projects.user.model.todo.TODOList;
 import junit.framework.Assert;
 import org.apache.log4j.Logger;
@@ -20,7 +21,7 @@ public class TODOListTest {
         todoList = new TODOList();
     }
 
-    public void createTodoElements(int amount) {
+    private void createTodoElements(int amount) {
         for (int i = 0; i < amount; i++) {
             todoList.createElement("TEST" + i);
             todoList.getElementByIndex(i).setId(i);
@@ -59,5 +60,23 @@ public class TODOListTest {
         todoList.setElementToChecked(2);
         Assert.assertTrue("Element is not checked", todoList.getElementById(2).isChecked());
 
+    }
+
+    /**
+     *  Check if checked numbers are deleted
+     */
+    @Test
+    public void test_removeCheckedElement_noElements() {
+        createTodoElements(10);
+        for (int i = 0; i < todoList.getElementsCount(); i += 3) {
+            todoList.getElementByIndex(i).setChecked(true);
+        }
+
+        todoList.removeCheckedElements();
+
+        for (TODOElement element : todoList.getTodoElements()) {
+            logger.info(element.getContent() + " : " + element.isChecked());
+            Assert.assertFalse("Element " + element.getContent() + " is checked", element.isChecked());
+        }
     }
 }

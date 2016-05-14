@@ -13,6 +13,18 @@ public class TODOList {
         todoElements = new ArrayList<TODOElement>();
     }
 
+    public ArrayList<TODOElement> getTodoElements() {
+        return todoElements;
+    }
+
+    public void setTodoElements(ArrayList<TODOElement> todoElements) {
+        this.todoElements = todoElements;
+    }
+
+    public int getElementsCount() {
+        return todoElements.size();
+    }
+
     public void createElement(String content) {
         todoElements.add(new TODOElement(content));
     }
@@ -49,6 +61,17 @@ public class TODOList {
             if (element.getId() == id) {
                 element.setChecked(true);
                 break;
+            }
+        }
+    }
+
+    public void removeCheckedElements() {
+        int index = 0;
+        while (index < todoElements.size()) {
+            if (todoElements.get(index).isChecked() == true) {
+                todoElements.remove(index);
+            } else {
+                index++;
             }
         }
     }
