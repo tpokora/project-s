@@ -1,5 +1,7 @@
 package com.tpokora.projects.user.model.todo;
 
+import com.tpokora.projects.user.model.User;
+
 import java.util.ArrayList;
 
 /**
@@ -25,8 +27,8 @@ public class TODOList {
         return todoElements.size();
     }
 
-    public void createElement(String content) {
-        todoElements.add(new TODOElement(content));
+    public void createElement(String content, User user) {
+        todoElements.add(new TODOElement(content, user));
     }
 
     public TODOElement getElementByIndex(int index) {

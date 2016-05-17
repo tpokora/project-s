@@ -3,6 +3,7 @@ package com.tpokora.projects.user.model;
 import com.fasterxml.jackson.annotation.*;
 import com.tpokora.projects.articles.model.Article;
 import com.tpokora.projects.common.model.AbstractEntity;
+import com.tpokora.projects.user.model.todo.TODOElement;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,6 +31,10 @@ public class User extends AbstractEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Article> articles;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<TODOElement> todolist;
 
     public User() {
         super();
@@ -90,5 +95,13 @@ public class User extends AbstractEntity {
 
     public void setArticles(List<Article> articles) {
         this.articles = articles;
+    }
+
+    public List<TODOElement> getTodolist() {
+        return todolist;
+    }
+
+    public void setTodolist(List<TODOElement> todolist) {
+        this.todolist = todolist;
     }
 }
