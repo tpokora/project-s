@@ -1,5 +1,6 @@
 package com.tpokora.projects.user.todo;
 
+import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.model.todo.TODOElement;
 import com.tpokora.projects.user.model.todo.TODOList;
 import junit.framework.Assert;
@@ -23,7 +24,7 @@ public class TODOListTest {
 
     private void createTodoElements(int amount) {
         for (int i = 0; i < amount; i++) {
-            todoList.createElement("TEST" + i);
+            todoList.createElement("TEST" + i, new User());
             todoList.getElementByIndex(i).setId(i);
         }
     }
@@ -33,7 +34,7 @@ public class TODOListTest {
      */
     @Test
     public void test_createElement_and_getByIndex_0_elementFound() {
-        todoList.createElement("TEST");
+        todoList.createElement("TEST", new User());
         Assert.assertTrue("Element not found.", todoList.getElementByIndex(0) != null);
     }
 
