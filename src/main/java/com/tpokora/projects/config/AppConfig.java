@@ -18,6 +18,7 @@ import com.tpokora.projects.widget.service.RSSService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,7 +30,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * Created by pokor on 28.02.2016.
  */
 @Configuration
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application_${env:prod}.properties")
 public class AppConfig {
 
     @Autowired
