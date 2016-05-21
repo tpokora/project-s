@@ -1,6 +1,6 @@
 {
   "API" : {
-    "url" : "http://192.168.1.18",
+    "url" : "http://localhost",
     "port" : 7080
   }
 }

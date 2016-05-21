@@ -21,7 +21,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             url: '/home',
             views: {
                 'main-view': {
-                    templateUrl: 'views/home.html',
+                    templateUrl: '../views/home.html',
                     controller: 'HomeController as homeCtrl'
                 }
             }
@@ -31,7 +31,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             url: '/login',
             views: {
                 'main-view': {
-                    templateUrl: 'views/login.html'
+                    templateUrl: '../views/login.html'
                 },
             }
         })
@@ -41,7 +41,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             url: '/user/list',
             views: {
                 'main-view': {
-                    templateUrl: 'views/users/users.html',
+                    templateUrl: '../views/users/users.html',
                     controller: 'UsersController as usersCtrl'
                 }
             }
@@ -51,7 +51,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             url: '/user/{id:int}',
             views: {
                 'main-view': {
-                    templateUrl: 'views/users/user.html',
+                    templateUrl: '../views/users/user.html',
                     controller: 'UsersController as usersCtrl'
                 }
             }
@@ -60,7 +60,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             url: '/user/new',
             views: {
                 'main-view': {
-                    templateUrl: 'views/users/user_new.html',
+                    templateUrl: '../views/users/user_new.html',
                     controller: 'UserNewController as userNewCtrl'
                 }
             }
@@ -70,7 +70,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             url: '/user/{id:int}/update',
             views: {
                 'main-view': {
-                    templateUrl: 'views/users/user_update.html',
+                    templateUrl: '../views/users/user_update.html',
                     controller: 'UserUpdateController as userUpdCtrl'
                 }
             }
@@ -79,7 +79,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             url: '/user/{id:int}/delete',
             views: {
                 'main-view': {
-                    templateUrl: 'views/users/user_delete.html',
+                    templateUrl: '../views/users/user_delete.html',
                     controller: 'UserDeleteController as userDltCtrl'
                 }
             }
@@ -91,7 +91,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             url: '/admin',
             views: {
                 'main-view': {
-                    templateUrl: 'views/admin/panel.html'
+                    templateUrl: '../views/admin/panel.html'
                 }
             }
 
@@ -100,7 +100,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             url: '/home',
             views: {
                 'admin-view': {
-                    templateUrl: 'views/admin/admin_home.html'
+                    templateUrl: '../views/admin/admin_home.html'
                 }
             }
         })
@@ -108,7 +108,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             url: '/users',
             views: {
                 'admin-view': {
-                    templateUrl: 'views/admin/admin_users.html',
+                    templateUrl: '../views/admin/admin_users.html',
                     controller: 'UsersController as usersCtrl'
                 }
             }
@@ -117,7 +117,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             url: '/user/{id:int}/update',
             views: {
                 'admin-view': {
-                    templateUrl: 'views/users/user_update.html',
+                    templateUrl: '../views/users/user_update.html',
                     controller: 'UserUpdateController as userUpdCtrl'
                 }
             }
@@ -126,7 +126,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             url: '/user/{id:int}/delete',
             views: {
                 'admin-view': {
-                    templateUrl: 'views/users/user_delete.html',
+                    templateUrl: '../views/users/user_delete.html',
                     controller: 'UserDeleteController as userDltCtrl'
                 }
             }
@@ -135,7 +135,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             url: '/database',
             views: {
                 'admin-view': {
-                    templateUrl: 'views/admin/admin_database.html',
+                    templateUrl: '../views/admin/admin_database.html',
                     controller: 'DatabaseController as databaseCtrl'
                 }
             }
@@ -146,7 +146,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             url: '/articles',
             views: {
                 'main-view' : {
-                    templateUrl: 'views/article/articles.html',
+                    templateUrl: '../views/article/articles.html',
                     controller: 'ArticleController as articleCtrl'
                 }
             }
@@ -157,7 +157,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             url: '/article/{id:int}',
             views: {
                 'main-view' : {
-                    templateUrl: 'views/article/article.html',
+                    templateUrl: '../views/article/article.html',
                     controller: 'ArticleController as articleCtrl'
                 }
             }
@@ -167,7 +167,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
             url: '/article/new',
             views: {
                 'main-view' : {
-                        templateUrl: 'views/article/article_new.html',
+                        templateUrl: '../views/article/article_new.html',
                         controller: 'ArticleController as articleCtrl'
                 }
             }

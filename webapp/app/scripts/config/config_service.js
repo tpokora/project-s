@@ -5,7 +5,7 @@ App.factory('ConfigService', ['$http', '$q', function($http, $q) {
 
     return {
         baseUrl: function() {
-            $http.get('properties/properties_%ENV%.json').then(function(json) {
+            $http.get('../../properties/properties_dev.json').then(function(json) {
                 deferred.resolve(json.data.API.url + ":" + json.data.API.port);
             })
             return deferred.promise;
