@@ -1,9 +1,14 @@
 'use strict'
 
-App.controller('AuthController', function($rootScope, $scope, $http, $location, UserService) {
+App.controller('AuthController', function($rootScope, $scope, $http, $location, ConfigService, UserService) {
     var self = this;
 
     $rootScope.loggedUser = '';
+
+    var baseUrl = '';
+    ConfigService.baseUrl().then(function(data) {
+        baseUrl = data;
+    });
 
     self.fetchUserByUsername = function(username) {
         UserService.fetchUserByUsername(username)
@@ -21,7 +26,7 @@ App.controller('AuthController', function($rootScope, $scope, $http, $location, 
             btoa(credentials.username + ":" + credentials.password)
         } : {};
 
-        $http.get('auth', { headers : headers }).success(function(data) {
+        $http.get(baseUrl + '/auth', { headers : headers }).success(function(data) {
             if (data.name) {
                 self.fetchUserByUsername(data.name);
                 $rootScope.authenticated = true;
