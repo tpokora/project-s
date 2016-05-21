@@ -343,7 +343,9 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*'
+            'styles/{,*/}*.*',
+            'scripts/{,*/}*.js',
+            'properties/{,*/}*.json'
           ]
         }, {
           expand: true,
@@ -375,7 +377,7 @@ module.exports = function (grunt) {
       ],
       dist: [
         'copy:styles',
-        'imagemin',
+        //'imagemin',
         'svgmin'
       ]
     },
@@ -386,9 +388,22 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    // Copy bower elements
+    bower: {
+      dev: {
+        dest: 'dist/lib',
+        js_dest: 'dist/lib/js',
+        css_dest: 'dist/lib/css',
+        options: {
+          expand: true
+        }
+      }
     }
   });
 
+  grunt.loadNpmTasks('grunt-bower');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -425,15 +440,16 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
-    'concat',
+    //'concat',
     'ngAnnotate',
     'copy:dist',
     'cdnify',
-    'cssmin',
-    'uglify',
+    //'cssmin',
+    //'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'bower'
   ]);
 
   grunt.registerTask('default', [
