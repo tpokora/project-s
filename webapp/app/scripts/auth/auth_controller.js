@@ -22,8 +22,8 @@ App.controller('AuthController', function($rootScope, $scope, $http, $location, 
     };
 
     var authenticate = function(credentials, callback) {
-        var headers = credentials ? { authorization : "Basic " +
-            btoa(credentials.username + ":" + credentials.password)
+        var headers = credentials ? { authorization : 'Basic ' +
+            btoa(credentials.username + ':' + credentials.password)
         } : {};
 
         $http.get(baseUrl + '/auth', { headers : headers }).success(function(data) {
@@ -38,26 +38,26 @@ App.controller('AuthController', function($rootScope, $scope, $http, $location, 
             $rootScope.authenticated = false;
             callback && callback();
         });
-    }
+    };
 
     authenticate();
     $scope.credentials = {};
     $scope.login = function() {
         authenticate($scope.credentials, function() {
             if($rootScope.authenticated) {
-                $location.path("/");
+                $location.path('/');
                 $scope.error = false;
             } else {
-                $location.path("/login");
+                $location.path('/login');
                 $scope.error = true;
             }
         });
-    }
+    };
 
     $scope.logout = function() {
         $http.post('logout', {}).finally(function() {
             $rootScope.authenticated = false;
-            $location.path("/");
+            $location.path('/');
         });
-    }
+    };
 });
