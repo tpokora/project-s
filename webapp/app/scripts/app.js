@@ -171,7 +171,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($s
                         controller: 'ArticleController as articleCtrl'
                 }
             }
-        })
+        });
 
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 }]);

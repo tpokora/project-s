@@ -14,14 +14,15 @@
         <!-- The main class to start by executing java -jar -->
         <start-class>com.tpokora.projects.config.App</start-class>
         <!-- Dependency versions -->
-        <maven.dependency.plugin.version>2.10</maven.dependency.plugin.version>
         <junit.version>4.12</junit.version>
         <com.jayway.jsonpath.version>1.2.0</com.jayway.jsonpath.version>
         <org.mockito.version>1.9.5</org.mockito.version>
         <org.hamcrest.version>1.3</org.hamcrest.version>
 
         <!-- Maven plugins -->
+        <maven.dependency.plugin.version>2.10</maven.dependency.plugin.version>
         <maven-replacer-plugin.version>1.5.2</maven-replacer-plugin.version>
+        <maven-war-plugin.version>2.6</maven-war-plugin.version>
 
         <!-- Web resources -->
         <wro4j.maven.plugin.version>1.7.6</wro4j.maven.plugin.version>
@@ -31,6 +32,10 @@
         <org.webjars.restangular.version>1.5.1</org.webjars.restangular.version>
         <org.webjars.bootstrap.version>3.3.6</org.webjars.bootstrap.version>
         <org.webjars.jquery.version>2.1.4</org.webjars.jquery.version>
+
+        <!-- packaging directory -->
+        <packaging.dir.linux></packaging.dir.linux>
+        <packaging.dir.win>C:/Deploy</packaging.dir.win>
     </properties>
 
     <parent>
@@ -104,7 +109,7 @@
     </dependencies>
 
     <build>
-        <finalName>ProjectS</finalName>
+        <finalName>Project-S</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -117,6 +122,15 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven-war-plugin.version}</version>
+                <configuration>
+                    <warName>Project-S</warName>
+                    <outputDirectory>${packaging.dir.win}</outputDirectory>
                 </configuration>
             </plugin>
             <plugin>
@@ -153,7 +167,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
+                    <wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory
+                    </wroManagerFactory>
                     <cssDestinationFolder>${project.build.directory}/classes/public/resources/css</cssDestinationFolder>
                     <jsDestinationFolder>${project.build.directory}/classes/public/resources/js</jsDestinationFolder>
                     <wroFile>${project.build.directory}/wro/wro.xml</wroFile>
