@@ -10,7 +10,7 @@ App.controller('UserUpdateController', ['$scope', '$location', '$stateParams', '
         email: ''
     };
 
-    var backUrl = "/users";
+    var backUrl = '/users';
 
     self.fetchUserById = function(id) {
         UserService.fetchUserById(id)
@@ -24,8 +24,8 @@ App.controller('UserUpdateController', ['$scope', '$location', '$stateParams', '
     };
 
     self.setBackUrl = function() {
-        if ($location.path().indexOf("admin") > -1) {
-            backUrl = "/admin/users";
+        if ($location.path().indexOf('admin') > -1) {
+            backUrl = '/admin/users';
         }
     }
 

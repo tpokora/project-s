@@ -31,7 +31,7 @@ App.controller('UserNewController', ['$scope', '$location', 'UserService', funct
                 });
         } else {
             $scope.errors.error = 'passwords.diff';
-            console.log("Different passwords");
+            console.log('Different passwords');
         }
     };
 

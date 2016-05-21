@@ -18,7 +18,7 @@ App.controller('WidgetController', ['$scope', '$q', '$stateParams', '$location',
     $scope.fetchRSSSources();
 
     $scope.fetchRSSBySource = function(source) {
-        if (source != "" && source != null) {
+        if (source != '' && source != null) {
         RSSService.fetchRSSBySource(source)
             .then(
                 function(rss) {
