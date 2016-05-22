@@ -363,6 +363,11 @@ module.exports = function (grunt) {
           src: '**/*',
           dest: 'dist/node_modules/express',
           expand: true
+        }, {
+          cwd: 'node_modules/body-parser',
+          src: '**/*',
+          dest: 'dist/node_modules/body-parser',
+          expand: true
         }]
       },
       styles: {
