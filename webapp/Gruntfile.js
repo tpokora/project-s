@@ -368,6 +368,11 @@ module.exports = function (grunt) {
           src: '**/*',
           dest: 'dist/node_modules/body-parser',
           expand: true
+        }, {
+          cwd: 'node_modules/morgan',
+          src: '**/*',
+          dest: 'dist/node_modules/morgan',
+          expand: true
         }]
       },
       styles: {

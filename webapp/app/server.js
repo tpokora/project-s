@@ -1,10 +1,12 @@
 var bodyParser = require('body-parser');
 var express = require('express');
+var logger = require('morgan');
 var app = express();
 
 var properties = require('./properties/properties_dev.json');
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/lib', express.static(__dirname + '/lib'));
 app.use('/styles', express.static(__dirname + '/styles'));
@@ -19,8 +21,8 @@ app.all(function(req, res, next) {
   next();
 });
 
-app.get('/', function(req, res, next) {
-  logRequest(req);
+app.get('*', function(req, res, next) {
+  logRequest(req, res, next);
   res.sendFile(__dirname + '/index.html');
 });
 
@@ -28,6 +30,7 @@ var server = app.listen(properties.Server.port, function() {
   console.log('Server is listening on port: ' + properties.Server.port);
 });
 
-function logRequest(req) {
+function logRequest(req, res, next) {
   console.log('REQUEST: %s %s', req.method, req.url);
-}
+  console.log('RESPONSE: %s %s', res.statusCode, res);
+};
