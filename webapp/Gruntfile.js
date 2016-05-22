@@ -345,7 +345,8 @@ module.exports = function (grunt) {
             'images/{,*/}*.{webp}',
             'styles/{,*/}*.*',
             'scripts/{,*/}*.js',
-            'properties/{,*/}*.json'
+            'properties/{,*/}*.json',
+            'server.js'
           ]
         }, {
           expand: true,
@@ -357,6 +358,11 @@ module.exports = function (grunt) {
           cwd: 'bower_components/bootstrap/dist',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
+        }, {
+          cwd: 'node_modules/express',
+          src: '**/*',
+          dest: 'dist/node_modules/express',
+          expand: true
         }]
       },
       styles: {
@@ -364,6 +370,14 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      deploy: {
+        files: [{
+          cwd: 'dist',
+          src: '**/*',
+          dest: 'C:/deploy/front',
+          expand: true
+        }],
       }
     },
 
@@ -400,10 +414,11 @@ module.exports = function (grunt) {
           expand: true
         }
       }
-    }
+    },
   });
 
   grunt.loadNpmTasks('grunt-bower');
+  grunt.loadNpmTasks('grunt-deploy');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -431,7 +446,7 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+    //'karma'
   ]);
 
   grunt.registerTask('build', [
@@ -457,4 +472,10 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.registerTask('deploy-app', [
+    'test',
+    'build',
+    'copy:deploy'
+  ])
 };

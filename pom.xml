@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.tpokora.projects</groupId>
     <artifactId>project-s</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>Project-S</name>
     <url>http://maven.apache.org</url>
@@ -22,7 +22,7 @@
         <!-- Maven plugins -->
         <maven.dependency.plugin.version>2.10</maven.dependency.plugin.version>
         <maven-replacer-plugin.version>1.5.2</maven-replacer-plugin.version>
-        <maven-war-plugin.version>2.6</maven-war-plugin.version>
+        <maven-jar-plugin.version>3.0.0</maven-jar-plugin.version>
 
         <!-- Web resources -->
         <wro4j.maven.plugin.version>1.7.6</wro4j.maven.plugin.version>
@@ -126,111 +126,36 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${maven-war-plugin.version}</version>
-                <configuration>
-                    <warName>Project-S</warName>
-                    <outputDirectory>${packaging.dir.win}</outputDirectory>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
+                <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>copy-resources</id>
-                        <phase>validate</phase>
+                        <id>copy-dependencies</id>
                         <goals>
-                            <goal>copy-resources</goal>
+                            <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/target/wro</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/wro</directory>
-                                    <filtering>true</filtering>
-                                </resource>
-                            </resources>
+                            <outputDirectory>${project.build.directory}/classes/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
             <plugin>
-                <groupId>ro.isdc.wro4j</groupId>
-                <artifactId>wro4j-maven-plugin</artifactId>
-                <version>${wro4j.maven.plugin.version}</version>
+                <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>generate-resources</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory
-                    </wroManagerFactory>
-                    <cssDestinationFolder>${project.build.directory}/classes/public/resources/css</cssDestinationFolder>
-                    <jsDestinationFolder>${project.build.directory}/classes/public/resources/js</jsDestinationFolder>
-                    <wroFile>${project.build.directory}/wro/wro.xml</wroFile>
-                    <extraConfigFile>${basedir}/src/main/wro/wro.properties</extraConfigFile>
-                    <contextFolder>${basedir}/src/main/wro</contextFolder>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.webjars</groupId>
-                        <artifactId>jquery</artifactId>
-                        <version>${org.webjars.jquery.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.webjars</groupId>
-                        <artifactId>angularjs</artifactId>
-                        <version>${org.webjars.angularjs.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.webjars</groupId>
-                        <artifactId>angular-ui-router</artifactId>
-                        <version>${org.webjars.angular-ui-router.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.webjars</groupId>
-                        <artifactId>restangular</artifactId>
-                        <version>${org.webjars.restangular.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.webjars</groupId>
-                        <artifactId>underscorejs</artifactId>
-                        <version>${org.webjars.underscorejs.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.webjars</groupId>
-                        <artifactId>bootstrap</artifactId>
-                        <version>${org.webjars.bootstrap.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>replacer</artifactId>
-                <version>${maven-replacer-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>replace</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <basedir>${project.build.directory}/classes</basedir>
-                    <includes>
-                        <include>public/app/components/config/config_service.js</include>
-                    </includes>
-                    <replacements>
-                        <replacement>
-                            <token>%ENV%</token>
-                            <value>${env}</value>
-                        </replacement>
-                    </replacements>
+                    <tasks>
+                        <copy file="target/${build.finalName}.jar" tofile="${packaging.dir.win}/${build.finalName}.jar"></copy>
+                    </tasks>
                 </configuration>
             </plugin>
         </plugins>
