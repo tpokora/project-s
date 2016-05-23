@@ -1,15 +1,10 @@
 'use strict'
 
-App.factory('ArticleService', ['$http', '$q', 'ConfigService', function($http, $q, ConfigService) {
-
-    var baseUrl = '';
-    ConfigService.baseUrl().then(function(data) {
-        baseUrl = data;
-    });
+App.factory('ArticleService', ['$http', '$q', 'APIConfig', function($http, $q, APIConfig) {
 
     return {
         fetchAllArticles: function() {
-            return $http.get(baseUrl + '/rest/article/list')
+            return $http.get(APIConfig.API_END_POINT() + '/rest/article/list')
                 .then(function(response) {
                     return response.data.content.articles;
                 }, function(errResponse) {
@@ -19,7 +14,7 @@ App.factory('ArticleService', ['$http', '$q', 'ConfigService', function($http, $
         },
 
         fetchArticleById: function(id) {
-            return $http.get(baseUrl + '/rest/article/' + id)
+            return $http.get(APIConfig.API_END_POINT() + '/rest/article/' + id)
                 .then(function(response) {
                     return response.data.content.articles;
                 }, function(errResponse) {
@@ -29,7 +24,7 @@ App.factory('ArticleService', ['$http', '$q', 'ConfigService', function($http, $
         },
 
         createArticle: function(article) {
-            return $http.post(baseUrl + '/rest/article/new', article)
+            return $http.post(APIConfig.API_END_POINT() + '/rest/article/new', article)
                 .then(
                     function(response) {
                         return response.data;

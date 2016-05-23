@@ -345,8 +345,7 @@ module.exports = function (grunt) {
             'images/{,*/}*.{webp}',
             'styles/{,*/}*.*',
             'scripts/{,*/}*.js',
-            'properties/{,*/}*.json',
-            'server.js'
+            'properties/{,*/}*.json'
           ]
         }, {
           expand: true,
@@ -358,21 +357,6 @@ module.exports = function (grunt) {
           cwd: 'bower_components/bootstrap/dist',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
-        }, {
-          cwd: 'node_modules/express',
-          src: '**/*',
-          dest: 'dist/node_modules/express',
-          expand: true
-        }, {
-          cwd: 'node_modules/body-parser',
-          src: '**/*',
-          dest: 'dist/node_modules/body-parser',
-          expand: true
-        }, {
-          cwd: 'node_modules/morgan',
-          src: '**/*',
-          dest: 'dist/node_modules/morgan',
-          expand: true
         }]
       },
       styles: {

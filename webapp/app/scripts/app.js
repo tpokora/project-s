@@ -9,10 +9,27 @@ var App = angular.module('myApp', [
         };
     });
 
-App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
+App.provider('APIConfig', function() {
+
+    this._url = '';
+    this._port = '';
+
+    this.$get = function($http, $q) {
+      var that = this;
+      return {
+        API_END_POINT: function() {
+          return 'http://' + that._url + ':' + that._port;
+        }
+      }
+    };
+});
+
+App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigProvider', function($stateProvider, $urlRouterProvider, $httpProvider, APIConfigProvider) {
+
+    APIConfigProvider._url = 'localhost';
+    APIConfigProvider._port = '7080';
 
     $urlRouterProvider.otherwise('/home')
-
 
     $stateProvider
 

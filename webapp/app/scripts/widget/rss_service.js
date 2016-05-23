@@ -1,15 +1,10 @@
 'use strict'
 
-App.factory('RSSService', ['$http', '$q', 'ConfigService', function($http, $q, ConfigService) {
-
-    var baseUrl = '';
-    ConfigService.baseUrl().then(function(data) {
-        baseUrl = data;
-    });
+App.factory('RSSService', ['$http', '$q', 'APIConfig', function($http, $q, APIConfig) {
 
     return {
         fetchRSSSources: function() {
-            return $http.get(baseUrl + '/rest/widget/rss/list')
+            return $http.get(APIConfig.API_END_POINT() + '/rest/widget/rss/list')
                 .then(
                     function(response) {
                         return response.data.content.RSSSources;
@@ -20,7 +15,7 @@ App.factory('RSSService', ['$http', '$q', 'ConfigService', function($http, $q, C
                 )
         },
         fetchRSSBySource: function(source) {
-            return $http.get(baseUrl + '/rest/widget/rss/' + source)
+            return $http.get(APIConfig.API_END_POINT() + '/rest/widget/rss/' + source)
                 .then(
                     function(response) {
                         return response.data.content.RSS;
