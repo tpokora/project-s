@@ -23,6 +23,7 @@
         <maven.dependency.plugin.version>2.10</maven.dependency.plugin.version>
         <maven-replacer-plugin.version>1.5.2</maven-replacer-plugin.version>
         <maven-jar-plugin.version>3.0.0</maven-jar-plugin.version>
+        <maven-resources-plugin.version>2.3</maven-resources-plugin.version>
 
         <!-- Web resources -->
         <wro4j.maven.plugin.version>1.7.6</wro4j.maven.plugin.version>
@@ -126,6 +127,11 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
@@ -159,5 +165,14 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>webapp/dist</directory>
+                <targetPath>public</targetPath>
+            </resource>
+        </resources>
     </build>
 </project>

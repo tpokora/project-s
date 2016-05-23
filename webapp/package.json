@@ -2,7 +2,8 @@
   "name": "webapp",
   "version": "0.0.1",
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "grunt-string-replace": "^1.2.1"
   },
   "repository": {},
   "devDependencies": {

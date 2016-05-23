@@ -15,6 +15,8 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  require('grunt-string-replace');
+
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
@@ -329,6 +331,42 @@ module.exports = function (grunt) {
       }
     },
 
+    // String replace enviroment settings in app.js
+    'string-replace': {
+      dev: {
+        src: './dist/scripts/app*.js',
+        dest: './dist/scripts/',
+        options: {
+          replacements: [
+            {
+              pattern: '$ENV_URL$',
+              replacement: 'localhost'
+            },
+            {
+              pattern: '$ENV_PORT$',
+              replacement: '7080'
+            }
+          ]
+        }
+      },
+      prod: {
+        src: './dist/scripts/app*.js',
+        dest: './dist/scripts/',
+        options: {
+          replacements: [
+            {
+              pattern: '$ENV_URL$',
+              replacement: 'localhost'
+            },
+            {
+              pattern: '$ENV_PORT$',
+              replacement: '9080'
+            }
+          ]
+        }
+      }
+    },
+
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
@@ -413,6 +451,7 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-bower');
   grunt.loadNpmTasks('grunt-deploy');
+  grunt.loadNpmTasks('grunt-string-replace');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -443,6 +482,9 @@ module.exports = function (grunt) {
     //'karma'
   ]);
 
+  grunt.registerTask('api-dev', ['string-replace:dev']);
+  grunt.registerTask('api-prod', ['string-replace:prod']);
+
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
@@ -471,5 +513,5 @@ module.exports = function (grunt) {
     'test',
     'build',
     'copy:deploy'
-  ])
+  ]);
 };
