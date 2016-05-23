@@ -26,7 +26,7 @@ App.provider('APIConfig', function() {
 
 App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigProvider', function($stateProvider, $urlRouterProvider, $httpProvider, APIConfigProvider) {
 
-    APIConfigProvider._url = $ENV_URL$;
+    APIConfigProvider._url = '$ENV_URL$';
     APIConfigProvider._port = $ENV_PORT$;
 
     $urlRouterProvider.otherwise('/home')
