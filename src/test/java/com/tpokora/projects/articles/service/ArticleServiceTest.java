@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.rowset.serial.SerialBlob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,51 +24,28 @@ import java.util.List;
 public class ArticleServiceTest extends AbstractServiceTest {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
-    User user;
+    private Article testArticle;
+    private User articleUser;
 
     @Autowired
-    ArticleService articleService;
+    private ArticleService articleService;
 
     /**
      * Sets up user for testing
      */
     @Before
-    @Transactional
-    @Rollback(true)
     public void setup() {
-        user = new User();
-        user.setUsername("ArticleUser");
-        user.setPassword("test");
-        user.setEmail("articleuser@test.com");
+        articleUser = new User();
+        articleUser.setUsername("ArticleUser");
+        articleUser.setPassword("test");
+        articleUser.setEmail("articleuser@test.com");
 
-        userService.createOrUpdateUser(user);
-
-        user = userService.getUserByUsername(user.getUsername());
-    }
-
-    /**
-     * Test getting all articles
-     */
-    @Test
-    @Transactional
-    public void getAllArticles_success() {
-        List<Article> articles = articleService.getAllArticles();
-
-        Assert.assertEquals(false, articles.isEmpty());
-    }
-
-    /**
-     * Test getting article by id
-     */
-    @Test
-    @Transactional
-    public void getArticleById_Id_success() {
-        int id = 1022;
-        Article article = articleService.getArticleById(id);
-
-        Assert.assertEquals(true, article.getId() == id);
+        testArticle = new Article();
+        testArticle.setTitle("TestArticle");
+        testArticle.setContent("TestArticleContent");
+        testArticle.setCreateTime(new Date());
     }
 
     /**
@@ -75,12 +53,18 @@ public class ArticleServiceTest extends AbstractServiceTest {
      */
     @Test
     @Transactional
+    @Rollback(true)
     public void getArticlesByTitle_testArticle_success() {
-        String title = "testArticle";
-        List<Article> articles = articleService.getArticlesByTitle(title);
+        userService.createOrUpdateUser(articleUser);
+        articleUser.setId(userService.getUserByUsername(articleUser.getUsername()).getId());
+        testArticle.setUser(articleUser);
+
+        articleService.createOrUpdateArticle(testArticle);
+
+        List<Article> articles = articleService.getArticlesByTitle(testArticle.getTitle());
 
         articles.forEach(article -> {
-            Assert.assertEquals(true, article.getTitle().equals(title));
+            Assert.assertEquals(true, article.getTitle().equals(testArticle.getTitle()));
         });
     }
 
@@ -92,40 +76,39 @@ public class ArticleServiceTest extends AbstractServiceTest {
     @Transactional
     @Rollback(true)
     public void createOrUpdateArticle_newArticle_success() throws SQLException {
-        String title = "Test Article";
-        String updatedTitle = "Test Article - updated";
-        String content = "Article content for testing purposes";
-        Date date = new Date();
+        userService.createOrUpdateUser(articleUser);
+        articleUser.setId(userService.getUserByUsername(articleUser.getUsername()).getId());
+        testArticle.setUser(articleUser);
 
-        Article newArticle = new Article();
-        newArticle.setTitle(title);
-        newArticle.setContent(content);
-        newArticle.setCreateTime(date);
-        newArticle.setUser(user);
+        articleService.createOrUpdateArticle(testArticle);
 
-        Article addedArticle = articleService.createOrUpdateArticle(newArticle);
+        testArticle = articleService.getArticlesByTitle(testArticle.getTitle()).get(0);
+        Assert.assertEquals(testArticle.getTitle(), testArticle.getTitle());
 
-        Assert.assertEquals(title, addedArticle.getTitle());
+        testArticle.setTitle(testArticle.getTitle() + "Updated");
 
-        newArticle.setTitle(updatedTitle);
+        articleService.createOrUpdateArticle(testArticle);
 
-        Article updatedArticle = articleService.createOrUpdateArticle(newArticle);
-
-        Assert.assertEquals(updatedTitle, updatedArticle.getTitle());
+        Assert.assertEquals(testArticle.getTitle(), articleService.getArticlesByTitle(testArticle.getTitle()).get(0).getTitle());
     }
 
     /**
-     *  Test deleting user
+     *  Test deleting article
      */
     @Test
     @Transactional
     @Rollback(true)
     public void deleteArticleById_Id_success() {
-        int id = 1022;
-        Assert.assertNotNull(articleService.getArticleById(id));
+        userService.createOrUpdateUser(articleUser);
+        articleUser.setId(userService.getUserByUsername(articleUser.getUsername()).getId());
+        testArticle.setUser(articleUser);
 
-        articleService.deleteArticleById(id);
+        articleService.createOrUpdateArticle(testArticle);
 
-        Assert.assertNull(articleService.getArticleById(id));
+        testArticle = articleService.getArticlesByTitle(testArticle.getTitle()).get(0);
+
+        articleService.deleteArticleById(testArticle.getId());
+
+        Assert.assertNull(articleService.getArticleById(testArticle.getId()));
     }
 }

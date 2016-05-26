@@ -22,7 +22,6 @@ public class Article extends AbstractEntity implements Serializable {
     private String title;
 
     @Column(name = "CONTENT")
-    @Lob
     private String content;
 
     @Column(name = "CREATE_TIME")
@@ -31,7 +30,7 @@ public class Article extends AbstractEntity implements Serializable {
 
 
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     /**
      * @JsonManagedReference commented out due to error in handling reference when POSTed
      */
