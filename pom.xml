@@ -160,7 +160,7 @@
                 </executions>
                 <configuration>
                     <tasks>
-                        <copy file="target/${build.finalName}.jar" tofile="${packaging.dir.win}/${build.finalName}.jar"></copy>
+                        <copy file="target/${project.build.finalName}.jar" tofile="${packaging.dir.win}/${project.build.finalName}.jar"></copy>
                     </tasks>
                 </configuration>
             </plugin>

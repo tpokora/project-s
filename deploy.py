@@ -24,7 +24,7 @@ separator('Building WEBAPP package finished')
 separator('Building API package...')
 
 os.chdir('..')
-process = subprocess.call('mvn package', shell=True, stderr=subprocess.PIPE, env=env)
+process = subprocess.call('mvn clean package', shell=True, stderr=subprocess.PIPE, env=env)
 
 separator('Building API package finished')
 
