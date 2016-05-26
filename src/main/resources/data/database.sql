@@ -1,6 +1,10 @@
-CREATE DATABASE users_database;
+create database project_s_db;
 
-USE users_database;
+USE project_s_db;
+
+create user 'project-s-app'@'localhost' identified by 'password';
+
+grant select, insert, update, delete on project_s_db.* to 'project-s-app'@'localhost';
 
 CREATE TABLE USER (
   ID INT(11) NOT NULL AUTO_INCREMENT,
