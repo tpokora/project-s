@@ -122,6 +122,10 @@ article .article-content {
     font-size: 18px;
 }
 
+.article-pre {
+    white-space: pre-wrap;
+}
+
 /* RSS View */
 #rss-view {
     width: 280px;
