@@ -439,9 +439,8 @@ module.exports = function (grunt) {
     // Copy bower elements
     bower: {
       dev: {
-        dest: 'dist/lib',
-        js_dest: 'dist/lib/js',
-        css_dest: 'dist/lib/css',
+        dest: 'dist/bower_components',
+        js_dest: 'dist/bower_components',
         options: {
           expand: true
         }
