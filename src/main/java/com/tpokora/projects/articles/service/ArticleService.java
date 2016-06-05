@@ -1,6 +1,8 @@
 package com.tpokora.projects.articles.service;
 
 import com.tpokora.projects.articles.model.Article;
+import com.tpokora.projects.articles.model.ListArticle;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -9,6 +11,7 @@ import java.util.List;
  */
 public interface ArticleService {
     public List<Article> getAllArticles();
+    public List<ListArticle> getAllArticlesList();
     public Article getArticleById(Integer id);
     public List<Article> getArticlesByTitle(String title);
     public Article createOrUpdateArticle(Article article);

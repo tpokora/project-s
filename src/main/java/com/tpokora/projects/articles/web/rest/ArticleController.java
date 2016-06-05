@@ -38,17 +38,17 @@ public class ArticleController implements RESTControllerError {
     ArticleService articleService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, headers = "Accept=application/json")
-    public ResponseEntity<RESTResponseWrapper> getAllArticles() {
+    public ResponseEntity<RESTResponseWrapper> getAllArticlesList() {
         restResponse.clearResponse();
         logger.info("Getting all articles...");
 
-        if (articleService.getAllArticles() == null && articleService.getAllArticles().isEmpty()) {
+        if (articleService.getAllArticlesList() == null && articleService.getAllArticlesList().isEmpty()) {
             logger.info("NO ARTICLES FOUND");
             addErrorToRESTResponse(articleError, ErrorTypes.ARTICLE_NOT_EXISTS);
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
         }
 
-        restResponse.addContent(ARTICLE_RESPONSE_STRING, articleService.getAllArticles());
+        restResponse.addContent(ARTICLE_RESPONSE_STRING, articleService.getAllArticlesList());
 
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }

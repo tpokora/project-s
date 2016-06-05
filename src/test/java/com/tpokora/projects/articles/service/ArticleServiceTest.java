@@ -1,10 +1,11 @@
 package com.tpokora.projects.articles.service;
 
 import com.tpokora.projects.articles.model.Article;
+import com.tpokora.projects.articles.model.ListArticle;
 import com.tpokora.projects.common.service.AbstractServiceTest;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.service.UserService;
-import com.tpokora.projects.user.utils.UserTestUtils;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,9 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.rowset.serial.SerialBlob;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +22,8 @@ import java.util.List;
  * Created by pokor on 26.03.2016.
  */
 public class ArticleServiceTest extends AbstractServiceTest {
+
+    private static final Logger logger = Logger.getLogger(ArticleServiceTest.class);
 
     @Autowired
     private UserService userService;
@@ -46,6 +48,26 @@ public class ArticleServiceTest extends AbstractServiceTest {
         testArticle.setTitle("TestArticle");
         testArticle.setContent("TestArticleContent");
         testArticle.setCreateTime(new Date());
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void getArticleList_success() {
+        userService.createOrUpdateUser(articleUser);
+        articleUser.setId(userService.getUserByUsername(articleUser.getUsername()).getId());
+        testArticle.setUser(articleUser);
+
+        articleService.createOrUpdateArticle(testArticle);
+
+        List<ListArticle> articles = articleService.getAllArticlesList();
+
+        for (ListArticle article : articles) {
+            Assert.assertEquals("Article.ID not Integer", true, article.getId().getClass() == Integer.class);
+            Assert.assertEquals("Article.Title not String",true, article.getTitle().getClass() == String.class);
+            Assert.assertEquals("Article.createTime not Timestamp", true, article.getCreateTime().getClass() == Timestamp.class);
+            Assert.assertEquals("Article.User.ID not Integer", true, article.getUser().getId().getClass() == Integer.class);
+        }
     }
 
     /**

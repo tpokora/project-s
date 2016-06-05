@@ -42,11 +42,15 @@ public class ArticleControllerTest extends AbstractControllerTest{
 
     @Test
     public void getArticles_articlesExists() throws Exception {
-        when(articleService.getAllArticles()).thenReturn(ArticleTestUtils.generateArticles(3, 1));
+        when(articleService.getAllArticlesList()).thenReturn(ArticleTestUtils.generateArticlesList(3, 1));
         mockMvc.perform(MockMvcRequestBuilders.get("/rest/article/list"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.articles").isArray())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content.articles[0].title").isString());
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.articles[0].id").isNumber())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.articles[0].title").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.articles[0].createTime").isString())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.articles[0].content").doesNotExist())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.articles[0].user.id").isNumber());
     }
 }

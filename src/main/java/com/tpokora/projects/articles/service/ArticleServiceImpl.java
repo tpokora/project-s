@@ -1,7 +1,9 @@
 package com.tpokora.projects.articles.service;
 
 import com.tpokora.projects.articles.dao.ArticleRepository;
+import com.tpokora.projects.articles.dao.ListArticleRepository;
 import com.tpokora.projects.articles.model.Article;
+import com.tpokora.projects.articles.model.ListArticle;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +17,15 @@ import java.util.List;
 public class ArticleServiceImpl implements ArticleService {
 
     @Resource
-    ArticleRepository articleRepo;
+    private ArticleRepository articleRepo;
+
+    @Resource
+    private ListArticleRepository listArticleRepo;
+
+    @Override
+    public List<ListArticle> getAllArticlesList() {
+        return listArticleRepo.findAll();
+    }
 
     @Override
     public List<Article> getAllArticles() {

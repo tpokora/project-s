@@ -1,6 +1,7 @@
 package com.tpokora.projects.articles.utils;
 
 import com.tpokora.projects.articles.model.Article;
+import com.tpokora.projects.articles.model.ListArticle;
 import com.tpokora.projects.user.model.User;
 
 import java.util.ArrayList;
@@ -19,7 +20,20 @@ public class ArticleTestUtils {
                 user.setId(userId);
 
                 for (int i = 0; i < amount; i++) {
-                    add(new Article(i, "article" + i, "articleContent" + i, new Date(),user ));
+                    add(new Article(i, "article" + i, "articleContent" + i, new Date(), user));
+                }
+            }
+        };
+    }
+
+    public static List<ListArticle> generateArticlesList(int amount, Integer userId) {
+        return new ArrayList<ListArticle>() {
+            {
+                User user = new User();
+                user.setId(userId);
+
+                for (int i = 0; i < amount; i++) {
+                    add(new ListArticle(i, "article" + i, new Date(), user));
                 }
             }
         };
