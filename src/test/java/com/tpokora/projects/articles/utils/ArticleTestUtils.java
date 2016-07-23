@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ArticleTestUtils {
 
-    public static List<Article> generateArticles(int amount, Integer userId) {
+    public static List<Article> generateArticles(int amount, final Integer userId) {
         return new ArrayList<Article>() {
             {
                 User user = new User();
