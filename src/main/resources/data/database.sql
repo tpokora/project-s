@@ -1,12 +1,10 @@
 create database project_s_db;
 
-USE project_s_db;
-
 create user 'project-s-app'@'localhost' identified by 'password';
 
 grant select, insert, update, delete on project_s_db.* to 'project-s-app'@'localhost';
 
-CREATE TABLE USER (
+CREATE TABLE project_s_db.USER (
   ID INT(11) NOT NULL AUTO_INCREMENT,
   USERNAME VARCHAR(45) COLLATE utf8_polish_ci NOT NULL,
   PASSWORD VARCHAR(64) COLLATE utf8_polish_ci NOT NULL,
@@ -17,12 +15,12 @@ CREATE TABLE USER (
   UNIQUE KEY EMAIL_UNIQUE (EMAIL)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
-ALTER TABLE user AUTO_INCREMENT=1000;
+ALTER TABLE project_s_db.USER AUTO_INCREMENT=1000;
 
-INSERT INTO USER(USERNAME, PASSWORD, EMAIL, ROLE)
+INSERT INTO project_s_db.USER(USERNAME, PASSWORD, EMAIL, ROLE)
     VALUES ('admin', '$2a$10$RiDTA930W5o8lpeNbQc1/.1jDubtN7gLDmzUR4OrhMob8BDuW54J6', 'email@email.com', 'ROLE_ADMIN');
 
-CREATE TABLE ARTICLE (
+CREATE TABLE project_s_db.ARTICLE (
 	ID INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	TITLE VARCHAR(64) NOT NULL COLLATE utf8_polish_ci,
     CONTENT BLOB NOT NULL,
@@ -34,5 +32,5 @@ CREATE TABLE ARTICLE (
         ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
-ALTER TABLE ARTICLE AUTO_INCREMENT=1000;
+ALTER TABLE project_s_db.ARTICLE AUTO_INCREMENT=1000;
 
