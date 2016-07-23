@@ -46,7 +46,12 @@ public class RSSParserImpl implements RSSParser {
         ArrayList<String> sourcesNames = new ArrayList<>();
         Set<Object> keys = sources.keySet();
 
-        sourcesNames.addAll(keys.stream().map(Object::toString).collect(Collectors.toList()));
+//        sourcesNames.addAll(keys.stream().map(Object::toString).collect(Collectors.toList()));
+
+        Iterator iterator = keys.iterator();
+        while(iterator.hasNext()) {
+            sourcesNames.add((String) iterator.next());
+        }
 
         return sourcesNames;
     }
