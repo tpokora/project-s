@@ -27,14 +27,13 @@ public class TablesDetailsServiceImpl implements TablesDetailsService {
 
         Map<String, ClassMetadata> classMetaDataMap = sessionFactory.getAllClassMetadata();
 
-        classMetaDataMap.entrySet().forEach(entry -> {
-            ClassMetadata classMetadata = entry.getValue();
+        for (Map.Entry<String, ClassMetadata> metaDataMap : classMetaDataMap.entrySet()) {
+            ClassMetadata classMetadata = metaDataMap.getValue();
             AbstractEntityPersister abstractEntityPersister = (AbstractEntityPersister) classMetadata;
             TableDetails tableDetails = new TableDetails();
             tableDetails.setName(abstractEntityPersister.getTableName());
             tableDetails.setColumns(abstractEntityPersister.getPropertyNames(), abstractEntityPersister.getPropertyTypes());
-            tableDetailsList.add(tableDetails);
-        });
+        }
 
         return tableDetailsList;
     }
