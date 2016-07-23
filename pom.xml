@@ -36,7 +36,7 @@
 
         <!-- packaging directory -->
         <packaging.dir.linux></packaging.dir.linux>
-        <packaging.dir.win>C:/Deploy</packaging.dir.win>
+        <packaging.dir.win></packaging.dir.win>
     </properties>
 
     <parent>
@@ -160,7 +160,7 @@
                 </executions>
                 <configuration>
                     <tasks>
-                        <copy file="target/${project.build.finalName}.jar" tofile="${packaging.dir.win}/${project.build.finalName}.jar"></copy>
+                        <copy file="target/${project.build.finalName}.jar" tofile="${project.build.finalName}.jar"></copy>
                     </tasks>
                 </configuration>
             </plugin>
