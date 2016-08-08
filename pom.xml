@@ -39,6 +39,14 @@
         <packaging.dir.win></packaging.dir.win>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>projects.repo</id>
+            <name>Project-S Internal Repository</name>
+            <url>https://github.com/tpokora/project-s.git</url>
+        </repository>
+    </distributionManagement>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
