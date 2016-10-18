@@ -26,8 +26,8 @@ App.provider('APIConfig', function() {
 
 App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigProvider', function($stateProvider, $urlRouterProvider, $httpProvider, APIConfigProvider) {
 
-    APIConfigProvider._url = '$ENV_URL$';
-    APIConfigProvider._port = $ENV_PORT$;
+    APIConfigProvider._url = 'localhost';
+    APIConfigProvider._port = 7080;
 
     $urlRouterProvider.otherwise('/home')
 
@@ -38,7 +38,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             url: '/home',
             views: {
                 'main-view': {
-                    templateUrl: '../views/home.html',
+                    templateUrl: 'app/views/home.html',
                     controller: 'HomeController as homeCtrl'
                 }
             }
@@ -48,7 +48,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             url: '/login',
             views: {
                 'main-view': {
-                    templateUrl: '../views/login.html'
+                    templateUrl: 'app/views/login.html'
                 },
             }
         })
@@ -58,7 +58,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             url: '/user/list',
             views: {
                 'main-view': {
-                    templateUrl: '../views/users/users.html',
+                    templateUrl: 'app/views/users/users.html',
                     controller: 'UsersController as usersCtrl'
                 }
             }
@@ -68,7 +68,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             url: '/user/{id:int}',
             views: {
                 'main-view': {
-                    templateUrl: '../views/users/user.html',
+                    templateUrl: 'app/views/users/user.html',
                     controller: 'UsersController as usersCtrl'
                 }
             }
@@ -77,7 +77,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             url: '/user/new',
             views: {
                 'main-view': {
-                    templateUrl: '../views/users/user_new.html',
+                    templateUrl: 'app/views/users/user_new.html',
                     controller: 'UserNewController as userNewCtrl'
                 }
             }
@@ -87,7 +87,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             url: '/user/{id:int}/update',
             views: {
                 'main-view': {
-                    templateUrl: '../views/users/user_update.html',
+                    templateUrl: 'app/views/users/user_update.html',
                     controller: 'UserUpdateController as userUpdCtrl'
                 }
             }
@@ -96,7 +96,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             url: '/user/{id:int}/delete',
             views: {
                 'main-view': {
-                    templateUrl: '../views/users/user_delete.html',
+                    templateUrl: 'app/views/users/user_delete.html',
                     controller: 'UserDeleteController as userDltCtrl'
                 }
             }
@@ -108,7 +108,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             url: '/admin',
             views: {
                 'main-view': {
-                    templateUrl: '../views/admin/panel.html'
+                    templateUrl: 'app/views/admin/panel.html'
                 }
             }
 
@@ -117,7 +117,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             url: '/home',
             views: {
                 'admin-view': {
-                    templateUrl: '../views/admin/admin_home.html'
+                    templateUrl: 'app/views/admin/admin_home.html'
                 }
             }
         })
@@ -125,7 +125,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             url: '/users',
             views: {
                 'admin-view': {
-                    templateUrl: '../views/admin/admin_users.html',
+                    templateUrl: 'app/views/admin/admin_users.html',
                     controller: 'UsersController as usersCtrl'
                 }
             }
@@ -134,7 +134,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             url: '/user/{id:int}/update',
             views: {
                 'admin-view': {
-                    templateUrl: '../views/users/user_update.html',
+                    templateUrl: 'app/views/users/user_update.html',
                     controller: 'UserUpdateController as userUpdCtrl'
                 }
             }
@@ -143,7 +143,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             url: '/user/{id:int}/delete',
             views: {
                 'admin-view': {
-                    templateUrl: '../views/users/user_delete.html',
+                    templateUrl: 'app/views/users/user_delete.html',
                     controller: 'UserDeleteController as userDltCtrl'
                 }
             }
@@ -152,7 +152,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             url: '/database',
             views: {
                 'admin-view': {
-                    templateUrl: '../views/admin/admin_database.html',
+                    templateUrl: 'app/views/admin/admin_database.html',
                     controller: 'DatabaseController as databaseCtrl'
                 }
             }
@@ -163,7 +163,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             url: '/articles',
             views: {
                 'main-view' : {
-                    templateUrl: '../views/article/articles.html',
+                    templateUrl: 'app/views/article/articles.html',
                     controller: 'ArticleController as articleCtrl'
                 }
             }
@@ -174,7 +174,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             url: '/article/{id:int}',
             views: {
                 'main-view' : {
-                    templateUrl: '../views/article/article.html',
+                    templateUrl: 'app/views/article/article.html',
                     controller: 'ArticleController as articleCtrl'
                 }
             }
@@ -184,7 +184,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             url: '/article/new',
             views: {
                 'main-view' : {
-                        templateUrl: '../views/article/article_new.html',
+                        templateUrl: 'app/views/article/article_new.html',
                         controller: 'ArticleController as articleCtrl'
                 }
             }
