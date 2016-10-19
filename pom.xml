@@ -27,7 +27,7 @@
 
         <!-- Web resources -->
         <wro4j.maven.plugin.version>1.7.6</wro4j.maven.plugin.version>
-        <org.webjars.angularjs.version>1.5.0</org.webjars.angularjs.version>
+        <org.webjars.angularjs.version>1.5.5</org.webjars.angularjs.version>
         <org.webjars.angular-ui-router.version>0.2.17</org.webjars.angular-ui-router.version>
         <org.webjars.underscorejs.version>1.8.3</org.webjars.underscorejs.version>
         <org.webjars.restangular.version>1.5.1</org.webjars.restangular.version>
@@ -163,6 +163,80 @@
                         <copy file="target/${project.build.finalName}.jar" tofile="${packaging.dir.win}/${project.build.finalName}.jar"></copy>
                     </tasks>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/wro</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/wro</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>ro.isdc.wro4j</groupId>
+                <artifactId>wro4j-maven-plugin</artifactId>
+                <version>${wro4j.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
+                    <cssDestinationFolder>${project.build.directory}/classes/public/resources/css</cssDestinationFolder>
+                    <jsDestinationFolder>${project.build.directory}/classes/public/resources/js</jsDestinationFolder>
+                    <wroFile>${project.build.directory}/wro/wro.xml</wroFile>
+                    <extraConfigFile>${basedir}/src/main/wro/wro.properties</extraConfigFile>
+                    <contextFolder>${basedir}/src/main/wro</contextFolder>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.webjars</groupId>
+                        <artifactId>jquery</artifactId>
+                        <version>${org.webjars.jquery.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.webjars</groupId>
+                        <artifactId>angularjs</artifactId>
+                        <version>${org.webjars.angularjs.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.webjars</groupId>
+                        <artifactId>restangular</artifactId>
+                        <version>${org.webjars.restangular.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.webjars</groupId>
+                        <artifactId>underscorejs</artifactId>
+                        <version>${org.webjars.underscorejs.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.webjars</groupId>
+                        <artifactId>angular-ui-router</artifactId>
+                        <version>${org.webjars.angular-ui-router.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.webjars</groupId>
+                        <artifactId>bootstrap</artifactId>
+                        <version>${org.webjars.bootstrap.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
         <resources>
