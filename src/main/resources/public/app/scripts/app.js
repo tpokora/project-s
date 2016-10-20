@@ -83,6 +83,15 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             }
 
         })
+        .state('user_reset_password', {
+            url: '/user/reset',
+            views: {
+                'main-view': {
+                    templateUrl: 'app/views/users/user_reset_password.html',
+                    controller: 'UserResetController as userResetCtrl'
+                }
+            }
+        })
         .state('user_update', {
             url: '/user/{id:int}/update',
             views: {

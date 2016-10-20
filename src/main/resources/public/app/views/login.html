@@ -11,7 +11,10 @@
                 <input type="password" id="password" name="password" ng-model="credentials.password" placeholder="password"/>
     </div>
             <button type="submit">Login</button>
-            <p class="message">Not registered? <a ui-sref="user_new">Create an account</a></p>
+            <p class="message">
+                <div class="line">Not registered? <a ui-sref="user_new">Create an account</a></div>
+                <div class="line">Forgot password? <a ui-sref="user_reset_password">Reset password</a></div>
+            </p>
 </form>
     </div>
 </div>
