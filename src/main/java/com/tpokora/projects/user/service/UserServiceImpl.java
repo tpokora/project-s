@@ -55,6 +55,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public User getUserByEmail(String email) {
+        try {
+            User user = userRepo.findByEmail(email);
+        } catch (IndexOutOfBoundsException e) {
+            return new NullUser();
+        } catch(UnexpectedRollbackException e) {
+            return new NullUser();
+        }
+
+        return userRepo.findByEmail(email);
+    }
+
+    @Override
     @Transactional
     public User createOrUpdateUser(User user) {
         User userToSave = user;
