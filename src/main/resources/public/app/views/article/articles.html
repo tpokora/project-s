@@ -1,18 +1,35 @@
-<div id="articles-list" class="center-block">
+<div class="articles-list" class="center-block">
     <div>
         <a ui-sref="article_new" ng-show="authenticated">New Article</a>
     </div>
     <header>List of articles:</header>
-    <div ng-repeat="article in articles | orderBy: createTime: true">
-        <div class="article-list-element">
-            <div class="title">
-                <a ui-sref="article({ id:article.id })">{{ article.title }}</a></div>
-        <div>
-                <span class="">Author: {{ article.user.username }}</span>
-            </div>
-            <div>
-                <span class="date">Created:</span> {{ article.createTime }}
-            </div>
-        </div>
-    </div>
+
+    <table class="table table-border table-striped">
+        <thead class="thead-inverse">
+            <tr>
+                <td colspan="3">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                <input type="text" class="form-control" placeholder="Search article by Title, Author or Create Time" ng-model="searchArticle" />
+                            </div>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            <tr class="table-header">
+                <td>Title</td>
+                <td>Author</td>
+                <td>Create Time</td>
+            </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="article in articles | orderBy: createTime: true | filter:searchArticle">
+            <td><a ui-sref="article({ id:article.id })">{{ article.title }}</a></td>
+            <td><span>{{ article.user.username }}</span></td>
+            <td><span>{{ article.createTime }}</span></td>
+        </tr>
+        </tbody>
+    </table>
 </div>

@@ -11,6 +11,12 @@ body {
     border-bottom: 1px solid #B1A9A9;
 }
 
+/* Tables */
+.table-header {
+    font-weight: bold;
+    font-size: 16px;
+}
+
 .clear-style {
     padding: 0;
     margin: 0;
@@ -84,27 +90,13 @@ body {
 }
 
 /* Users list */
-#users-list header {
+.users-list header {
    margin: 20px 0px 30px 0px;
    font-size: 34px;
    font-weight: bold;
 }
 
 /* Articles list */
-#articles-list header{
-   margin: 20px 0px 30px 0px;
-   font-size: 34px;
-   font-weight: bold;
-}
-
-.article-list-element {
-    padding: 10px;
-    border-bottom: 1px solid #B1A9A9;
-}
-
-.article-list-element .title {
-    font-size: 24px;
-}
 
 .date {
     font-weight: bold;
