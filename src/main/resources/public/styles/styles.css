@@ -11,6 +11,11 @@ body {
     border-bottom: 1px solid #B1A9A9;
 }
 
+/* Commons */
+.error {
+    color: #c30f0f;
+}
+
 /* Tables */
 .table-header {
     font-weight: bold;
@@ -23,7 +28,7 @@ body {
 }
 
 /* Form */
-    .login-page {
+.login-page {
     width: 360px;
     padding: 8% 0 0;
     margin: auto;
