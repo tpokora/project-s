@@ -100,6 +100,8 @@ public class AppConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedOrigins("http://" + env.getProperty("server.address") + ":" + env.getProperty("frontend.port"));
+                // opening DEV application to request different then front end application - must be reconfigured in production system
+                registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST", "PUT", "DELETE");
             }
         };
     }
