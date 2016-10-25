@@ -53,6 +53,8 @@ App.controller('AuthController', function($rootScope, $scope, $http, $location, 
         $http.post('logout', {}).finally(function() {
             $rootScope.authenticated = false;
             $location.path('/');
+        }).error(function(data) {
+            $rootScope.authenticated = false;
         });
     };
 });

@@ -33,14 +33,34 @@ App.controller('UserUpdateController', ['$scope', '$location', '$stateParams', '
     self.fetchUserById(params.id);
     self.setBackUrl();
 
+    function checkUpdatePasswords(firstPassword, secondPassword) {
+        if (firstPassword == secondPassword) {
+            return true;
+        } else {
+            return false;
+        };
+    };
+
     $scope.updateUser = function() {
         self.userToUpdate = $scope.user;
-        UserService.updateUser(params.id, self.userToUpdate)
-            .then(
-                function() {
-                    $location.path(backUrl);
-                }
-            );
+        if ($scope.newPassword != '') {
+            if ($scope.newPassword.length > 2) {
+                if (checkUpdatePasswords($scope.newPassword, $scope.newPasswordRepeat)) {
+                    self.userToUpdate.password = $scope.newPassword;
+                    $scope.updateError = '';
+                    UserService.updateUser(params.id, self.userToUpdate)
+                        .then(
+                            function() {
+                                $location.path(backUrl);
+                            }
+                         );
+                    } else {
+                        $scope.updateError = 'Password are not identical!';
+                    }
+            } else {
+                $scope.updateError = 'New password to short! (min. 3 char)';
+            }
+        }
     };
 
     $scope.back = function() {
