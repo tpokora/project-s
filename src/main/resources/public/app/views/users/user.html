@@ -23,29 +23,6 @@
         </tbody>
     </table>
 
-    <table class="table table-hover">
-        <thead>
-            <tr class="table-header">
-                <td colspan="">
-                    Change Password
-                </td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <form role="form">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="error">{{ updateError }}</div>
-                                <input type="text" class="form-control" placeholder="Password" ng-model="newPassword"/>
-                                <input type="text" class="form-control" placeholder="Repeat Password" ng-model="newPasswordRepeat"/>
-                                <input type="submit" ng-click="updateUser()" value="UPDATE" />
-                            </div>
-                        </div>
-                    </form>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div ui-view="user-change-password-view">
+    </div>
 </div>

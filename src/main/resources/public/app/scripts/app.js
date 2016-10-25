@@ -70,6 +70,10 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
                 'main-view': {
                     templateUrl: 'app/views/users/user.html',
                     controller: 'UsersController as usersCtrl'
+                },
+                'user-change-password-view@user': {
+                    templateUrl: 'app/views/users/user_change_password.html',
+                    controller: 'UserUpdateController as userUpdateCtrl'
                 }
             }
         })
