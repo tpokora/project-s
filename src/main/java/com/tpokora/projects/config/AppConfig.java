@@ -6,9 +6,7 @@ import com.tpokora.projects.articles.service.ArticleService;
 import com.tpokora.projects.articles.service.ArticleServiceImpl;
 import com.tpokora.projects.articles.web.rest.ArticleError;
 import com.tpokora.projects.common.errors.AbstractError;
-import com.tpokora.projects.user.service.CustomUserDetailsService;
-import com.tpokora.projects.user.service.UserService;
-import com.tpokora.projects.user.service.UserServiceImpl;
+import com.tpokora.projects.user.service.*;
 import com.tpokora.projects.user.web.rest.UserError;
 import com.tpokora.projects.widget.rss.RSSError;
 import com.tpokora.projects.widget.rss.RSSParser;
@@ -62,6 +60,11 @@ public class AppConfig {
     @Bean(name = "userService")
     public UserService getUserService() {
         return new UserServiceImpl();
+    }
+
+    @Bean(name = "userResetPasswordService")
+    public UserResetPasswordService getUserResetPasswordService() {
+        return new UserResetPasswordServiceImpl();
     }
 
     @Bean(name = "userDetailsService")

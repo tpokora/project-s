@@ -3,6 +3,7 @@ package com.tpokora.projects.common.service;
 import com.tpokora.projects.config.AppTestConfig;
 import com.tpokora.projects.config.DatabaseTestConfiguration;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
