@@ -42,4 +42,9 @@ public class UserResetPasswordServiceImpl implements UserResetPasswordService {
         userResetPasswordRepo.saveAndFlush(userResetPasswordtoSave);
         return userResetPasswordRepo.findBySessionId(userResetPasswordtoSave.getSessionId());
     }
+
+    @Override
+    public void removeUserResetPasswordBySessionID(String sessionID) {
+        userResetPasswordRepo.delete(userResetPasswordRepo.findBySessionId(sessionID));
+    }
 }

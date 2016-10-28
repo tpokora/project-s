@@ -8,4 +8,5 @@ import com.tpokora.projects.user.model.UserResetPassword;
 public interface UserResetPasswordService {
     public UserResetPassword findBySessionId(String sessionID);
     public UserResetPassword createOrUpdateUserResetPassword(UserResetPassword userResetPassword);
+    public void removeUserResetPasswordBySessionID(String sessionID);
 }
