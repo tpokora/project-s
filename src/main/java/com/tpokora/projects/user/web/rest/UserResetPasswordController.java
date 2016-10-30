@@ -1,5 +1,7 @@
 package com.tpokora.projects.user.web.rest;
 
+import com.tpokora.projects.common.errors.AbstractError;
+import com.tpokora.projects.common.errors.ErrorTypes;
 import com.tpokora.projects.common.web.RESTResponseWrapper;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.model.UserResetPassword;
@@ -33,22 +35,33 @@ public class UserResetPasswordController {
     @Autowired
     private UserSetPasswordService userSetPasswordService;
 
+    @Autowired
+    private AbstractError userError;
+
     @RequestMapping(value = "/user/reset/{sessionID}", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<RESTResponseWrapper> resetUserPassword(@PathVariable("sessionID") String sessionID) {
         restResponse.clearResponse();
 
         if (userResetPasswordService.findBySessionId(sessionID) == null) {
             logger.error("Session with sessionID: " + sessionID + " not found");
-            // add error
+            addUserErrorToResponse(ErrorTypes.USER_RESET_PASSWORD_SESSIONID_NOT_FOUND);
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
         }
 
         UserResetPassword userResetPassword = userResetPasswordService.findBySessionId(sessionID);
+
+        if  (userService.getUserById(userResetPassword.getUser().getId()) == null) {
+            addUserErrorToResponse(ErrorTypes.USER_NOT_EXISTS);
+            return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
+        }
+
         User user = userService.getUserById(userResetPassword.getUser().getId());
-
-        user.setPassword(userResetPassword.getTempPassword());
-        userSetPasswordService.updateUserPassword(user);
-
+        restResponse.addContent("user", user);
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
+    }
+
+    private void addUserErrorToResponse(ErrorTypes error) {
+        userError.setError(error);
+        restResponse.addError(userError);
     }
 }

@@ -28,9 +28,8 @@ public class UserResetPassword extends AbstractEntity {
 //    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
     private Date createTime;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "userResetPassword")
-    @PrimaryKeyJoinColumn
     private User user;
 
     public UserResetPassword() {}

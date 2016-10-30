@@ -34,13 +34,10 @@ public class UserResetPasswordServiceImpl implements UserResetPasswordService {
 
     @Override
     public UserResetPassword createOrUpdateUserResetPassword(UserResetPassword userResetPassword) {
-        UserResetPassword userResetPasswordtoSave = userResetPassword;
-        if (userResetPassword.getId() != null) {
-            userResetPasswordtoSave = userResetPasswordRepo.findBySessionId(userResetPassword.getSessionId());
-        }
+        UserResetPassword userResetPasswordToSave = userResetPassword;
 
-        userResetPasswordRepo.saveAndFlush(userResetPasswordtoSave);
-        return userResetPasswordRepo.findBySessionId(userResetPasswordtoSave.getSessionId());
+        userResetPasswordRepo.saveAndFlush(userResetPasswordToSave);
+        return userResetPasswordRepo.findBySessionId(userResetPasswordToSave.getSessionId());
     }
 
     @Override

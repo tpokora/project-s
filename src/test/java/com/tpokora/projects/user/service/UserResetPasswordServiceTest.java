@@ -54,7 +54,8 @@ public class UserResetPasswordServiceTest extends AbstractServiceTest {
     @Transactional
     @Rollback(true)
     public void getUserResetPassword_userResetPasswordExists() {
-        userService.createOrUpdateUser(user);
+        user = userService.createOrUpdateUser(user);
+        userResetPassword.setUser(user);
         userResetPasswordService.createOrUpdateUserResetPassword(userResetPassword);
 
         Assert.assertEquals(SESSIONID, userResetPasswordService.findBySessionId(SESSIONID).getSessionId());
@@ -63,7 +64,7 @@ public class UserResetPasswordServiceTest extends AbstractServiceTest {
     @Test
     @Transactional
     @Rollback(true)
-    public void removeUserResetPasswordremoveBySessionID_userResetPasswordNotExists() {
+    public void removeUserResetPasswordRemoveBySessionID_userResetPasswordNotExists() {
         userService.createOrUpdateUser(user);
         userResetPasswordService.createOrUpdateUserResetPassword(userResetPassword);
 

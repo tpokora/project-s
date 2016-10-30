@@ -32,8 +32,7 @@ public class User extends AbstractEntity {
     @JsonBackReference
     private List<Article> articles;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserResetPassword userResetPassword;
 
     public User() {
