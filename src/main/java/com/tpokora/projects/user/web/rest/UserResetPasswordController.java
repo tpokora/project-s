@@ -1,8 +1,11 @@
 package com.tpokora.projects.user.web.rest;
 
 import com.tpokora.projects.common.web.RESTResponseWrapper;
+import com.tpokora.projects.user.model.User;
+import com.tpokora.projects.user.model.UserResetPassword;
 import com.tpokora.projects.user.service.UserResetPasswordService;
 import com.tpokora.projects.user.service.UserService;
+import com.tpokora.projects.user.service.UserSetPasswordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,9 @@ public class UserResetPasswordController {
     @Autowired
     private UserResetPasswordService userResetPasswordService;
 
+    @Autowired
+    private UserSetPasswordService userSetPasswordService;
+
     @RequestMapping(value = "/user/reset/{sessionID}", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<RESTResponseWrapper> resetUserPassword(@PathVariable("sessionID") String sessionID) {
         restResponse.clearResponse();
@@ -36,6 +42,12 @@ public class UserResetPasswordController {
             // add error
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
         }
+
+        UserResetPassword userResetPassword = userResetPasswordService.findBySessionId(sessionID);
+        User user = userService.getUserById(userResetPassword.getUser().getId());
+
+        user.setPassword(userResetPassword.getTempPassword());
+        userSetPasswordService.updateUserPassword(user);
 
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }

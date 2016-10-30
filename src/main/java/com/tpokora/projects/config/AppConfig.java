@@ -67,6 +67,11 @@ public class AppConfig {
         return new UserResetPasswordServiceImpl();
     }
 
+    @Bean(name = "userSetPasswordService")
+    public UserSetPasswordService getUserSetPasswordService() {
+        return new UserSetPasswordServiceImpl();
+    }
+
     @Bean(name = "userDetailsService")
     public UserDetailsService getUserDetailsService() {
         return new CustomUserDetailsService();

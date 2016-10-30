@@ -32,6 +32,10 @@ public class User extends AbstractEntity {
     @JsonBackReference
     private List<Article> articles;
 
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private UserResetPassword userResetPassword;
+
     public User() {
         super();
     }

@@ -29,7 +29,8 @@ public class UserResetPassword extends AbstractEntity {
     private Date createTime;
 
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "userResetPassword")
+    @PrimaryKeyJoinColumn
     private User user;
 
     public UserResetPassword() {}
