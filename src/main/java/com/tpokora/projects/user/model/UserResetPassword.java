@@ -1,7 +1,9 @@
 package com.tpokora.projects.user.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tpokora.projects.common.model.AbstractEntity;
+import com.tpokora.projects.common.utils.SessionIdentifierGenerator;
 import com.tpokora.projects.user.model.nullobjects.NullUser;
 import com.tpokora.projects.user.model.nullobjects.NullUserResetPassword;
 
@@ -19,20 +21,30 @@ public class UserResetPassword extends AbstractEntity {
     private String sessionId;
 
     @Column(name = "TEMP_PASSWORD")
+    @JsonIgnore
     private String tempPassword;
 
     @Column(name = "OLD_PASSWORD")
+    @JsonIgnore
     private String oldPassword;
 
     @Column(name = "CREATE_TIME")
 //    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
     private Date createTime;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     private User user;
 
-    public UserResetPassword() {}
+    public UserResetPassword() {
+        super();
+    }
+
+    public UserResetPassword(User user) {
+        this.sessionId = SessionIdentifierGenerator.generateSessionID();
+        this.createTime = new Date();
+        this.user = user;
+    }
 
     public UserResetPassword(String sessionId, String tempPassword, String oldPassword, Date createTime) {
         this.sessionId = sessionId;

@@ -53,14 +53,14 @@ public class UserControllerTest extends AbstractControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/rest/user/list"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(
-                        MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON)
+                        MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8)
                 )
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.users").isArray());
     }
 
     // TODO: Fix user not exists test
-    @Ignore
     @Test
+    @Ignore
     public void getAllUsers_usersNotExists() throws Exception {
         when(userService.getAllUsers()).thenReturn(UserTestUtils.generateUsers(0));
         mockMvc.perform(MockMvcRequestBuilders.get("/rest/user/list"))
@@ -76,7 +76,7 @@ public class UserControllerTest extends AbstractControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/rest/user/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(
-                        MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON)
+                        MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8)
                 )
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].username").value("user1"))
@@ -90,20 +90,20 @@ public class UserControllerTest extends AbstractControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/rest/user/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(
-                        MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON)
+                        MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8)
                 )
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.users[0].username").value("user1"));
     }
 
 
     // TODO: fix test to get 404 and error in response
-    @Ignore
     @Test
+    @Ignore
     public void getUserById_2_userNotExists() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/rest/user/2"))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(
-                        MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON)
+                        MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8)
                 )
                 .andExpect(MockMvcResultMatchers.jsonPath("$.errors").isArray());
     }
@@ -113,7 +113,7 @@ public class UserControllerTest extends AbstractControllerTest {
     public void createNewUser_success() throws Exception {
         User newUser = UserTestUtils.generateUsers(1).get(0);
         mockMvc.perform(MockMvcRequestBuilders.post("/rest/user/new")
-            .contentType(MediaType.APPLICATION_JSON)
+            .contentType(MediaType.APPLICATION_JSON_UTF8)
             .content(TestUtils.convertObjectToJsonBytes(newUser)))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.users").exists())
@@ -136,7 +136,7 @@ public class UserControllerTest extends AbstractControllerTest {
         userToUpdate.setEmail("UPDATED_EMAIL");
         userToUpdate.setRole("UPDATED_ROLE");
         mockMvc.perform(MockMvcRequestBuilders.put("/rest/user/1/update")
-                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(TestUtils.convertObjectToJsonBytes(userToUpdate)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.users").exists())

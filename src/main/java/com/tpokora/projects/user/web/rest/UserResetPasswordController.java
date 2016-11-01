@@ -2,13 +2,16 @@ package com.tpokora.projects.user.web.rest;
 
 import com.tpokora.projects.common.errors.AbstractError;
 import com.tpokora.projects.common.errors.ErrorTypes;
+import com.tpokora.projects.common.utils.SecurityUtilities;
+import com.tpokora.projects.common.utils.SessionIdentifierGenerator;
 import com.tpokora.projects.common.web.RESTResponseWrapper;
 import com.tpokora.projects.user.model.User;
+import com.tpokora.projects.user.model.UserPassword;
 import com.tpokora.projects.user.model.UserResetPassword;
 import com.tpokora.projects.user.model.nullobjects.NullUser;
 import com.tpokora.projects.user.service.UserResetPasswordService;
 import com.tpokora.projects.user.service.UserService;
-import com.tpokora.projects.user.service.UserSetPasswordService;
+import com.tpokora.projects.user.service.UserPasswordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 /**
  * Created by pokor on 29.10.2016.
@@ -36,10 +41,30 @@ public class UserResetPasswordController {
     private UserResetPasswordService userResetPasswordService;
 
     @Autowired
-    private UserSetPasswordService userSetPasswordService;
+    private UserPasswordService userPasswordService;
 
     @Autowired
     private AbstractError userError;
+
+    @RequestMapping(value = "/user/reset/new", method = RequestMethod.POST, headers = "Accept=application/json")
+    public ResponseEntity<RESTResponseWrapper> generateSessionID(@RequestBody User user) {
+
+        if (userService.getUserById(user.getId()) == null ) {
+            addUserErrorToResponse(ErrorTypes.USER_NOT_EXISTS);
+            return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
+        }
+
+        String sessionID = SessionIdentifierGenerator.generateSessionID();
+        String tempPassword = SecurityUtilities.randomString(SecurityUtilities.CHARSET_AZ_09, SecurityUtilities.PASSWORD_LENGTH);
+        String hashedTempPassword = SecurityUtilities.hashingPassword(tempPassword);
+        String oldPassword = userPasswordService.getUserById(user.getId()).getPassword();
+
+        UserResetPassword userResetPassword = new UserResetPassword(sessionID, hashedTempPassword, oldPassword, new Date(), user);
+        
+        userResetPasswordService.createOrUpdateUserResetPassword(userResetPassword);
+        restResponse.addContent("userResetSession", userResetPassword);
+        return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/user/reset/{sessionID}", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<RESTResponseWrapper> findUserBySessionId(@PathVariable("sessionID") String sessionID) {

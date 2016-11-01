@@ -1,6 +1,6 @@
 package com.tpokora.projects.user.service;
 
-import com.tpokora.projects.common.utils.SecurityUtilites;
+import com.tpokora.projects.common.utils.SecurityUtilities;
 import com.tpokora.projects.user.dao.UserRepository;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.model.nullobjects.NullUser;
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
             userToSave.setEmail(user.getEmail());
         }
 
-        userToSave.setPassword(SecurityUtilites.hashingPassword(userToSave.getPassword()));
+        userToSave.setPassword(SecurityUtilities.hashingPassword(userToSave.getPassword()));
         userRepo.saveAndFlush(userToSave);
         return userRepo.findByUsername(userToSave.getUsername());
     }

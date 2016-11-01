@@ -8,6 +8,7 @@ import com.tpokora.projects.user.model.UserResetPassword;
 import com.tpokora.projects.user.service.UserResetPasswordService;
 import com.tpokora.projects.user.service.UserService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -62,7 +63,7 @@ public class UserResetPasswordControllerTest extends AbstractControllerTest {
         when(userResetPasswordService.findBySessionId(WRONG_SESSION_ID)).thenReturn(userResetPassword);
         mockMvc.perform(MockMvcRequestBuilders.get("/rest/user/reset/" + WRONG_SESSION_ID))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.user").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.user.id").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.user.username").exists())
@@ -101,6 +102,23 @@ public class UserResetPasswordControllerTest extends AbstractControllerTest {
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.content.user.username").value(userToUpdate.getUsername()))
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.content.user.email").exists())
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.content.user.role").exists());
+    }
+
+    // TODO: finish test
+    @Ignore
+    @Test
+    @Rollback(true)
+    public void generateNewSessionIDForUser_success() throws Exception {
+        User user = new User(1, "test", "test", "test", "ROLE_USER");
+        UserResetPassword newUserResetPassword = new UserResetPassword(user);
+        when(userResetPasswordService.createOrUpdateUserResetPassword(newUserResetPassword)).thenReturn(newUserResetPassword);
+        mockMvc.perform(MockMvcRequestBuilders.post("/rest/user/reset/new")
+            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .content(TestUtils.convertObjectToJsonBytes(user)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content.userResetSession").exists());
+
     }
 }
 
