@@ -8,6 +8,7 @@ import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by pokor on 27.10.2016.
@@ -17,6 +18,11 @@ public class UserResetPasswordServiceImpl implements UserResetPasswordService {
 
     @Resource
     private UserResetPasswordRepository userResetPasswordRepo;
+
+    @Override
+    public List<UserResetPassword> getAllUserResetPasswordSessions() {
+        return userResetPasswordRepo.findAll();
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -42,6 +48,6 @@ public class UserResetPasswordServiceImpl implements UserResetPasswordService {
 
     @Override
     public void removeUserResetPasswordBySessionID(String sessionID) {
-        userResetPasswordRepo.delete(userResetPasswordRepo.findBySessionId(sessionID));
+        userResetPasswordRepo.delete(userResetPasswordRepo.findBySessionId(sessionID).getId());
     }
 }

@@ -60,7 +60,7 @@ public class UserResetPasswordController {
         String oldPassword = userPasswordService.getUserById(user.getId()).getPassword();
 
         UserResetPassword userResetPassword = new UserResetPassword(sessionID, hashedTempPassword, oldPassword, new Date(), user);
-        
+
         userResetPasswordService.createOrUpdateUserResetPassword(userResetPassword);
         restResponse.addContent("userResetSession", userResetPassword);
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
