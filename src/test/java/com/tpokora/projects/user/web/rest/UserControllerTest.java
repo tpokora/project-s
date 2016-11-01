@@ -16,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -108,6 +109,7 @@ public class UserControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    @Rollback(true)
     public void createNewUser_success() throws Exception {
         User newUser = UserTestUtils.generateUsers(1).get(0);
         mockMvc.perform(MockMvcRequestBuilders.post("/rest/user/new")
@@ -124,6 +126,7 @@ public class UserControllerTest extends AbstractControllerTest {
     // TODO: Error in test No value at JSON path "$.content.users[0].username", exception: Property ['id'] not found in path $['content']['users'][0]
     @Ignore
     @Test
+    @Rollback(true)
     public void updateUser_success() throws Exception {
         User userToUpdate = UserTestUtils.generateUsers(1).get(0);
         when(userService.createOrUpdateUser(userToUpdate)).thenReturn(userToUpdate);
@@ -145,6 +148,7 @@ public class UserControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    @Rollback(true)
     public void removeUser_success() throws Exception {
         mockMvc.perform((MockMvcRequestBuilders.delete("/rest/user/1/delete")))
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
@@ -158,6 +162,7 @@ public class UserControllerTest extends AbstractControllerTest {
      */
     @Ignore
     @Test
+    @Rollback(true)
     public void getUserById_1_userWithArticle() throws Exception {
         User user = UserTestUtils.generateUsers(1).get(0);
         user.setArticles((List<Article>) ArticleTestUtils.generateArticles(1, user.getId()));

@@ -1,7 +1,5 @@
 package com.tpokora.projects.scheulder;
 
-import com.tpokora.projects.common.utils.SessionIdentifierGenerator;
-import org.apache.catalina.SessionIdGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -20,7 +18,7 @@ public class UserPasswordResetScheduler {
 
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("HH:mm:ss");
 
-    private static final int USER_PASSWORD_RESET_SCHEDULER = 5000;
+    private static final int USER_PASSWORD_RESET_SCHEDULER = 3600000;
 
     /**
      * Scheduler checks time of reset password creation and removes session after time
