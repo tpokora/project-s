@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * Created by pokor on 01.11.2016.
  */
 @Entity
-@Table(name = "USER")
+@Table(name = "USERS")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class UserPassword extends AbstractEntity {
 

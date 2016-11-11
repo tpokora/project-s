@@ -1,11 +1,8 @@
 package com.tpokora.projects.user.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tpokora.projects.common.model.AbstractEntity;
 import com.tpokora.projects.common.utils.SessionIdentifierGenerator;
-import com.tpokora.projects.user.model.nullobjects.NullUser;
-import com.tpokora.projects.user.model.nullobjects.NullUserResetPassword;
 
 import javax.persistence.*;
 import java.util.Date;
