@@ -18,7 +18,11 @@ App.provider('APIConfig', function() {
       var that = this;
       return {
         API_END_POINT: function() {
-          return 'http://' + that._url + ':' + that._port;
+          var output = that._url;
+          if (that._port != '') {
+            output += ':' + that._port;
+          }
+          return output;
         }
       }
     };
@@ -26,8 +30,8 @@ App.provider('APIConfig', function() {
 
 App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigProvider', function($stateProvider, $urlRouterProvider, $httpProvider, APIConfigProvider) {
 
-    APIConfigProvider._url = 'localhost';
-    APIConfigProvider._port = 7080;
+    APIConfigProvider._url = 'https://project-s-app.herokuapp.com';
+    APIConfigProvider._port = '';
 
     $urlRouterProvider.otherwise('/home')
 
