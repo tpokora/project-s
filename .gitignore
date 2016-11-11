@@ -21,7 +21,7 @@ buildSrc/build
 /spring-*/build
 /src/asciidoc/build
 target/
-/src/main/resources/properties/loc.properties
+*loc.properties
 
 # Eclipse artifacts, including WTP generated manifests
 .classpath
