@@ -3,13 +3,17 @@
 <head>
     <link rel="stylesheet" href="styles/bootstrap.min.css" text="text/css">
     <script src="resources/js/angular.js"></script>
+    <script src="app/scripts/env.js"></script>
     <script src="app/scripts/app.js"></script>
     <script src="app/scripts/home/home_service.js"></script>
     <script src="app/scripts/user/user_service.js"></script>
     <script src="app/scripts/auth/auth_controller.js"></script>
     <script src="app/scripts/admin/admin_database_service.js"></script>
     <script src="app/scripts/article/article_service.js"></script>
-    <script src="app/scripts/widget/rss_service.js"></script>
+
+    <!-- RSS Widget Disabled -->
+    <!--<script src="app/scripts/widget/rss_service.js"></script>-->
+    <!-- ------------------- -->
 
     <link rel="stylesheet" href="styles/styles.css" text="text/css">
     <meta http-equiv="Content-Type" content="charset=UTF-8">
@@ -52,12 +56,18 @@
                     <li ng-show="!authenticated"><a ui-sref="user_new">Sign in</a></li>
                     <li ng-show="authenticated"><a href="" ng-click="logout()">Logout</a></li>
                     <li ng-show="authenticated"><a ui-sref="users">Users</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">RSS<span class="caret"></span></a>
-                        <div class="dropdown-menu" ng-include="'views/widget/rss.html'">
-                        </div>
-                    </li>
+
+                    <!-- RSS Widget Disabled -->
+                    <!-- ------------------- -->
+
+                    <!--<li class="dropdown">-->
+                        <!--<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"-->
+                           <!--aria-expanded="false">RSS<span class="caret"></span></a>-->
+                        <!--<div class="dropdown-menu" ng-include="'views/widget/rss.html'">-->
+                        <!--</div>-->
+                    <!--</li>-->
+
+                    <!-- ------------------- -->
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -88,6 +98,9 @@
     <script src="app/scripts/user/user_new_controller.js"></script>
     <script src="app/scripts/user/user_update_controller.js"></script>
     <script src="app/scripts/article/article_controller.js"></script>
-    <script src="app/scripts/widget/widget_controller.js"></script>
+
+    <!-- RSS Widget Disabled -->
+    <!--<script src="app/scripts/widget/widget_controller.js"></script>-->
+    <!-- ------------------- -->
 </body>
 </html>

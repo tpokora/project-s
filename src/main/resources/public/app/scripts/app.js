@@ -1,5 +1,12 @@
 'use strict'
 
+var env = {};
+
+// Import variables if present (from env.js)
+if(window){
+  Object.assign(env, window.__env);
+}
+
 var App = angular.module('myApp', [
     'ui.router'
      ])
@@ -7,7 +14,17 @@ var App = angular.module('myApp', [
         return {
             template: 'Spring Template Application'
         };
-    });
+    })
+    // Load environments to angular
+    .constant('__env', __env);
+
+function logEnvironment($log, __env){
+    $log.debug('Environment variables:');
+    $log.debug(__env)
+}
+
+logEnvironment.$inject = ['$log', '__env'];
+App.run(logEnvironment);
 
 App.provider('APIConfig', function() {
 
@@ -30,8 +47,8 @@ App.provider('APIConfig', function() {
 
 App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigProvider', function($stateProvider, $urlRouterProvider, $httpProvider, APIConfigProvider) {
 
-    APIConfigProvider._url = 'https://project-s-app.herokuapp.com';
-    APIConfigProvider._port = '';
+    APIConfigProvider._url = __env.apiUrl;
+    APIConfigProvider._port = __env.apiPort;
 
     $urlRouterProvider.otherwise('/home')
 
