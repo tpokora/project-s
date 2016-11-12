@@ -6,8 +6,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.tpokora.projects.common.model.AbstractEntity;
 import com.tpokora.projects.user.model.User;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -21,6 +23,9 @@ public class Article extends AbstractEntity implements Serializable {
     @Column(name = "TITLE")
     private String title;
 
+    @Lob
+    @Size(min = 0, max = 9000)
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "CONTENT")
     private String content;
 
