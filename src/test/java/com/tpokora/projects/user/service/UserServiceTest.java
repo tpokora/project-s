@@ -2,11 +2,14 @@ package com.tpokora.projects.user.service;
 
 import com.tpokora.projects.common.service.AbstractServiceTest;
 import com.tpokora.projects.user.model.User;
+import com.tpokora.projects.user.utils.UserTestUtils;
 import org.apache.log4j.Logger;
 import org.junit.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 
 /**
  * Created by pokor on 26.03.2016.
@@ -33,9 +36,11 @@ public class UserServiceTest extends AbstractServiceTest {
      */
     @Test
     @Transactional
+    @Rollback(true)
     public void getAllUsers_usersExists() {
-        java.util.List<User> userList = userService.getAllUsers();
-        Assert.assertEquals(false, userList.isEmpty());
+        User user = userService.createOrUpdateUser(testUser);
+        ArrayList<User> userArrayList = (ArrayList<User>) userService.getAllUsers();
+        Assert.assertEquals(false, userArrayList.isEmpty());
     }
 
     @Test

@@ -1,10 +1,10 @@
 package com.tpokora.projects.user.service;
 
 import com.tpokora.projects.common.service.AbstractServiceTest;
+import com.tpokora.projects.common.utils.SecurityUtilities;
 import com.tpokora.projects.common.utils.SessionIdentifierGenerator;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.model.UserResetPassword;
-import com.tpokora.projects.user.model.nullobjects.NullUserResetPassword;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class UserResetPasswordServiceTest extends AbstractServiceTest {
     private UserResetPassword userResetPassword;
 
     private static final String SESSIONID = SessionIdentifierGenerator.generateSessionID();
-    private static final String TEMPPASSWORD = SessionIdentifierGenerator.generateSessionID();
+    private static final String TEMPPASSWORD = SecurityUtilities.hashingPassword(SecurityUtilities.randomString(SecurityUtilities.CHARSET_AZ_09, SecurityUtilities.PASSWORD_LENGTH));
     private static final String OLDPASSWORD = SessionIdentifierGenerator.generateSessionID();
 
     @Before

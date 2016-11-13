@@ -26,4 +26,10 @@ public class UserPasswordServiceImpl implements UserPasswordService {
 
         return userPasswordRepo.findOne(id);
     }
+
+    @Override
+    public UserPassword updateUserPassword(UserPassword newUserPassword) {
+        userPasswordRepo.saveAndFlush(newUserPassword);
+        return userPasswordRepo.findOne(newUserPassword.getId());
+    }
 }

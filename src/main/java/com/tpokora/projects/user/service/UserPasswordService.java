@@ -8,4 +8,5 @@ import com.tpokora.projects.user.model.UserPassword;
  */
 public interface UserPasswordService {
     public UserPassword getUserById(int id);
+    public UserPassword updateUserPassword(UserPassword newUserPassword);
 }
