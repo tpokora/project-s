@@ -95,9 +95,8 @@ public class UserResetPasswordController {
     }
 
     @RequestMapping(value = "/user/reset/{sessionID}/changePassword", method = RequestMethod.PUT, headers = "Accept=application/json")
-    public ResponseEntity<RESTResponseWrapper> changeUserPassword(@PathVariable(value = "sessionID") String sessionID, @RequestBody User user) {
+    public ResponseEntity<RESTResponseWrapper> changeUserPassword(@PathVariable(value = "sessionID") String sessionID) {
         restResponse.clearResponse();
-        logger.info("User: " + user.getUsername());
         UserResetPassword userResetPassword = userResetPasswordService.findBySessionId(sessionID);
         if (userResetPassword == null) {
             logger.error("Session with sessionID: " + sessionID + " not found");
@@ -105,14 +104,22 @@ public class UserResetPasswordController {
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
         }
 
-        if (user != null && userService.getUserById(userResetPassword.getUser().getId()) instanceof NullUser) {
+        if (userService.getUserById(userResetPassword.getUser().getId()) instanceof NullUser) {
             addUserErrorToResponse(ErrorTypes.USER_NOT_EXISTS);
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
         }
 
-        User updatedUser = userService.createOrUpdateUser(user);
-        restResponse.addContent("user", updatedUser);
+        User userToUpdate = userService.getUserById(userResetPassword.getUser().getId());
+        changeUserPasswordToTemp(userToUpdate, userResetPassword.getTempPassword());
+        User updatedUser = userService.getUserById(userToUpdate.getId());
+        restResponse.addContent("user", userToUpdate);
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
+    }
+
+    private void changeUserPasswordToTemp(User user, String tempPassword) {
+        UserPassword oldPassword = userPasswordService.getUserById(user.getId());
+        UserPassword newPassword = new UserPassword(user.getId(), tempPassword);
+        userPasswordService.updateUserPassword(newPassword);
     }
 
     private void addUserErrorToResponse(ErrorTypes error) {

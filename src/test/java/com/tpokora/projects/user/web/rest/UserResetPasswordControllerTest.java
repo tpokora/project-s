@@ -110,7 +110,7 @@ public class UserResetPasswordControllerTest extends AbstractControllerTest {
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.content.user.email").exists())
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.content.user.role").exists());
     }
-    
+
     @Test
     @Rollback(true)
     public void generateNewSessionIDForUser_success() throws Exception {
