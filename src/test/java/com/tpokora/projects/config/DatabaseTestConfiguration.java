@@ -7,6 +7,6 @@ import org.springframework.context.annotation.PropertySource;
  * Created by pokor on 26.05.2016.
  */
 @Configuration
-@PropertySource("classpath:properties/dev.properties")
+@PropertySource("classpath:properties/loc.properties")
 public class DatabaseTestConfiguration extends DatabaseConfiguration {
 }

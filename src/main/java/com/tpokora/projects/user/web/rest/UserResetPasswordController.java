@@ -46,6 +46,11 @@ public class UserResetPasswordController {
     @Autowired
     private AbstractError userError;
 
+    /**
+     * Creates new session with new and old hashed password in DB
+     * @param user
+     * @return returns sessionID of password reset
+     */
     @RequestMapping(value = "/user/reset/new", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<RESTResponseWrapper> generateSessionID(@RequestBody User user) {
 
@@ -92,7 +97,6 @@ public class UserResetPasswordController {
     @RequestMapping(value = "/user/reset/{sessionID}/changePassword", method = RequestMethod.PUT, headers = "Accept=application/json")
     public ResponseEntity<RESTResponseWrapper> changeUserPassword(@PathVariable(value = "sessionID") String sessionID, @RequestBody User user) {
         restResponse.clearResponse();
-        logger.info("TEST: " + sessionID);
         logger.info("User: " + user.getUsername());
         UserResetPassword userResetPassword = userResetPasswordService.findBySessionId(sessionID);
         if (userResetPassword == null) {

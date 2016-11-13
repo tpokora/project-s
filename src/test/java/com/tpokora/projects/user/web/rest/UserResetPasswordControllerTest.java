@@ -1,12 +1,16 @@
 package com.tpokora.projects.user.web.rest;
 
 import com.tpokora.projects.common.errors.AbstractError;
+import com.tpokora.projects.common.utils.SecurityUtilities;
 import com.tpokora.projects.common.utils.TestUtils;
 import com.tpokora.projects.common.web.rest.AbstractControllerTest;
 import com.tpokora.projects.user.model.User;
+import com.tpokora.projects.user.model.UserPassword;
 import com.tpokora.projects.user.model.UserResetPassword;
+import com.tpokora.projects.user.service.UserPasswordService;
 import com.tpokora.projects.user.service.UserResetPasswordService;
 import com.tpokora.projects.user.service.UserService;
+import com.tpokora.projects.user.utils.UserTestUtils;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -44,6 +48,9 @@ public class UserResetPasswordControllerTest extends AbstractControllerTest {
 
     @Mock
     private UserResetPasswordService userResetPasswordService;
+
+    @Mock
+    private UserPasswordService userPasswordService;
 
     @InjectMocks
     private UserResetPasswordController userResetPasswordController;
@@ -103,14 +110,17 @@ public class UserResetPasswordControllerTest extends AbstractControllerTest {
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.content.user.email").exists())
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.content.user.role").exists());
     }
-
-    // TODO: finish test
-    @Ignore
+    
     @Test
     @Rollback(true)
     public void generateNewSessionIDForUser_success() throws Exception {
-        User user = new User(1, "test", "test", "test", "ROLE_USER");
+        User user = UserTestUtils.generateUsers(1).get(0);
+        when(userService.getUserById(user.getId())).thenReturn(user);
+        UserPassword userPassword = new UserPassword(SecurityUtilities.hashingPassword(user.getPassword()));
+        when(userPasswordService.getUserById(user.getId())).thenReturn(userPassword);
         UserResetPassword newUserResetPassword = new UserResetPassword(user);
+        newUserResetPassword.setOldPassword(SecurityUtilities.hashingPassword(user.getPassword()));
+        newUserResetPassword.setTempPassword(SecurityUtilities.hashingPassword(user.getPassword()));
         when(userResetPasswordService.createOrUpdateUserResetPassword(newUserResetPassword)).thenReturn(newUserResetPassword);
         mockMvc.perform(MockMvcRequestBuilders.post("/rest/user/reset/new")
             .contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -118,7 +128,6 @@ public class UserResetPasswordControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.userResetSession").exists());
-
     }
 }
 
