@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Tomek on 2016-01-10.
  */
 @Entity
-@Table(name = "USER")
+@Table(name = "USERS")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User extends AbstractEntity {
 
@@ -31,6 +31,9 @@ public class User extends AbstractEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Article> articles;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private UserResetPassword userResetPassword;
 
     public User() {
         super();

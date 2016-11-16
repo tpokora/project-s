@@ -6,9 +6,7 @@ import com.tpokora.projects.articles.service.ArticleService;
 import com.tpokora.projects.articles.service.ArticleServiceImpl;
 import com.tpokora.projects.articles.web.rest.ArticleError;
 import com.tpokora.projects.common.errors.AbstractError;
-import com.tpokora.projects.user.service.CustomUserDetailsService;
-import com.tpokora.projects.user.service.UserService;
-import com.tpokora.projects.user.service.UserServiceImpl;
+import com.tpokora.projects.user.service.*;
 import com.tpokora.projects.user.web.rest.UserError;
 import com.tpokora.projects.widget.rss.RSSError;
 import com.tpokora.projects.widget.rss.RSSParser;
@@ -18,7 +16,6 @@ import com.tpokora.projects.widget.service.RSSService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -64,6 +61,16 @@ public class AppConfig {
         return new UserServiceImpl();
     }
 
+    @Bean(name = "userResetPasswordService")
+    public UserResetPasswordService getUserResetPasswordService() {
+        return new UserResetPasswordServiceImpl();
+    }
+
+    @Bean(name = "userPasswordService")
+    public UserPasswordService getUserPasswordService() {
+        return new UserPasswordServiceImpl();
+    }
+
     @Bean(name = "userDetailsService")
     public UserDetailsService getUserDetailsService() {
         return new CustomUserDetailsService();
@@ -100,6 +107,8 @@ public class AppConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedOrigins("http://" + env.getProperty("server.address") + ":" + env.getProperty("frontend.port"));
+                // opening DEV application to request different then front end application - must be reconfigured in production system
+                registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST", "PUT", "DELETE");
             }
         };
     }

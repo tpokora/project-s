@@ -26,6 +26,10 @@ public class UserError extends AbstractError {
                 this.text = "user.exists";
                 this.code = 422;
                 break;
+            case USER_RESET_PASSWORD_SESSIONID_NOT_FOUND:
+                this.text = "user.reset.password.sessionid.not.exists";
+                this.code = 404;
+                break;
             default:
                 this.code = 404;
                 break;

@@ -1,9 +1,7 @@
 package com.tpokora.projects.common.model;
 
+import javax.persistence.*;
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 
 /**
  * Created by pokor on 11.02.2016.
@@ -12,7 +10,7 @@ import javax.persistence.MappedSuperclass;
 public abstract class AbstractEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Integer id;
 

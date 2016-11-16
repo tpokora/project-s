@@ -1,0 +1,41 @@
+<div>
+    <h1>Admin - Users management</h1>
+
+    <hr/>
+
+    <table class="table center">
+        <thead>
+            <tr>
+                <td colspan="5">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                <input type="text" class="form-control" placeholder="Search user" ng-model="searchUser"/>
+                            </div>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            <tr class="table-header">
+                <td>ID</td>
+                <td>USERNAME</td>
+                <td>EMAIL</td>
+                <td>ROLE</td>
+                <td>ACTION</td>
+            </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users | filter:searchUser">
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+                <a ui-sref="admin.user_update({ id:user.id })">Update</a>
+                <a ui-sref="admin.user_delete({ id:user.id })">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

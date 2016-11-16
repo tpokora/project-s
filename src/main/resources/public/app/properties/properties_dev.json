@@ -1,0 +1,8 @@
+{
+  "Server" : {
+    "port" : 7080
+  },
+  "API" : {
+    "url" : "https://project-s-app.herokuapp.com/"
+  }
+}

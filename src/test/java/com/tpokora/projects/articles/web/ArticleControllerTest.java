@@ -45,7 +45,7 @@ public class ArticleControllerTest extends AbstractControllerTest{
         when(articleService.getAllArticles()).thenReturn(ArticleTestUtils.generateArticles(3, 1));
         mockMvc.perform(MockMvcRequestBuilders.get("/rest/article/list"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.articles").isArray())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.articles[0].title").isString());
     }

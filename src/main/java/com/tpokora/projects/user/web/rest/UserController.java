@@ -83,6 +83,20 @@ public class UserController {
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/email/{email:.+}", method = RequestMethod.GET, headers = "Accept=application/json")
+    public ResponseEntity<RESTResponseWrapper> getUserByEmail(@PathVariable("email") String email) {
+        restResponse.clearResponse();
+        logger.info("Looking for user with email: " + email + " ...");
+        if (userService.getUserByEmail(email) instanceof NullUser) {
+            logger.error("No USERS with email: " + email + " returned to: " + this.getClass().getSimpleName());
+            addUserErrorToResponse(ErrorTypes.USER_NOT_EXISTS);
+            return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.NOT_FOUND);
+        }
+
+        restResponse.addContent(USER_RESPONSE_STRING, userToArray(userService.getUserByEmail(email)));
+        return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/new", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<RESTResponseWrapper> createNewUser(@RequestBody User user, UriComponentsBuilder ucb) throws Exception {
         restResponse.clearResponse();

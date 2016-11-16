@@ -1,9 +1,0 @@
-{
-  "Server" : {
-    "port" : 7000
-  },
-  "API" : {
-    "url" : "http://localhost",
-    "port" : 7080
-  }
-}

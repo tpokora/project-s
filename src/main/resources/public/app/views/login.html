@@ -1,0 +1,20 @@
+<div class="alert alert-danger" ng-show="error">
+    There was a problem logging in. Please try again.
+</div>
+<div class="login-page">
+    <div class="form">
+        <form class="register-form" role="form" ng-submit="login()">
+    <div>
+                <input type="text" id="username" name="username" ng-model="credentials.username" placeholder="username"/>
+    </div>
+    <div>
+                <input type="password" id="password" name="password" ng-model="credentials.password" placeholder="password"/>
+    </div>
+            <button type="submit">Login</button>
+            <p class="message">
+                <div class="line">Not registered? <a ui-sref="user_new">Create an account</a></div>
+                <div class="line">Forgot password? <a ui-sref="user_reset_password">Reset password</a></div>
+            </p>
+</form>
+    </div>
+</div>

@@ -43,7 +43,7 @@ public class DatabaseControllerTest extends AbstractControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/rest/admin/database/table/list"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.tables").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.tables").isArray());
@@ -55,7 +55,7 @@ public class DatabaseControllerTest extends AbstractControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/rest/admin/database/table/list"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.tables").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.tables").isArray())

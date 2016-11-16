@@ -63,9 +63,9 @@ public class ArticleServiceTest extends AbstractServiceTest {
 
         List<Article> articles = articleService.getArticlesByTitle(testArticle.getTitle());
 
-        articles.forEach(article -> {
+        for (Article article : articles) {
             Assert.assertEquals(true, article.getTitle().equals(testArticle.getTitle()));
-        });
+        }
     }
 
     /**
