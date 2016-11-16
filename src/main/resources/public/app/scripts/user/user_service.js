@@ -43,6 +43,19 @@ App.factory('UserService', ['$http', '$q', 'APIConfig', function($http, $q, APIC
                         )
                 },
 
+        fetchUserByEmail: function(email) {
+            return $http.get(APIConfig.API_END_POINT() + '/rest/user/email?value=' + email)
+                .then(
+                    function(response) {
+                        return response.data.content.users[0];
+                    },
+                    function(errResponse) {
+                        console.error('Error while fetching User');
+                        return $q.reject(errResponse);
+                    }
+                )
+        },
+
         createUser: function(user) {
             return $http.post(APIConfig.API_END_POINT() + '/rest/user/new', user)
                 .then(
