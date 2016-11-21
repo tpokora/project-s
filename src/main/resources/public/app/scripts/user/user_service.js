@@ -92,6 +92,19 @@ App.factory('UserService', ['$http', '$q', 'APIConfig', function($http, $q, APIC
                         return $q.reject(errResponse);
                     }
                 )
+        },
+
+        resetUserPasswordSession: function(user) {
+            return $http.post(APIConfig.API_END_POINT() + '/rest/user/reset/new', user)
+                .then(
+                    function(response) {
+                        return response.data.content.user;
+                    },
+                    function(errResponse) {
+                        console.error('Error while creating user new reset password session');
+                        return $q.reject(errResponse);
+                    }
+                )
         }
     }
 }]);

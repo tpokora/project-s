@@ -36,7 +36,7 @@ App.controller('UserNewController', ['$scope', '$location', 'UserService', funct
     };
 
     $scope.back = function() {
-        $location.path('/user/list');
+        $location.path('/home');
     };
 
 }]);
