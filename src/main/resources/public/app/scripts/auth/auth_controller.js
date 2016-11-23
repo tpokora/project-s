@@ -50,11 +50,15 @@ App.controller('AuthController', function($rootScope, $scope, $http, $location, 
     };
 
     $scope.logout = function() {
-        $http.post('logout', {}).finally(function() {
+        $http.post('logout', {})
+        .error(function(data) {
             $rootScope.authenticated = false;
+        }).finally(function() {
+        $rootScope.authenticated = false;
             $location.path('/');
-        }).error(function(data) {
-            $rootScope.authenticated = false;
+            console.log('Logout successful');
+        }).catch(function(e) {
+            console.error('Unknown error during logout');
         });
     };
 });

@@ -83,9 +83,10 @@ public class UserController {
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/email/{email:.+}", method = RequestMethod.GET, headers = "Accept=application/json")
-    public ResponseEntity<RESTResponseWrapper> getUserByEmail(@PathVariable("email") String email) {
+    @RequestMapping(value = "/email", method = RequestMethod.GET, headers = "Accept=application/json")
+    public ResponseEntity<RESTResponseWrapper> getUserByEmail(@RequestParam String value) {
         restResponse.clearResponse();
+        String email = value;
         logger.info("Looking for user with email: " + email + " ...");
         if (userService.getUserByEmail(email) instanceof NullUser) {
             logger.error("No USERS with email: " + email + " returned to: " + this.getClass().getSimpleName());

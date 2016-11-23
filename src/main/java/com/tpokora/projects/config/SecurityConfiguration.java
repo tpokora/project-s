@@ -20,9 +20,6 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 import javax.sql.DataSource;
 
-/**
- * Created by pokor on 28.02.2016.
- */
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 @PropertySource("classpath:properties/app.properties")
@@ -51,16 +48,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                /**
-                 * TODO: Create functionality to generate urls from properties files
-                 */
-                .antMatchers("/index.html", "/views/home.html", "/views/login.html", "/views/users/user_new.html", "/views/article/**", "/views/widget/**").permitAll()
-                .antMatchers("/views/admin/**").hasRole("ADMIN")
-                .antMatchers("/views/users/**", "/views/article/article_new.html").hasAnyRole("ADMIN, USER")
-                .and().formLogin().loginPage("/views/login.html")
+                .antMatchers("/index.html", "/app/views/home.html", "/app/views/login.html", "/app/views/users/user_new.html", "/app/views/article/**", "/app/views/widget/**").permitAll()
+                .antMatchers("/app/views/admin/**").hasRole("ADMIN")
+                .antMatchers("/app/views/users/**", "/app/views/article/article_new.html").hasAnyRole("ADMIN, USER")
+                // TODO: Access Denied Page does not work
+                .and().formLogin().loginPage("/app/views/login.html")
                 .usernameParameter("username").passwordParameter("password")
                 .and().logout().logoutSuccessUrl("/")
-                .and().exceptionHandling().accessDeniedPage("/?error");
+                .and().exceptionHandling().accessDeniedPage("/app/views/login.html?error");
 
         if (env.getProperty("status").equals("dev")) {
             http.csrf().disable();
@@ -78,8 +73,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
-        return encoder;
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
