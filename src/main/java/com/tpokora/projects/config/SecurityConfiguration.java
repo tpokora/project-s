@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-@PropertySource("classpath:properties/app.properties")
+@PropertySource("classpath:properties/${env:dev}.properties")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
