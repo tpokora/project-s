@@ -1,0 +1,28 @@
+<div class="center-block">
+    <table class="table table-hover">
+        <thead>
+        <th class="text-center">Profile</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td>ID</td>
+            <td>{{ loggedUser.id }}</td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>{{ loggedUser.username }}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{ loggedUser.email }}</td>
+        </tr>
+        <tr>
+            <td>Role</td>
+            <td>{{ loggedUser.role }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div ui-view="user-change-password-view">
+    </div>
+</div>

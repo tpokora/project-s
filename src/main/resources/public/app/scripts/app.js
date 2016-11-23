@@ -85,16 +85,27 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             }
 
         })
+
+        .state('profile', {
+            url: '/profile',
+            views: {
+                'main-view': {
+                    templateUrl: 'app/views/users/profile.html',
+                    controller: 'UsersController as usersCtrl'
+                },
+                'user-change-password-view@profile': {
+                    templateUrl: 'app/views/users/user_change_password.html',
+                    controller: 'UserUpdateController as userUpdateCtrl'
+                }
+            }
+        })
+
         .state('user', {
             url: '/user/{id:int}',
             views: {
                 'main-view': {
                     templateUrl: 'app/views/users/user.html',
                     controller: 'UsersController as usersCtrl'
-                },
-                'user-change-password-view@user': {
-                    templateUrl: 'app/views/users/user_change_password.html',
-                    controller: 'UserUpdateController as userUpdateCtrl'
                 }
             }
         })
