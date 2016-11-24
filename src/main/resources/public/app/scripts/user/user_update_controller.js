@@ -37,7 +37,9 @@ App.controller('UserUpdateController', function($rootScope, $scope, $location, $
 
     if ($location.path().indexOf('profile') > -1) {
         backUrl = '/profile';
-        fetchUserById($rootScope.loggedUser.id);
+        if ($rootScope.loggedUser.id != null) {
+            $scope.user = $rootScope.loggedUser;
+        }
     } else {
         fetchUserById(params.id);
     }
