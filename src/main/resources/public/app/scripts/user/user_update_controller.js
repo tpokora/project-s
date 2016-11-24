@@ -53,7 +53,7 @@ App.controller('UserUpdateController', function($rootScope, $scope, $location, $
                 if (checkUpdatePasswords($scope.newPassword, $scope.newPasswordRepeat)) {
                     self.userToUpdate.password = $scope.newPassword;
                     $scope.updateError = '';
-                    UserService.updateUser(params.id, self.userToUpdate)
+                    UserService.updateUser($scope.user.id, self.userToUpdate)
                         .then(
                             function() {
                                 $location.path(backUrl);
