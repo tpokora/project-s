@@ -12,7 +12,7 @@ App.controller('UserUpdateController', function($rootScope, $scope, $location, $
 
     var backUrl = '/users';
 
-    self.fetchUserById = function(id) {
+    function fetchUserById(id) {
         UserService.fetchUserById(id)
             .then(
                 function(data) {
@@ -23,20 +23,24 @@ App.controller('UserUpdateController', function($rootScope, $scope, $location, $
             );
     };
 
+    self.setResponseMsg = function() {
+        $scope.responseMsg = '';
+    }
+
     self.setBackUrl = function() {
         if ($location.path().indexOf('admin') > -1) {
             backUrl = '/admin/users';
         }
     }
 
-    if ($location.path().indexOf('profile') > -1) {
-        self.fetchUserById($rootScope.loggedUser.id);
-    } else {
-        self.fetchUserById(params.id);
-    }
-
-
     self.setBackUrl();
+
+    if ($location.path().indexOf('profile') > -1) {
+        backUrl = '/profile';
+        fetchUserById($rootScope.loggedUser.id);
+    } else {
+        fetchUserById(params.id);
+    }
 
     function checkUpdatePasswords(firstPassword, secondPassword) {
         if (firstPassword == secondPassword) {
@@ -56,6 +60,8 @@ App.controller('UserUpdateController', function($rootScope, $scope, $location, $
                     UserService.updateUser($scope.user.id, self.userToUpdate)
                         .then(
                             function() {
+                                console.log('Password changed!');
+                                $scope.responseMsg = 'Password changed!';
                                 $location.path(backUrl);
                             }
                          );
