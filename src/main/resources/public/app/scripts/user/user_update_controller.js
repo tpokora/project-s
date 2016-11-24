@@ -56,7 +56,6 @@ App.controller('UserUpdateController', function($rootScope, $scope, $location, $
             if ($scope.newPassword.length > 2) {
                 if (checkUpdatePasswords($scope.newPassword, $scope.newPasswordRepeat)) {
                     self.userToUpdate.password = $scope.newPassword;
-                    $scope.updateError = '';
                     UserService.updateUser($scope.user.id, self.userToUpdate)
                         .then(
                             function() {
@@ -66,10 +65,10 @@ App.controller('UserUpdateController', function($rootScope, $scope, $location, $
                             }
                          );
                     } else {
-                        $scope.updateError = 'Password are not identical!';
+                        $scope.responseMsg = 'Password are not identical!';
                     }
             } else {
-                $scope.updateError = 'New password to short! (min. 3 char)';
+                $scope.responseMsg = 'New password to short! (min. 3 char)';
             }
         }
     };
