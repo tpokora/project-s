@@ -1,6 +1,6 @@
 'use strict'
 
-App.controller('UserUpdateController', ['$scope', '$location', '$stateParams', 'UserService', function($scope, $location, $stateParams, UserService) {
+App.controller('UserUpdateController', function($rootScope, $scope, $location, $stateParams, UserService) {
     var self = this;
     var params = $stateParams;
     self.userToUpdate = {
@@ -29,8 +29,13 @@ App.controller('UserUpdateController', ['$scope', '$location', '$stateParams', '
         }
     }
 
+    if ($location.path().indexOf('profile') > -1) {
+        self.fetchUserById($rootScope.loggedUser.id);
+    } else {
+        self.fetchUserById(params.id);
+    }
 
-    self.fetchUserById(params.id);
+
     self.setBackUrl();
 
     function checkUpdatePasswords(firstPassword, secondPassword) {
@@ -66,4 +71,4 @@ App.controller('UserUpdateController', ['$scope', '$location', '$stateParams', '
     $scope.back = function() {
         $location.path(backUrl);
     };
-}]);
+});
