@@ -31,7 +31,7 @@ public class HomeController {
     private class HomeElement {
         private String title;
         private String header;
-        private String content;
+        private Object content;
 
         public HomeElement() {
             this.title = env.getProperty("home.page.title");
@@ -46,11 +46,11 @@ public class HomeController {
             return header;
         }
 
-        public String getContent() {
+        public Object getContent() {
             return content;
         }
 
-        public void setContent(String content) {
+        public void setContent(Object content) {
             this.content = content;
         }
     }
@@ -64,7 +64,7 @@ public class HomeController {
             return new ResponseEntity<HomeElement>(HttpStatus.NO_CONTENT);
         }
 
-        homeElement.setContent(newestArticle.getContent());
+        homeElement.setContent(newestArticle);
 
         return new ResponseEntity<HomeElement>(homeElement, HttpStatus.OK);
     }
