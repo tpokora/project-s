@@ -13,4 +13,5 @@ public interface ArticleService {
     public List<Article> getArticlesByTitle(String title);
     public Article createOrUpdateArticle(Article article);
     public void deleteArticleById(Integer id);
+    public Article getNewestArticle();
 }

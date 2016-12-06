@@ -52,4 +52,9 @@ public class ArticleServiceImpl implements ArticleService {
     public void deleteArticleById(Integer id) {
         articleRepo.delete(id);
     }
+
+    @Override
+    public Article getNewestArticle() {
+        return articleRepo.findFirstByOrderByCreateTimeAsc().get(0);
+    }
 }
