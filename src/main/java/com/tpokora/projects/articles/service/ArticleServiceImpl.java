@@ -55,6 +55,6 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article getNewestArticle() {
-        return articleRepo.findFirstByOrderByCreateTimeAsc().get(0);
+        return articleRepo.findFirstByOrderByCreateTimeDesc().get(0);
     }
 }

@@ -14,5 +14,5 @@ import java.util.List;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Integer> {
     public List<Article> findByTitle(String title);
-    public List<Article> findFirstByOrderByCreateTimeAsc();
+    public List<Article> findFirstByOrderByCreateTimeDesc();
 }
