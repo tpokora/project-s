@@ -19,18 +19,17 @@ App.controller('UserResetController', ['$scope', '$location', 'UserService', fun
 
     $scope.resetPassword = function() {
         self.user = $scope.user;
-        self.userToReset = UserService.fetchUserByEmail(self.user.email);
-
-        console.log(self.userToReset);
-
-        if (self.userToReset != null) {
-            UserService.resetUserPasswordSession(self.userToReset)
-                .then(function() {
-                    console.log('New user reset password session created');
-                });
-        } else {
-            console.error('User not exists');
-        }
+        UserService.fetchUserByEmail(self.user.email).then(function(response) {
+            self.userToReset = response;
+            if (self.userToReset != null) {
+                UserService.resetUserPasswordSession(self.userToReset)
+                    .then(function() {
+                        console.log('New user reset password session created');
+                    });
+            } else {
+                console.error('User not exists');
+            }
+        });
     };
 
     $scope.back = function() {
