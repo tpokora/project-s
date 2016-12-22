@@ -13,10 +13,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * Created by pokor on 27.10.2016.
@@ -79,9 +82,9 @@ public class UserResetPasswordServiceTest extends AbstractServiceTest {
 
     @Test
     @Transactional
-    public void sendResetPasswordEmail_success() {
-        ResetPasswordMailResponse resetPasswordMailResponse = userResetPasswordService.sendResetPasswordEmail("strzupak@gmail.com", "testPassword");
+    public void sendResetPasswordEmail_success() throws ExecutionException, InterruptedException {
+        Future<ResetPasswordMailResponse> resetPasswordMailResponse = userResetPasswordService.sendResetPasswordEmail("strzupak@gmail.com", "testPassword");
 
-        Assert.assertEquals(true, resetPasswordMailResponse.getStatus().equals(UserConst.RESET_PASSWORD_EMAIL_SUCCESS));
+        Assert.assertEquals(true, resetPasswordMailResponse.get().getStatus().equals(UserConst.RESET_PASSWORD_EMAIL_SUCCESS));
     }
 }

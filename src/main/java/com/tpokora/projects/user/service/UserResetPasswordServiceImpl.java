@@ -9,6 +9,7 @@ import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.*;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,12 +18,13 @@ import org.springframework.web.client.RestTemplate;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.Future;
 
 /**
  * Created by pokor on 27.10.2016.
  */
 @Service("userResetPasswordService")
-@PropertySource("classpath:properties/${env:dev}.properties")
+@PropertySource("classpath:properties/${env:loc}.properties")
 public class UserResetPasswordServiceImpl implements UserResetPasswordService {
 
     @Autowired
@@ -64,9 +66,9 @@ public class UserResetPasswordServiceImpl implements UserResetPasswordService {
     }
 
     @Override
-    public ResetPasswordMailResponse sendResetPasswordEmail(String to, String newPassword) {
+    public Future<ResetPasswordMailResponse> sendResetPasswordEmail(String to, String newPassword) {
         HashMap<String, Object> content = new HashMap<String, Object>();
-        content.put("newPassword", "test");
+        content.put("newPassword", newPassword);
 
         RestTemplate restTemplate = new RestTemplate();
         JSONObject request = new JSONObject();
@@ -79,11 +81,13 @@ public class UserResetPasswordServiceImpl implements UserResetPasswordService {
 
         HttpEntity<String> entity = new HttpEntity<>(request.toString(), httpHeaders);
 
+        String url = env.getProperty("mailservice.url") + "resetPasswordMail";
+
         ResponseEntity<ResetPasswordMailResponse> resetPasswordEmailResponseEntity =
-                restTemplate.exchange(env.getProperty("mailservice.url") + "resetPasswordMail", HttpMethod.POST, entity, ResetPasswordMailResponse.class);
+                restTemplate.exchange(url, HttpMethod.POST, entity, ResetPasswordMailResponse.class);
 
         ResetPasswordMailResponse resetPasswordMailResponse = resetPasswordEmailResponseEntity.getBody();
 
-        return resetPasswordMailResponse;
+        return new AsyncResult<>(resetPasswordMailResponse);
     }
 }
