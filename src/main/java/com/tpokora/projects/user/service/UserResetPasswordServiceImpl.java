@@ -1,20 +1,32 @@
 package com.tpokora.projects.user.service;
 
 import com.tpokora.projects.user.dao.UserResetPasswordRepository;
+import org.springframework.core.env.Environment;
+import com.tpokora.projects.user.model.ResetPasswordMailResponse;
 import com.tpokora.projects.user.model.UserResetPassword;
 import com.tpokora.projects.user.model.nullobjects.NullUserResetPassword;
+import net.minidev.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by pokor on 27.10.2016.
  */
 @Service("userResetPasswordService")
+@PropertySource("classpath:properties/${env:dev}.properties")
 public class UserResetPasswordServiceImpl implements UserResetPasswordService {
+
+    @Autowired
+    private Environment env;
 
     @Resource
     private UserResetPasswordRepository userResetPasswordRepo;
@@ -49,5 +61,29 @@ public class UserResetPasswordServiceImpl implements UserResetPasswordService {
     @Override
     public void removeUserResetPasswordBySessionID(String sessionID) {
         userResetPasswordRepo.delete(userResetPasswordRepo.findBySessionId(sessionID).getId());
+    }
+
+    @Override
+    public ResetPasswordMailResponse sendResetPasswordEmail(String to, String newPassword) {
+        HashMap<String, Object> content = new HashMap<String, Object>();
+        content.put("newPassword", "test");
+
+        RestTemplate restTemplate = new RestTemplate();
+        JSONObject request = new JSONObject();
+        request.put("to", to);
+        request.put("type", "resetPassword");
+        request.put("content", content);
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
+
+        HttpEntity<String> entity = new HttpEntity<>(request.toString(), httpHeaders);
+
+        ResponseEntity<ResetPasswordMailResponse> resetPasswordEmailResponseEntity =
+                restTemplate.exchange(env.getProperty("mailservice.url") + "resetPasswordMail", HttpMethod.POST, entity, ResetPasswordMailResponse.class);
+
+        ResetPasswordMailResponse resetPasswordMailResponse = resetPasswordEmailResponseEntity.getBody();
+
+        return resetPasswordMailResponse;
     }
 }

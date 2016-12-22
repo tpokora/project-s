@@ -3,7 +3,9 @@ package com.tpokora.projects.user.service;
 import com.tpokora.projects.common.service.AbstractServiceTest;
 import com.tpokora.projects.common.utils.SecurityUtilities;
 import com.tpokora.projects.common.utils.SessionIdentifierGenerator;
+import com.tpokora.projects.user.model.ResetPasswordMailResponse;
 import com.tpokora.projects.user.model.User;
+import com.tpokora.projects.user.model.UserConst;
 import com.tpokora.projects.user.model.UserResetPassword;
 import org.junit.Assert;
 import org.junit.Before;
@@ -73,5 +75,13 @@ public class UserResetPasswordServiceTest extends AbstractServiceTest {
         userResetPasswordService.removeUserResetPasswordBySessionID(userResetPasswordService.findBySessionId(SESSIONID).getSessionId());
 
         Assert.assertEquals(true, userResetPasswordService.findBySessionId(SESSIONID) == null);
+    }
+
+    @Test
+    @Transactional
+    public void sendResetPasswordEmail_success() {
+        ResetPasswordMailResponse resetPasswordMailResponse = userResetPasswordService.sendResetPasswordEmail("strzupak@gmail.com", "testPassword");
+
+        Assert.assertEquals(true, resetPasswordMailResponse.getStatus().equals(UserConst.RESET_PASSWORD_EMAIL_SUCCESS));
     }
 }
