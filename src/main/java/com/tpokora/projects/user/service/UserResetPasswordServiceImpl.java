@@ -67,9 +67,10 @@ public class UserResetPasswordServiceImpl implements UserResetPasswordService {
     }
 
     @Override
-    public Future<ResetPasswordMailResponse> sendResetPasswordEmail(String to, String newPassword) {
+    public Future<ResetPasswordMailResponse> sendResetPasswordEmail(String to, String newPassword, String sessionID) {
         HashMap<String, Object> content = new HashMap<String, Object>();
         content.put("newPassword", newPassword);
+        content.put("link", generateResetPasswordLink(sessionID));
 
         RestTemplate restTemplate = new RestTemplate();
         JSONObject request = new JSONObject();
@@ -90,5 +91,9 @@ public class UserResetPasswordServiceImpl implements UserResetPasswordService {
         ResetPasswordMailResponse resetPasswordMailResponse = resetPasswordEmailResponseEntity.getBody();
 
         return new AsyncResult<>(resetPasswordMailResponse);
+    }
+
+    private String generateResetPasswordLink(String sessionID) {
+        return env.getProperty("host.url") + "/rest/user/reset/" + sessionID + "/changePassword";
     }
 }

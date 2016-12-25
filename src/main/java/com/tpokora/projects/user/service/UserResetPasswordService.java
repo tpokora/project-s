@@ -14,5 +14,5 @@ public interface UserResetPasswordService {
     public UserResetPassword findBySessionId(String sessionID);
     public UserResetPassword createOrUpdateUserResetPassword(UserResetPassword userResetPassword);
     public void removeUserResetPasswordBySessionID(String sessionID);
-    public Future<ResetPasswordMailResponse> sendResetPasswordEmail(String to, String newPassword);
+    public Future<ResetPasswordMailResponse> sendResetPasswordEmail(String to, String newPassword, String sessionID);
 }

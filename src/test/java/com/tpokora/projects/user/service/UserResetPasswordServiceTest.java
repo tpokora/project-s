@@ -83,7 +83,7 @@ public class UserResetPasswordServiceTest extends AbstractServiceTest {
     @Test
     @Transactional
     public void sendResetPasswordEmail_success() throws ExecutionException, InterruptedException {
-        Future<ResetPasswordMailResponse> resetPasswordMailResponse = userResetPasswordService.sendResetPasswordEmail("strzupak@gmail.com", "testPassword");
+        Future<ResetPasswordMailResponse> resetPasswordMailResponse = userResetPasswordService.sendResetPasswordEmail("strzupak@gmail.com", "testPassword", SESSIONID);
 
         Assert.assertEquals(true, resetPasswordMailResponse.get().getStatus().equals(UserConst.RESET_PASSWORD_EMAIL_SUCCESS));
     }
