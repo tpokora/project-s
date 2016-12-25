@@ -61,6 +61,7 @@ public class UserResetPasswordServiceImpl implements UserResetPasswordService {
     }
 
     @Override
+    @Transactional
     public void removeUserResetPasswordBySessionID(String sessionID) {
         userResetPasswordRepo.delete(userResetPasswordRepo.findBySessionId(sessionID).getId());
     }

@@ -67,8 +67,8 @@ public class UserResetPasswordController {
         UserResetPassword userResetPassword = new UserResetPassword(sessionID, hashedTempPassword, oldPassword, new Date(), user);
         userResetPasswordService.sendResetPasswordEmail(user.getEmail(), tempPassword);
 
-        userResetPasswordService.createOrUpdateUserResetPassword(userResetPassword);
-        restResponse.addContent("userResetSession", userResetPassword);
+        UserResetPassword updatedUser = userResetPasswordService.createOrUpdateUserResetPassword(userResetPassword);
+        restResponse.addContent("userResetSession", updatedUser);
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }
 
@@ -95,7 +95,7 @@ public class UserResetPasswordController {
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/user/reset/{sessionID}/changePassword", method = RequestMethod.PUT, headers = "Accept=application/json")
+    @RequestMapping(value = "/user/reset/{sessionID}/changePassword", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<RESTResponseWrapper> changeUserPassword(@PathVariable(value = "sessionID") String sessionID) {
         restResponse.clearResponse();
         UserResetPassword userResetPassword = userResetPasswordService.findBySessionId(sessionID);
@@ -113,6 +113,8 @@ public class UserResetPasswordController {
         User userToUpdate = userService.getUserById(userResetPassword.getUser().getId());
         changeUserPasswordToTemp(userToUpdate, userResetPassword.getTempPassword());
         User updatedUser = userService.getUserById(userToUpdate.getId());
+        // TODO: element is not being removed from from DB
+        userResetPasswordService.removeUserResetPasswordBySessionID(userResetPassword.getSessionId());
         restResponse.addContent("user", userToUpdate);
         return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.OK);
     }
