@@ -81,7 +81,7 @@ public class UserResetPasswordServiceImpl implements UserResetPasswordService {
 
         HttpEntity<String> entity = new HttpEntity<>(request.toString(), httpHeaders);
 
-        String url = env.getProperty("mailservice.url") + "resetPasswordMail";
+        String url = env.getProperty("mailservice.url");
 
         ResponseEntity<ResetPasswordMailResponse> resetPasswordEmailResponseEntity =
                 restTemplate.exchange(url, HttpMethod.POST, entity, ResetPasswordMailResponse.class);
