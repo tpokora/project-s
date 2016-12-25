@@ -1,7 +1,22 @@
 <div class="container">
     <div ng-controller="HomeController as homeCtrl">
-        <h1>{{ homeCtrl.content.header }}</h1>
-
-        <p>{{ homeCtrl.content.content }}</p>
+        <div class="home-page-header center-text">
+            <h1>{{ homeCtrl.homeContent.header }}</h1>
+        </div>
+        <hr/>
+        <article>
+            <div class="center-text">
+                <h4>Newest article</h4>
+            </div>
+            <div class="home-page-article-content">
+                <div class="top-bottom-line">
+                    <div>
+                        <strong>{{ homeCtrl.homeContent.content.title }}</strong>
+                    </div>
+                    <span>by: {{ homeCtrl.homeContent.content.user.username }} | {{ homeCtrl.homeContent.content.createTime }}</span>
+                </div>
+                <pre class="article-pre" style="margin-top: 10px">{{ homeCtrl.homeContent.content.content }}</pre>
+            </div>
+        </article>
     </div>
 </div>

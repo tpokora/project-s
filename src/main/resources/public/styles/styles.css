@@ -1,22 +1,28 @@
 body {
-    font-family: "PT Sans", "Helvetica Neue", Helvetica,Arial, sans-serif, sans-serif;
+    font-family: "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
     background: #3E3D3D;
     color: #B1B1B1;
 }
 
+
 /* Utilities */
+
 .top-bottom-line {
     padding: 6px 10px;
     border-top: 1px solid #B1A9A9;
     border-bottom: 1px solid #B1A9A9;
 }
 
+
 /* Commons */
+
 .error {
     color: #c30f0f;
 }
 
+
 /* Tables */
+
 .table-header {
     font-weight: bold;
     font-size: 16px;
@@ -27,7 +33,9 @@ body {
     margin: 0;
 }
 
+
 /* Form */
+
 .login-page {
     width: 360px;
     padding: 8% 0 0;
@@ -80,7 +88,10 @@ body {
     transition: all 0.3 ease;
     cursor: pointer;
 }
-.form button:hover,.form button:active,.form button:focus {
+
+.form button:hover,
+.form button:active,
+.form button:focus {
     background: #43A047;
 }
 
@@ -94,12 +105,19 @@ body {
     margin: 0 auto;
 }
 
-/* Users list */
-.users-list header {
-   margin: 20px 0px 30px 0px;
-   font-size: 34px;
-   font-weight: bold;
+.center-text {
+    text-align: center;
 }
+
+
+/* Users list */
+
+.users-list header {
+    margin: 20px 0px 30px 0px;
+    font-size: 34px;
+    font-weight: bold;
+}
+
 
 /* Articles list */
 
@@ -107,7 +125,9 @@ body {
     font-weight: bold;
 }
 
+
 /* Article */
+
 article header {
     margin: 20px 0px 30px 0px;
     font-size: 34px;
@@ -119,11 +139,20 @@ article .article-content {
     font-size: 18px;
 }
 
+article .home-page-article-content {
+    width: 70%;
+    margin: 0 auto;
+    padding: 6px 10px;
+    font-size: 18px;
+}
+
 .article-pre {
     white-space: pre-wrap;
 }
 
+
 /* RSS View */
+
 #rss-view {
     width: 280px;
 }

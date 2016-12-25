@@ -2,14 +2,15 @@
 
 App.controller('HomeController', ['$scope', 'HomeService', function($scope, HomeService) {
     var self = this;
-    var content = [];
+    var homeContent = [];
 
     self.fetchHome = function() {
         HomeService.home()
             .then(
                 function(data) {
-                    self.content = data;
-                }, function(errResponse) {
+                    self.homeContent = data;
+                },
+                function(errResponse) {
                     console.error('Error while fetching Home content');
                 }
             );

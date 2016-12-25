@@ -3,13 +3,13 @@
 var env = {};
 
 // Import variables if present (from env.js)
-if(window){
-  Object.assign(env, window.__env);
+if (window) {
+    Object.assign(env, window.__env);
 }
 
 var App = angular.module('myApp', [
-    'ui.router'
-     ])
+        'ui.router'
+    ])
     .directive('appTitle', function() {
         return {
             template: 'Spring Template Application'
@@ -18,7 +18,7 @@ var App = angular.module('myApp', [
     // Load environments to angular
     .constant('__env', __env);
 
-function logEnvironment($log, __env){
+function logEnvironment($log, __env) {
     $log.debug('Environment variables:');
     $log.debug(__env)
 }
@@ -32,16 +32,16 @@ App.provider('APIConfig', function() {
     this._port = '';
 
     this.$get = function($http, $q) {
-      var that = this;
-      return {
-        API_END_POINT: function() {
-          var output = that._url;
-          if (that._port != '') {
-            output += ':' + that._port;
-          }
-          return output;
+        var that = this;
+        return {
+            API_END_POINT: function() {
+                var output = that._url;
+                if (that._port != '') {
+                    output += ':' + that._port;
+                }
+                return output;
+            }
         }
-      }
     };
 });
 
@@ -54,7 +54,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
 
     $stateProvider
 
-        // Main page ui-views
+    // Main page ui-views
         .state('home', {
             url: '/home',
             views: {
@@ -74,8 +74,8 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             }
         })
 
-        // User ui-views
-        .state('users', {
+    // User ui-views
+    .state('users', {
             url: '/user/list',
             views: {
                 'main-view': {
@@ -136,9 +136,18 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             }
 
         })
+        .state('user_reset_password_redirect', {
+            url: '/user/resetPassword/{sessionID:string}',
+            views: {
+                'main-view': {
+                    template: 'Redirecting...',
+                    controller: 'UserResetController as userResetCtrl'
+                }
+            }
+        })
 
-        // Admin ui-views
-        .state('admin', {
+    // Admin ui-views
+    .state('admin', {
             url: '/admin',
             views: {
                 'main-view': {
@@ -192,37 +201,37 @@ App.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'APIConfigP
             }
         })
 
-        // Article ui-views
-        .state('articles', {
-            url: '/articles',
-            views: {
-                'main-view' : {
-                    templateUrl: 'app/views/article/articles.html',
-                    controller: 'ArticleController as articleCtrl'
-                }
+    // Article ui-views
+    .state('articles', {
+        url: '/articles',
+        views: {
+            'main-view': {
+                templateUrl: 'app/views/article/articles.html',
+                controller: 'ArticleController as articleCtrl'
             }
+        }
 
-        })
+    })
 
-        .state('article', {
-            url: '/article/{id:int}',
-            views: {
-                'main-view' : {
-                    templateUrl: 'app/views/article/article.html',
-                    controller: 'ArticleController as articleCtrl'
-                }
+    .state('article', {
+        url: '/article/{id:int}',
+        views: {
+            'main-view': {
+                templateUrl: 'app/views/article/article.html',
+                controller: 'ArticleController as articleCtrl'
             }
-        })
+        }
+    })
 
-        .state('article_new', {
-            url: '/article/new',
-            views: {
-                'main-view' : {
-                        templateUrl: 'app/views/article/article_new.html',
-                        controller: 'ArticleController as articleCtrl'
-                }
+    .state('article_new', {
+        url: '/article/new',
+        views: {
+            'main-view': {
+                templateUrl: 'app/views/article/article_new.html',
+                controller: 'ArticleController as articleCtrl'
             }
-        });
+        }
+    });
 
-        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 }]);

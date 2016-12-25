@@ -48,7 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/index.html", "/app/views/home.html", "/app/views/login.html", "/app/views/users/user_new.html", "/app/views/article/**", "/app/views/widget/**").permitAll()
+                .antMatchers("/index.html", "/app/views/home.html", "/app/views/login.html", "/app/views/users/user_new.html", "/app/views/users/user_reset_password.html", "/app/views/article/**", "/app/views/widget/**").permitAll()
                 .antMatchers("/app/views/admin/**").hasRole("ADMIN")
                 .antMatchers("/app/views/users/**", "/app/views/article/article_new.html").hasAnyRole("ADMIN, USER")
                 // TODO: Access Denied Page does not work

@@ -31,17 +31,17 @@ App.factory('UserService', ['$http', '$q', 'APIConfig', function($http, $q, APIC
         },
 
         fetchUserByUsername: function(username) {
-                    return $http.get(APIConfig.API_END_POINT() + '/rest/user/name/' + username)
-                        .then(
-                            function(response) {
-                                return response.data.content.users[0];
-                            },
-                            function(errResponse) {
-                                console.error('Error while fetching User');
-                                return $q.reject(errResponse);
-                            }
-                        )
-                },
+            return $http.get(APIConfig.API_END_POINT() + '/rest/user/name/' + username)
+                .then(
+                    function(response) {
+                        return response.data.content.users[0];
+                    },
+                    function(errResponse) {
+                        console.error('Error while fetching User');
+                        return $q.reject(errResponse);
+                    }
+                )
+        },
 
         fetchUserByEmail: function(email) {
             return $http.get(APIConfig.API_END_POINT() + '/rest/user/email?value=' + email)
@@ -61,7 +61,8 @@ App.factory('UserService', ['$http', '$q', 'APIConfig', function($http, $q, APIC
                 .then(
                     function(response) {
                         return response.data;
-                    }, function(errResponse) {
+                    },
+                    function(errResponse) {
                         console.error('Error while creating new User');
                         return $q.reject(errResponse);
                     }
@@ -102,6 +103,19 @@ App.factory('UserService', ['$http', '$q', 'APIConfig', function($http, $q, APIC
                     },
                     function(errResponse) {
                         console.error('Error while creating user new reset password session');
+                        return $q.reject(errResponse);
+                    }
+                )
+        },
+
+        resetUserPassword: function(sessionID) {
+            return $http.get(APIConfig.API_END_POINT() + '/rest/user/reset/' + sessionID + '/changePassword')
+                .then(
+                    function(response) {
+                        return response.data.content.user;
+                    },
+                    function(errResponse) {
+                        console.error('Error reseting user password.');
                         return $q.reject(errResponse);
                     }
                 )
