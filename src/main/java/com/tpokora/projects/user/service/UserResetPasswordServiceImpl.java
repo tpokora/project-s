@@ -24,7 +24,7 @@ import java.util.concurrent.Future;
  * Created by pokor on 27.10.2016.
  */
 @Service("userResetPasswordService")
-@PropertySource("classpath:properties/${env:loc}.properties")
+@PropertySource("classpath:properties/${env:dev}.properties")
 public class UserResetPasswordServiceImpl implements UserResetPasswordService {
 
     @Autowired
