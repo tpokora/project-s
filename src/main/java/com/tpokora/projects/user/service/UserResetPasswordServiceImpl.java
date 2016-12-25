@@ -94,6 +94,6 @@ public class UserResetPasswordServiceImpl implements UserResetPasswordService {
     }
 
     private String generateResetPasswordLink(String sessionID) {
-        return env.getProperty("host.url") + "/rest/user/reset/" + sessionID + "/changePassword";
+        return env.getProperty("host.url") + "/#/user/resetPassword/" + sessionID;
     }
 }
