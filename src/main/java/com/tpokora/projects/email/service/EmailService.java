@@ -19,7 +19,7 @@ import java.util.concurrent.Future;
  * Created by pokor on 26.12.2016.
  */
 @Service("emailService")
-@PropertySource("classpath:properties/${env:loc}.properties")
+@PropertySource("classpath:properties/${env:dev}.properties")
 public class EmailService {
 
     private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
