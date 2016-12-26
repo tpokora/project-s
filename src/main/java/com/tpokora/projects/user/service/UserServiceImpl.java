@@ -18,7 +18,7 @@ import java.util.List;
  * Created by Tomek on 2016-01-16.
  */
 @Service("userService")
-@PropertySource("classpath:properties/${env:loc}.properties")
+@PropertySource("classpath:properties/${env:dev}.properties")
 public class UserServiceImpl implements UserService {
 
     @Autowired
