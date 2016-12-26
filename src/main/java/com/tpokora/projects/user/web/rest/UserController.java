@@ -112,6 +112,7 @@ public class UserController {
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
+        userService.sendUserRegistrationCompleteEmail(newUser.getEmail(), newUser.getUsername());
         restResponse.addContent(USER_RESPONSE_STRING, userToArray(newUser));
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucb.path("/home").build().toUri());

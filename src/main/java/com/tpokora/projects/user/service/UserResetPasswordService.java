@@ -1,6 +1,6 @@
 package com.tpokora.projects.user.service;
 
-import com.tpokora.projects.user.model.ResetPasswordMailResponse;
+import com.tpokora.projects.user.model.UserMailResponse;
 import com.tpokora.projects.user.model.UserResetPassword;
 
 import java.util.List;
@@ -14,5 +14,5 @@ public interface UserResetPasswordService {
     public UserResetPassword findBySessionId(String sessionID);
     public UserResetPassword createOrUpdateUserResetPassword(UserResetPassword userResetPassword);
     public void removeUserResetPasswordBySessionID(String sessionID);
-    public Future<ResetPasswordMailResponse> sendResetPasswordEmail(String to, String newPassword, String sessionID);
+    public Future<UserMailResponse> sendResetPasswordEmail(String to, String newPassword, String sessionID);
 }

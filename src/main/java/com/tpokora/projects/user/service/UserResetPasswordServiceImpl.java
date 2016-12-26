@@ -2,7 +2,7 @@ package com.tpokora.projects.user.service;
 
 import com.tpokora.projects.user.dao.UserResetPasswordRepository;
 import org.springframework.core.env.Environment;
-import com.tpokora.projects.user.model.ResetPasswordMailResponse;
+import com.tpokora.projects.user.model.UserMailResponse;
 import com.tpokora.projects.user.model.UserResetPassword;
 import com.tpokora.projects.user.model.nullobjects.NullUserResetPassword;
 import net.minidev.json.JSONObject;
@@ -67,7 +67,7 @@ public class UserResetPasswordServiceImpl implements UserResetPasswordService {
     }
 
     @Override
-    public Future<ResetPasswordMailResponse> sendResetPasswordEmail(String to, String newPassword, String sessionID) {
+    public Future<UserMailResponse> sendResetPasswordEmail(String to, String newPassword, String sessionID) {
         HashMap<String, Object> content = new HashMap<String, Object>();
         content.put("newPassword", newPassword);
         content.put("link", generateResetPasswordLink(sessionID));
@@ -85,12 +85,12 @@ public class UserResetPasswordServiceImpl implements UserResetPasswordService {
 
         String url = env.getProperty("mailservice.url");
 
-        ResponseEntity<ResetPasswordMailResponse> resetPasswordEmailResponseEntity =
-                restTemplate.exchange(url, HttpMethod.POST, entity, ResetPasswordMailResponse.class);
+        ResponseEntity<UserMailResponse> resetPasswordEmailResponseEntity =
+                restTemplate.exchange(url, HttpMethod.POST, entity, UserMailResponse.class);
 
-        ResetPasswordMailResponse resetPasswordMailResponse = resetPasswordEmailResponseEntity.getBody();
+        UserMailResponse userMailResponse = resetPasswordEmailResponseEntity.getBody();
 
-        return new AsyncResult<>(resetPasswordMailResponse);
+        return new AsyncResult<>(userMailResponse);
     }
 
     private String generateResetPasswordLink(String sessionID) {

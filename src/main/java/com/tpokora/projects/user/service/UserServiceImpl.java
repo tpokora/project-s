@@ -3,19 +3,33 @@ package com.tpokora.projects.user.service;
 import com.tpokora.projects.common.utils.SecurityUtilities;
 import com.tpokora.projects.user.dao.UserRepository;
 import com.tpokora.projects.user.model.User;
+import com.tpokora.projects.user.model.UserMailResponse;
 import com.tpokora.projects.user.model.nullobjects.NullUser;
+import net.minidev.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.http.*;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.Future;
 
 /**
  * Created by Tomek on 2016-01-16.
  */
 @Service("userService")
+@PropertySource("classpath:properties/${env:loc}.properties")
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private Environment env;
 
     @Resource
     private UserRepository userRepo;
@@ -88,5 +102,31 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void removeUserById(int id) {
         userRepo.delete(id);
+    }
+
+    @Override
+    public Future<UserMailResponse> sendUserRegistrationCompleteEmail(String email, String login) {
+        HashMap<String, Object> content = new HashMap<>();
+        content.put("login", login);
+
+        RestTemplate restTemplate = new RestTemplate();
+        JSONObject request = new JSONObject();
+        request.put("to", email);
+        request.put("type", "registration");
+        request.put("content", content);
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
+
+        HttpEntity<String> entity = new HttpEntity<>(request.toString(), httpHeaders);
+
+        String url = env.getProperty("mailservice.url");
+
+        ResponseEntity<UserMailResponse> resetPasswordEmailResponseEntity =
+                restTemplate.exchange(url, HttpMethod.POST, entity, UserMailResponse.class);
+
+        UserMailResponse userMailResponse = resetPasswordEmailResponseEntity.getBody();
+
+        return new AsyncResult<>(userMailResponse);
     }
 }
