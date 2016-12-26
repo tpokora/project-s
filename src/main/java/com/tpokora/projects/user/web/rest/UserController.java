@@ -110,12 +110,12 @@ public class UserController {
         User newUser = user;
         newUser.setRole("ROLE_USER");
 
-//        try {
-//            userService.createOrUpdateUser(newUser);
-//        } catch(ConstraintViolationException e) {
-//            addUserErrorToResponse(ErrorTypes.USER_ALREADY_EXISTS);
-//            return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.UNPROCESSABLE_ENTITY);
-//        }
+        try {
+            userService.createOrUpdateUser(newUser);
+        } catch(ConstraintViolationException e) {
+            addUserErrorToResponse(ErrorTypes.USER_ALREADY_EXISTS);
+            return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.UNPROCESSABLE_ENTITY);
+        }
 
         EmailResponse emailResponse = (EmailResponse) emailService.sendUserRegistrationCompleteEmail(newUser.getUsername(), newUser.getEmail());
         restResponse.addContent(USER_RESPONSE_STRING, userToArray(newUser));
