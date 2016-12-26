@@ -1,10 +1,8 @@
 package com.tpokora.projects.user.service;
 
 import com.tpokora.projects.user.model.User;
-import com.tpokora.projects.user.model.UserMailResponse;
 
 import java.util.List;
-import java.util.concurrent.Future;
 
 /**
  * Created by Tomek on 2016-01-16.
@@ -16,5 +14,4 @@ public interface UserService {
     public User getUserByEmail(String email);
     public User createOrUpdateUser(User user);
     public void removeUserById(int id);
-    public Future<UserMailResponse> sendUserRegistrationCompleteEmail(String email, String login);
 }

@@ -3,7 +3,8 @@ package com.tpokora.projects.user.service;
 import com.tpokora.projects.common.service.AbstractServiceTest;
 import com.tpokora.projects.common.utils.SecurityUtilities;
 import com.tpokora.projects.common.utils.SessionIdentifierGenerator;
-import com.tpokora.projects.user.model.UserMailResponse;
+import com.tpokora.projects.email.model.EmailResponse;
+import com.tpokora.projects.email.service.EmailService;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.model.UserConst;
 import com.tpokora.projects.user.model.UserResetPassword;
@@ -33,6 +34,9 @@ public class UserResetPasswordServiceTest extends AbstractServiceTest {
 
     @Autowired
     private UserResetPasswordService userResetPasswordService;
+
+    @Autowired
+    private EmailService emailService;
 
     private User user;
     private UserResetPassword userResetPassword;
@@ -82,7 +86,7 @@ public class UserResetPasswordServiceTest extends AbstractServiceTest {
     @Test
     @Transactional
     public void sendResetPasswordEmail_success() throws ExecutionException, InterruptedException {
-        Future<UserMailResponse> resetPasswordMailResponse = userResetPasswordService.sendResetPasswordEmail("strzupak@gmail.com", "testPassword", SESSIONID);
+        Future<EmailResponse> resetPasswordMailResponse = emailService.sendResetPasswordEmail("strzupak@gmail.com", "testPassword", SESSIONID);
 
         Assert.assertEquals(true, resetPasswordMailResponse.get().getStatus().equals(UserConst.RESET_PASSWORD_EMAIL_SUCCESS));
     }

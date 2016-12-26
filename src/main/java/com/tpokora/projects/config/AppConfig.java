@@ -6,6 +6,7 @@ import com.tpokora.projects.articles.service.ArticleService;
 import com.tpokora.projects.articles.service.ArticleServiceImpl;
 import com.tpokora.projects.articles.web.rest.ArticleError;
 import com.tpokora.projects.common.errors.AbstractError;
+import com.tpokora.projects.email.service.EmailService;
 import com.tpokora.projects.user.service.*;
 import com.tpokora.projects.user.web.rest.UserError;
 import com.tpokora.projects.widget.rss.RSSError;
@@ -84,6 +85,11 @@ public class AppConfig {
     @Bean(name = "articleService")
     public ArticleService getArticleService() {
         return new ArticleServiceImpl();
+    }
+
+    @Bean(name = "emailService")
+    public EmailService getEmailService() {
+        return new EmailService();
     }
 
     /*
