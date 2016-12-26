@@ -1,16 +1,16 @@
-package com.tpokora.projects.user.model;
+package com.tpokora.projects.email.model;
 
 /**
  * Created by pokor on 22.12.2016.
  */
-public class ResetPasswordMailResponse {
+public class EmailResponse {
 
     private String to;
     private String status;
 
-    public ResetPasswordMailResponse() {}
+    public EmailResponse() {}
 
-    public ResetPasswordMailResponse(String to, String status) {
+    public EmailResponse(String to, String status) {
         this.to = to;
         this.status = status;
     }

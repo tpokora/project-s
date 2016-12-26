@@ -5,6 +5,7 @@ import com.tpokora.projects.common.errors.ErrorTypes;
 import com.tpokora.projects.common.utils.SecurityUtilities;
 import com.tpokora.projects.common.utils.SessionIdentifierGenerator;
 import com.tpokora.projects.common.web.RESTResponseWrapper;
+import com.tpokora.projects.email.service.EmailService;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.model.UserPassword;
 import com.tpokora.projects.user.model.UserResetPassword;
@@ -44,6 +45,9 @@ public class UserResetPasswordController {
     private UserPasswordService userPasswordService;
 
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     private AbstractError userError;
 
     /**
@@ -65,7 +69,7 @@ public class UserResetPasswordController {
         String oldPassword = userPasswordService.getUserById(user.getId()).getPassword();
 
         UserResetPassword userResetPassword = new UserResetPassword(sessionID, hashedTempPassword, oldPassword, new Date(), user);
-        userResetPasswordService.sendResetPasswordEmail(user.getEmail(), tempPassword, userResetPassword.getSessionId());
+        emailService.sendResetPasswordEmail(user.getEmail(), tempPassword, userResetPassword.getSessionId());
 
         UserResetPassword updatedUser = userResetPasswordService.createOrUpdateUserResetPassword(userResetPassword);
         restResponse.addContent("userResetSession", updatedUser);

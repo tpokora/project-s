@@ -4,6 +4,9 @@ import com.tpokora.projects.common.utils.SecurityUtilities;
 import com.tpokora.projects.user.dao.UserRepository;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.model.nullobjects.NullUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +18,11 @@ import java.util.List;
  * Created by Tomek on 2016-01-16.
  */
 @Service("userService")
+@PropertySource("classpath:properties/${env:loc}.properties")
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private Environment env;
 
     @Resource
     private UserRepository userRepo;

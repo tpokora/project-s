@@ -3,6 +3,8 @@ package com.tpokora.projects.user.web.rest;
 import com.tpokora.projects.common.errors.AbstractError;
 import com.tpokora.projects.common.errors.ErrorTypes;
 import com.tpokora.projects.common.web.RESTResponseWrapper;
+import com.tpokora.projects.email.model.EmailResponse;
+import com.tpokora.projects.email.service.EmailService;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.model.nullobjects.NullUser;
 import com.tpokora.projects.user.service.UserService;
@@ -33,6 +35,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    EmailService emailService;
 
     @Autowired
     AbstractError userError;
@@ -112,6 +117,7 @@ public class UserController {
             return new ResponseEntity<RESTResponseWrapper>(restResponse, HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
+        EmailResponse emailResponse = (EmailResponse) emailService.sendUserRegistrationCompleteEmail(newUser.getUsername(), newUser.getEmail());
         restResponse.addContent(USER_RESPONSE_STRING, userToArray(newUser));
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucb.path("/home").build().toUri());
