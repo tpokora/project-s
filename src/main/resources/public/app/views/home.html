@@ -4,18 +4,16 @@
             <h1>{{ homeCtrl.homeContent.header }}</h1>
         </div>
         <hr/>
+        <div class="center-text">
+            <h3>Newest article</h3>
+        </div>
         <article>
-            <div class="center-text">
-                <h4>Newest article</h4>
-            </div>
-            <div class="home-page-article-content">
+            <div>
                 <div class="top-bottom-line">
-                    <div>
-                        <strong>{{ homeCtrl.homeContent.content.title }}</strong>
-                    </div>
-                    <span>by: {{ homeCtrl.homeContent.content.user.username }} | {{ homeCtrl.homeContent.content.createTime }}</span>
+                    <strong class="header">{{ homeCtrl.homeContent.content.title }}</strong><br />
+                    <span class="author-date-element">by <b>{{ homeCtrl.homeContent.content.user.username }}</b>, {{ homeCtrl.homeContent.content.createTime }}</span>
                 </div>
-                <pre class="article-pre" style="margin-top: 10px">{{ homeCtrl.homeContent.content.content }}</pre>
+                <pre class="article-pre article-content">{{ homeCtrl.homeContent.content.content }}</pre>
             </div>
         </article>
     </div>
