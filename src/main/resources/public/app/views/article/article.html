@@ -1,10 +1,12 @@
 <article class="center-block">
-    <a ui-sref="articles"><< Back to articles list</a>
-    <header>{{ article.title }}</header>
-    <p class="top-bottom-line">
-        <span>By: {{ article.user.username }} | {{ article.createTime }}</span>
-    </p>
-    <div class="article-content">
-        <pre class="article-pre">{{ parsedContent }}</pre>
-    </div>
+    <a ui-sref="articles">
+        << Back to articles list</a>
+            <div>
+                <header></header>
+                <div class="top-bottom-line">
+                    <h1 class="header">{{ article.title }}</h1>
+                    <span class="author-date-element">by <b>{{ article.user.username }}</b>, {{ article.createTime }}</span>
+                </div>
+                <pre class="article-pre article-content">{{ parsedContent }}</pre>
+            </div>
 </article>
