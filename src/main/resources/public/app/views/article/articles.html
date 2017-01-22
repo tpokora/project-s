@@ -8,7 +8,7 @@
                 <td colspan="3">
                     <form>
                         <div class="form-group">
-                            <div class="input-group">
+                            <div class="input-group search-bar">
                                 <div class="input-group-addon"><i class="fa fa-search"></i></div>
                                 <input type="text" class="form-control" placeholder="Search article by Title, Author or Create Time" ng-model="searchArticle" />
                             </div>
@@ -17,17 +17,17 @@
                 </td>
             </tr>
             <tr class="table-header">
-                <td>Title</td>
-                <td>Author</td>
-                <td>Create Time</td>
+                <td class="col-md-3 text-center">Title</td>
+                <td class="col-md-1 text-center">Author</td>
+                <td class="col-md-1 text-center">Create Time</td>
             </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="article in articles | orderBy: createTime: true | filter:searchArticle">
-            <td><a ui-sref="article({ id:article.id })">{{ article.title }}</a></td>
-            <td><span>{{ article.user.username }}</span></td>
-            <td><span>{{ article.createTime }}</span></td>
-        </tr>
+            <tr ng-repeat="article in articles | orderBy: createTime: true | filter:searchArticle">
+                <td><a ui-sref="article({ id:article.id })">{{ article.title }}</a></td>
+                <td class="text-center"><span>{{ article.user.username }}</span></td>
+                <td class="text-center"><span>{{ article.createTime }}</span></td>
+            </tr>
         </tbody>
     </table>
 </div>

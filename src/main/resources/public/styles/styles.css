@@ -13,6 +13,10 @@ body {
     border-bottom: 1px solid #B1A9A9;
 }
 
+.text-center {
+    text-align: center;
+}
+
 
 /* Commons */
 
@@ -120,6 +124,17 @@ body {
 
 
 /* Articles list */
+
+.articles-list {
+    font-family: "Roboto", sans-serif;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.articles-list .search-bar {
+    width: 100%;
+}
 
 .date {
     font-weight: bold;
