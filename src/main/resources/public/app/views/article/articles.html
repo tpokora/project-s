@@ -25,8 +25,8 @@
         <tbody>
             <tr ng-repeat="article in articles | orderBy: createTime: true | filter:searchArticle">
                 <td><a ui-sref="article({ id:article.id })">{{ article.title }}</a></td>
-                <td class="text-center"><span>{{ article.user.username }}</span></td>
-                <td class="text-center"><span>{{ article.createTime }}</span></td>
+                <td class="text-center"><span class="text-color-common">{{ article.user.username }}</span></td>
+                <td class="text-center"><span class="text-color-common">{{ article.createTime }}</span></td>
             </tr>
         </tbody>
     </table>
