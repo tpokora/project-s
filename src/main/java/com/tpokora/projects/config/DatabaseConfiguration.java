@@ -33,7 +33,7 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackageClasses = {
         UserRepository.class, ArticleRepository.class
 })
-@PropertySource("classpath:properties/${env:dev}.properties")
+@PropertySource("classpath:properties/${env:app}.properties")
 public class DatabaseConfiguration {
 
     @Autowired
