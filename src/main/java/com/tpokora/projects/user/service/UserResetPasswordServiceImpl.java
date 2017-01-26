@@ -17,7 +17,7 @@ import java.util.List;
  * Created by pokor on 27.10.2016.
  */
 @Service("userResetPasswordService")
-@PropertySource("classpath:properties/${env:loc}.properties")
+@PropertySource("classpath:properties/${env:app}.properties")
 public class UserResetPasswordServiceImpl implements UserResetPasswordService {
 
     @Autowired
