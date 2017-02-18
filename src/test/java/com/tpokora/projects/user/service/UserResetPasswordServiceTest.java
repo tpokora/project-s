@@ -10,6 +10,7 @@ import com.tpokora.projects.user.model.UserConst;
 import com.tpokora.projects.user.model.UserResetPassword;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,6 +86,7 @@ public class UserResetPasswordServiceTest extends AbstractTest {
 
     @Test
     @Transactional
+    @Ignore
     public void sendResetPasswordEmail_success() throws ExecutionException, InterruptedException {
         Future<EmailResponse> resetPasswordMailResponse = emailService.sendResetPasswordEmail("strzupak@gmail.com", "testPassword", SESSIONID);
 
