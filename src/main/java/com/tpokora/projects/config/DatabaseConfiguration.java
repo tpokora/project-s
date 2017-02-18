@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import com.tpokora.projects.articles.dao.ArticleRepository;
 import com.tpokora.projects.articles.model.Article;
 import com.tpokora.projects.user.dao.UserRepository;
+import com.tpokora.projects.user.dao.UserResetPasswordRepository;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.model.UserPassword;
 import com.tpokora.projects.user.model.UserResetPassword;
@@ -31,7 +32,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackageClasses = {
-        UserRepository.class, ArticleRepository.class
+        UserRepository.class, ArticleRepository.class, UserResetPasswordRepository.class
 })
 @PropertySource("classpath:properties/${env:app}.properties")
 public class DatabaseConfiguration {

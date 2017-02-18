@@ -1,10 +1,9 @@
 package com.tpokora.projects.articles.service;
 
 import com.tpokora.projects.articles.model.Article;
-import com.tpokora.projects.common.service.AbstractServiceTest;
+import com.tpokora.projects.common.AbstractTest;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.service.UserService;
-import com.tpokora.projects.user.utils.UserTestUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,16 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.rowset.serial.SerialBlob;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by pokor on 26.03.2016.
  */
-public class ArticleServiceTest extends AbstractServiceTest {
+public class ArticleServiceTest extends AbstractTest {
 
     @Autowired
     private UserService userService;

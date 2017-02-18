@@ -1,6 +1,6 @@
 package com.tpokora.projects.user.service;
 
-import com.tpokora.projects.common.service.AbstractServiceTest;
+import com.tpokora.projects.common.AbstractTest;
 import com.tpokora.projects.common.utils.SecurityUtilities;
 import com.tpokora.projects.common.utils.SessionIdentifierGenerator;
 import com.tpokora.projects.email.model.EmailResponse;
@@ -25,7 +25,7 @@ import java.util.concurrent.Future;
  * Created by pokor on 27.10.2016.
  */
 
-public class UserResetPasswordServiceTest extends AbstractServiceTest {
+public class UserResetPasswordServiceTest extends AbstractTest {
 
     protected static final Logger logger = LoggerFactory.getLogger(UserResetPasswordServiceTest.class);
 

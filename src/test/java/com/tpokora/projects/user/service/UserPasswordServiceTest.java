@@ -1,10 +1,9 @@
 package com.tpokora.projects.user.service;
 
-import com.tpokora.projects.common.service.AbstractServiceTest;
+import com.tpokora.projects.common.AbstractTest;
 import com.tpokora.projects.common.utils.SecurityUtilities;
 import com.tpokora.projects.user.model.User;
 import com.tpokora.projects.user.model.UserPassword;
-import com.tpokora.projects.user.model.UserResetPassword;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Created by pokor on 13.11.2016.
  */
-public class UserPasswordServiceTest extends AbstractServiceTest {
+public class UserPasswordServiceTest extends AbstractTest {
 
     @Autowired
     private UserService userService;

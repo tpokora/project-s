@@ -78,6 +78,7 @@ public class UserResetPasswordControllerTest extends AbstractControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content.user.role").exists());
     }
 
+    @Ignore
     @Test
     @Rollback(true)
     public void changeUserPasswordBySessionID_changed() throws Exception {

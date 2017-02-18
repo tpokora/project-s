@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/rest")
-@PropertySource("classpath:properties/${env:dev}.properties")
+@PropertySource("classpath:properties/${env:app}.properties")
 public class HomeController {
 
     private static final Logger logger = Logger.getLogger(HomeController.class);

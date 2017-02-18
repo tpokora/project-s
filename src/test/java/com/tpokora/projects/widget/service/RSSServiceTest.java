@@ -1,6 +1,6 @@
 package com.tpokora.projects.widget.service;
 
-import com.tpokora.projects.common.service.AbstractServiceTest;
+import com.tpokora.projects.common.AbstractTest;
 import com.tpokora.projects.widget.model.rss.Feed;
 import com.tpokora.projects.widget.model.rss.FeedMessage;
 import junit.framework.Assert;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by pokor on 16.04.2016.
  */
 @Ignore
-public class RSSServiceTest extends AbstractServiceTest {
+public class RSSServiceTest extends AbstractTest {
 
     private final static Logger logger = LoggerFactory.getLogger(RSSServiceTest.class);
 
