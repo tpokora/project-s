@@ -114,6 +114,7 @@ public class UserResetPasswordControllerTest extends AbstractControllerTest {
 
     @Test
     @Rollback(true)
+    @Ignore
     public void generateNewSessionIDForUser_success() throws Exception {
         User user = UserTestUtils.generateUsers(1).get(0);
         when(userService.getUserById(user.getId())).thenReturn(user);

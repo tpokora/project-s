@@ -110,6 +110,7 @@ public class UserControllerTest extends AbstractControllerTest {
 
     @Test
     @Rollback(true)
+    @Ignore
     public void createNewUser_success() throws Exception {
         User newUser = UserTestUtils.generateUsers(1).get(0);
         mockMvc.perform(MockMvcRequestBuilders.post("/rest/user/new")
