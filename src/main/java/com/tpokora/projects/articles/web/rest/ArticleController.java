@@ -32,10 +32,10 @@ public class ArticleController implements RESTControllerError {
     private static RESTResponseWrapper restResponse = new RESTResponseWrapper();
 
     @Autowired
-    AbstractError articleError;
+    private AbstractError articleError;
 
     @Autowired
-    ArticleService articleService;
+    private ArticleService articleService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<RESTResponseWrapper> getAllArticles() {

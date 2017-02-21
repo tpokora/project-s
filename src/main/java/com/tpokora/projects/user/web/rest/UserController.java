@@ -34,13 +34,13 @@ public class UserController {
     private static final String USER_RESPONSE_STRING = "users";
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    EmailService emailService;
+    private EmailService emailService;
 
     @Autowired
-    AbstractError userError;
+    private AbstractError userError;
 
     // TODO: Handle adding error when not found
 

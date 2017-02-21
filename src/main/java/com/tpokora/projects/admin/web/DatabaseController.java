@@ -27,7 +27,7 @@ public class DatabaseController {
     private List<TableDetails> tableDetailsList;
 
     @Autowired
-    TablesDetailsService tableDetailsService;
+    private TablesDetailsService tableDetailsService;
 
     @RequestMapping(value = "/table/list", method = RequestMethod.GET, headers = "Accept=application/json")
     public ResponseEntity<RESTResponseWrapper> getTables() {

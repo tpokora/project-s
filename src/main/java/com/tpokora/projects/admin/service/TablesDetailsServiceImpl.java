@@ -18,7 +18,7 @@ import java.util.Map;
 public class TablesDetailsServiceImpl implements TablesDetailsService {
 
     @Autowired
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     public TablesDetailsServiceImpl() {
     }

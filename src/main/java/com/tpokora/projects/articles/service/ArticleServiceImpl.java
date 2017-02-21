@@ -15,7 +15,7 @@ import java.util.List;
 public class ArticleServiceImpl implements ArticleService {
 
     @Resource
-    ArticleRepository articleRepo;
+    private ArticleRepository articleRepo;
 
     @Override
     public List<Article> getAllArticles() {
