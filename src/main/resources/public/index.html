@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
 <head>
-    <link rel="stylesheet" href="styles/bootstrap.min.css" text="text/css">
     <script src="resources/js/angular.js"></script>
+    <script src="resources/js/bootstrap.js"></script>
     <script src="app/scripts/env.js"></script>
     <script src="app/scripts/app.js"></script>
     <script src="app/scripts/home/home_service.js"></script>
@@ -15,6 +15,7 @@
     <!--<script src="app/scripts/widget/rss_service.js"></script>-->
     <!-- ------------------- -->
 
+    <link rel="stylesheet" href="resources/css/bootstrap-css.css" text="text/css">
     <link rel="stylesheet" href="styles/styles.css" text="text/css">
     <meta http-equiv="Content-Type" content="charset=UTF-8">
     <title app-title></title>
@@ -46,7 +47,7 @@
                 </form>
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             Content <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
